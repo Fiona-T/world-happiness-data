@@ -29,6 +29,10 @@ The target market is relatively broad. In general, it would be people with a pas
 ---
 ### User stories
 ### Design
+*Note:* Since the application runs in the terminal, there is no design of the user interface. 
+
+The deployed application runs in a mock terminal on Heroku in order to demonstrate the project, the design of the mock terminal is built into the template provided by Code Institute. 
+
 ### Flow Chart
 
 ## Features

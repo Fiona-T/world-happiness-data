@@ -28,6 +28,13 @@ The target market is relatively broad. In general, it would be people with a pas
 ## User Experience (UX)
 ---
 ### User stories
+*Note:* there is no login or registered users for this application, so each user story is from the point of view of a visiting user using the application.
+1. As a visiting user, I want to understand the dataset that the application uses so that I decide if I want to use this data and therefore use this application
+2. As a visiting user, I want to see what data the application allows me to look up and what data will be provided to me, so that I can decide how to use the application and plan what information I need from the application
+3. As a visiting user, I want to be able to choose a country so that I can view the data related to that country
+4. As a visiting user, I want to be able to see the happiness score over time for a particular country, so that I can see the scores and trends over time for that country
+5. As a visiting user, I want to be able to see a graph of the happiness score over time for a particular country so that I can visualise the data more easily
+
 ### Design
 *Note:* Since the application runs in the terminal, there is no design of the user interface. 
 

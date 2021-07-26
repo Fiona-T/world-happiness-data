@@ -2,6 +2,7 @@
 from pyfiglet import Figlet
 # import Termcolor library for text colours
 from termcolor import colored
+import csv
 
 
 def print_banner_msg(text):
@@ -58,5 +59,27 @@ def get_country():
     print(country)
 
 
+def create_countries_list(filepath):
+    """
+    Open the specified csv file, create a list of countries from 1st column
+    """
+    with open(filepath, "r") as f:
+        data = list(csv.reader(f))
+        # open the file and read it, convert it to list of lists
+    countries_list = []
+    # empty list to add countries to
+    for row in data[1:]:
+        country = row[0]
+        countries_list.append(country)
+        # for each row except header, get 1st item, append to countries_list
+    # print(data[1])
+    # print(countries_list)
+    unique_countries = set(countries_list)
+    # convert the list to a set for unique countries
+    # print(unique_countries)
+    return unique_countries
+
+
 welcome_msg()
 get_country()
+create_countries_list("data/world-happiness-report.csv")

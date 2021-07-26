@@ -1,3 +1,14 @@
+# import Pyfiglet library for text to fonts functionality
+from pyfiglet import Figlet
+
+
+def print_banner_msg(text):
+    font = Figlet(font="slant")
+    print("-" * 40)
+    print(font.renderText(text))
+    print("-" * 40)
+
+
 def print_smiley():
     print("-" * 40)
     print(" " * 10 + "_" * 8)
@@ -14,4 +25,5 @@ def print_smiley():
     print("-" * 40)
 
 
+print_banner_msg("Welcome")
 print_smiley()

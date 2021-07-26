@@ -1,11 +1,13 @@
 # import Pyfiglet library for text to fonts functionality
 from pyfiglet import Figlet
+# import Termcolor library for text colours
+from termcolor import colored
 
 
 def print_banner_msg(text):
-    font = Figlet(font="slant")
+    font = Figlet(font="ogre")
     print("-" * 40)
-    print(font.renderText(text))
+    print(colored(font.renderText(text), "yellow"))
     print("-" * 40)
 
 

@@ -59,6 +59,19 @@ def get_country():
     print(country)
 
 
+class RowData:
+    """
+    each row of the csv file
+    """
+    def __init__(self, country, year, score):
+        self.country = country
+        self.year = year
+        self.score = score
+
+    def description(self):
+        return f"Country: {self.country}, Year: {self.year}, Score: {self.score}"
+
+
 def create_countries_list(filepath):
     """
     Open the specified csv file, create a list of countries from 1st column
@@ -69,15 +82,21 @@ def create_countries_list(filepath):
     countries_list = []
     # empty list to add countries to
     for row in data[1:]:
+        # for each row except header
         country = row[0]
-        countries_list.append(country)
-        # for each row except header, get 1st item, append to countries_list
-    # print(data[1])
-    # print(countries_list)
-    unique_countries = set(countries_list)
-    # convert the list to a set for unique countries
-    # print(unique_countries)
-    return unique_countries
+        year = row[1]
+        score = row[3]
+        countries_list.append(RowData(country, year, score))
+        # create instance of RowData class, append to countries_list
+    # below prints the country for each object in the countries list
+    # for countries in countries_list:
+    #     print(countries.country)
+    # print first object from the countries list
+    print(countries_list[1])
+    # print country property of first object from the countries list
+    print(countries_list[1].country)
+    # print output of description function from RowData class
+    print(countries_list[1].description())
 
 
 welcome_msg()

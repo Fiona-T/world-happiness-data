@@ -2,6 +2,7 @@
 from pyfiglet import Figlet
 # import Termcolor library for text colours
 from termcolor import colored
+# import csv module to read the csv file
 import csv
 
 
@@ -56,49 +57,33 @@ def get_country():
         \nThen you can choose to view a graph of that data.")
     country = input(
         "Please enter the name of the country you want to look up:\n")
-    print(country)
+    print(f"You entered: {country}")
 
 
-class RowData:
-    """
-    each row of the csv file
-    """
-    def __init__(self, country, year, score):
-        self.country = country
-        self.year = year
-        self.score = score
-
-    def description(self):
-        return f"Country: {self.country}, Year: {self.year}, Score: {self.score}"
-
-
-def create_countries_list(filepath):
+def create_countries_dict(filepath):
     """
     Open the specified csv file, create a list of countries from 1st column
     """
     with open(filepath, "r") as f:
         data = list(csv.reader(f))
-        # open the file and read it, convert it to list of lists
-    countries_list = []
-    # empty list to add countries to
-    for row in data[1:]:
-        # for each row except header
-        country = row[0]
-        year = row[1]
-        score = row[3]
-        countries_list.append(RowData(country, year, score))
-        # create instance of RowData class, append to countries_list
-    # below prints the country for each object in the countries list
-    # for countries in countries_list:
-    #     print(countries.country)
-    # print first object from the countries list
-    print(countries_list[1])
-    # print country property of first object from the countries list
-    print(countries_list[1].country)
-    # print output of description function from RowData class
-    print(countries_list[1].description())
+        # open the file and read it, convert to list of lists
+    country_dict = {}
+    # for each list in the list of lists
+    for sublist in data:
+        # key is the first column (country), value is tuple of year and score
+        key, value = sublist[0], tuple(sublist[1:3])
+        # if the country is not already there, then add the corresponding value
+        if key not in country_dict:
+            country_dict[key] = value
+        else:
+            # if country exists, check if values are NOT a list, convert to list (1st time)
+            if not isinstance(country_dict[key], list):
+                country_dict[key] = [country_dict[key]]
+            # append the new value to the exising list of values
+            country_dict[key].append(value)
+    print(country_dict)
 
 
 welcome_msg()
 get_country()
-create_countries_list("data/world-happiness-report.csv")
+create_countries_dict("data/world-happiness-report.csv")

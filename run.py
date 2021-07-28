@@ -58,6 +58,7 @@ def get_country():
     country = input(
         "Please enter the name of the country you want to look up:\n")
     print(f"You entered: {country}")
+    return country
 
 
 def create_countries_dict(filepath):
@@ -82,8 +83,15 @@ def create_countries_dict(filepath):
             # append the new value to the exising list of values
             country_dict[key].append(value)
     print(country_dict)
+    return country_dict
+
+
+def retrieve_country_data(country, dict):
+    result = dict.get(country)
+    print(f"Here is the data for {country}: {result}")
 
 
 welcome_msg()
-get_country()
-create_countries_dict("data/world-happiness-report.csv")
+country = get_country()
+countries_dict = create_countries_dict("data/world-happiness-report.csv")
+retrieve_country_data(country, countries_dict)

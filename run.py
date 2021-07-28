@@ -69,8 +69,8 @@ def create_countries_dict(filepath):
         data = list(csv.reader(f))
         # open the file and read it, convert to list of lists
     country_dict = {}
-    # for each list in the list of lists
-    for sublist in data:
+    # for each list in the list of lists, excluding first one
+    for sublist in data[1:]:
         # key is the first column (country), value is tuple of year and score
         key, value = sublist[0], tuple(sublist[1:3])
         # if the country is not already there, then add the corresponding value

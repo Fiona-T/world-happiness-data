@@ -96,6 +96,17 @@ class Country:
         self.name = name
         self.scores = scores
 
+    def show_years(self):
+        """
+        creates a list of the available years,
+        from the self.scores list of tuples (year, score)
+        """
+        years = []
+        for data in self.scores:
+            year = int(data[0])
+            years.append(year)
+        return years
+
 
 def make_country(country, countries_dict):
     # get scores from dictionary, to be passed when creating Class instance
@@ -105,6 +116,9 @@ def make_country(country, countries_dict):
     c = Country(country, country_scores)
     # test print
     print(f"Name: {c.name}, scores: {c.scores}")
+    # gets the list of available years from method of Country class
+    available_years = c.show_years()
+    print(f"The years available for {c.name} are: {available_years}")
 
 
 def retrieve_country_data(country, dict):

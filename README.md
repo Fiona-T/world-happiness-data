@@ -41,6 +41,7 @@ The target market is relatively broad. In general, it would be people with a pas
 The deployed application runs in a mock terminal on Heroku in order to demonstrate the project, the design of the mock terminal is built into the template provided by Code Institute. 
 
 ### Flow Chart
+[View the flowchart here](docs/flowchart.pdf), showing the steps that run in the application, how the user can move through the application and the user options at each stage. 
 
 ## Features
 ---

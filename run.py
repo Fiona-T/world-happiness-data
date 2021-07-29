@@ -107,6 +107,15 @@ class Country:
             years.append(year)
         return years
 
+    def get_scores(self, choice):
+        """
+        creates dictionary of the year and score from self.scores
+        prints the score for the selected year
+        """
+        di = dict(self.scores)
+        result = di.get(choice)
+        print(f"The score for {self.name} for {choice} is {result}")
+
 
 def make_country(country, countries_dict):
     # get scores from dictionary, to be passed when creating Class instance
@@ -131,10 +140,12 @@ def get_years():
     else:
         choice = requested_years
     print(f"thanks, you asked for {choice}")
+    return choice
 
 
 welcome_msg()
 country = get_country()
 countries_dict = create_countries_dict("data/world-happiness-report.csv")
 c = make_country(country, countries_dict)
-get_years()
+choice = get_years()
+c.get_scores(choice)

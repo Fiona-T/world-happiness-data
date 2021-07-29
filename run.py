@@ -86,6 +86,27 @@ def create_countries_dict(filepath):
     return country_dict
 
 
+class Country:
+    """
+    creates an instance of Country class, for the chosen country.
+    name is the country name
+    scores is a list of tuples containing year, score
+    """
+    def __init__(self, name, scores):
+        self.name = name
+        self.scores = scores
+
+
+def make_country(country, countries_dict):
+    # get scores from dictionary, to be passed when creating Class instance
+    country_scores = countries_dict.get(country)
+    print(country_scores)
+    # create instance of Country for the selected country
+    c = Country(country, country_scores)
+    # test print
+    print(f"Name: {c.name}, scores: {c.scores}")
+
+
 def retrieve_country_data(country, dict):
     result = dict.get(country)
     print(f"Here is the data for {country}: {result}")
@@ -94,4 +115,5 @@ def retrieve_country_data(country, dict):
 welcome_msg()
 country = get_country()
 countries_dict = create_countries_dict("data/world-happiness-report.csv")
-retrieve_country_data(country, countries_dict)
+# retrieve_country_data(country, countries_dict)
+make_country(country, countries_dict)

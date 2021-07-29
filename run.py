@@ -121,13 +121,7 @@ def make_country(country, countries_dict):
     print(f"The years available for {c.name} are: {available_years}")
 
 
-def retrieve_country_data(country, dict):
-    result = dict.get(country)
-    print(f"Here is the data for {country}: {result}")
-
-
 welcome_msg()
 country = get_country()
 countries_dict = create_countries_dict("data/world-happiness-report.csv")
-# retrieve_country_data(country, countries_dict)
 make_country(country, countries_dict)

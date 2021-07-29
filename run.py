@@ -116,12 +116,25 @@ def make_country(country, countries_dict):
     c = Country(country, country_scores)
     # test print
     print(f"Name: {c.name}, scores: {c.scores}")
+    return c
+
+
+def get_years():
     # gets the list of available years from method of Country class
     available_years = c.show_years()
     print(f"The years available for {c.name} are: {available_years}")
+    requested_years = input(
+        "Enter the year you want from this list, or type in A for all years\n")
+    # test print the choice to terminal, choice All for A, or year if not A
+    if requested_years == "A":
+        choice = "all years"
+    else:
+        choice = requested_years
+    print(f"thanks, you asked for {choice}")
 
 
 welcome_msg()
 country = get_country()
 countries_dict = create_countries_dict("data/world-happiness-report.csv")
-make_country(country, countries_dict)
+c = make_country(country, countries_dict)
+get_years()

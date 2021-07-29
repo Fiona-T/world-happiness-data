@@ -46,6 +46,18 @@ The deployed application runs in a mock terminal on Heroku in order to demonstra
 ## Features
 ---
 ### Existing Features
+- Welcome message with short note on the purpose of the application
+- Option for user to view the data by the selected country
+- Exception handling for the country choice 
+- When a valid country is entered, user is shown the years for which data exists for that country, since each country does not have data for every year
+- Option for user to choose the year they want to view for that country, or all years
+- Option for user, if they have chosen to view all years, to choose if they want to view a graph of the data. This will be the happiness score for that country over time
+- Option for user, if they originally chose a single year, to then view all years for the selected country
+- Option for user to view min, max, median, average, or all of these values, for the selected country, if they chose to view all years for that country
+- Option for user to go back and select another option from min, max, median, average, or all options (e.g. they chose max first time, can go back and chose min or all, etc.)
+- Option for user to choose a different country, or to exit programme when they have viewed their data 
+- Exception handling for all user choices 
+
 ### Future Features
 
 ## Content Requirements

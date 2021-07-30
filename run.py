@@ -93,10 +93,12 @@ class Country:
     creates an instance of Country class, for the chosen country.
     name is the country name
     scores is a list of tuples containing year, score
+    di is dictionary with year as k, score as v
     """
     def __init__(self, name, scores):
         self.name = name
         self.scores = scores
+        self.di = dict(self.scores)
 
     def show_years(self):
         """
@@ -116,21 +118,25 @@ class Country:
         or prints year + score for all years if all selected
         """
         print(f"The score for {self.name} for {choice} is:")
-        di = dict(self.scores)
         if choice == "all years":
             # print the key and value for each item in the dict
-            [print(k, ":", v) for k, v in di.items()]
-            # get years and scores as lists for uniplot, convert to ints/floats
-            years = [int(k) for k in list(di.keys())]
-            scores = [float(v) for v in list(di.values())]
-            print(years)
-            print(scores)
-            # uniplot graph - years on xaxis and scores on yaxis
-            plot(
-                xs=years, ys=scores, lines=True, legend_labels=["years"],
-                title="Happiness scores over time")
+            [print(k, ":", v) for k, v in self.di.items()]
         else:
-            print(di.get(choice))
+            print(self.di.get(choice))
+
+    def show_graph(self):
+        """
+        plots a graph of the scores over time, using uniplot
+        first get years and scores as lists, converted to ints/floats
+        then plot the graph, years on x-axis, score on y-axis
+        """
+        years = [int(k) for k in list(self.di.keys())]
+        scores = [float(v) for v in list(self.di.values())]
+        print(years)
+        print(scores)
+        plot(
+            xs=years, ys=scores, lines=True, legend_labels=["years"],
+            title="Happiness scores over time")
 
 
 def make_country(country, countries_dict):
@@ -165,3 +171,5 @@ countries_dict = create_countries_dict("data/world-happiness-report.csv")
 c = make_country(country, countries_dict)
 choice = get_years()
 c.get_scores(choice)
+if choice == "all years":
+    c.show_graph()

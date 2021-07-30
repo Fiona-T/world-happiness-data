@@ -111,10 +111,15 @@ class Country:
         """
         creates dictionary of the year and score from self.scores
         prints the score for the selected year
+        or prints year + score for all years if all selected
         """
+        print(f"The score for {self.name} for {choice} is:")
         di = dict(self.scores)
-        result = di.get(choice)
-        print(f"The score for {self.name} for {choice} is {result}")
+        if choice == "all years":
+            # print the key and value for each item in the dict
+            [print(k, ":", v) for k, v in di.items()]
+        else:
+            print(di.get(choice))
 
 
 def make_country(country, countries_dict):

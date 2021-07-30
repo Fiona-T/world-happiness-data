@@ -177,9 +177,22 @@ def graph_option():
         proceed = input(
             "\nPress 1 to continue when you have finished with the graph\n")
         if proceed:
-            pass
+            show_options()
     else:
-        pass
+        show_options()
+
+
+def show_options():
+    """
+    shows options for user to choose next
+    returns the option to be handled by different function
+    """
+    print("\nChoose the option you want next:")
+    print(f"1. Get more data (max, min, median, average scores) for {c.name}")
+    print("2. Choose a different country")
+    print("3. Exit the application")
+    option = input("Enter 1, 2, or 3 here:\n")
+    return option
 
 
 welcome_msg()

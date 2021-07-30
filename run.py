@@ -165,6 +165,23 @@ def get_years():
     return choice
 
 
+def graph_option():
+    """
+    presents option to view graph and handles repsonse
+    run show_graph method if Yes
+    Otherwise show the next options
+    """
+    graph = input("Do you want to view graph of this data? Y/N\n")
+    if graph == "Y":
+        c.show_graph()
+        proceed = input(
+            "\nPress 1 to continue when you have finished with the graph\n")
+        if proceed:
+            pass
+    else:
+        pass
+
+
 welcome_msg()
 country = get_country()
 countries_dict = create_countries_dict("data/world-happiness-report.csv")
@@ -172,4 +189,4 @@ c = make_country(country, countries_dict)
 choice = get_years()
 c.get_scores(choice)
 if choice == "all years":
-    c.show_graph()
+    graph_option()

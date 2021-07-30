@@ -4,6 +4,8 @@ from pyfiglet import Figlet
 from termcolor import colored
 # import csv module to read the csv file
 import csv
+# import uniplot for graph display in terminal
+from uniplot import plot
 
 
 def print_banner_msg(text):
@@ -118,6 +120,15 @@ class Country:
         if choice == "all years":
             # print the key and value for each item in the dict
             [print(k, ":", v) for k, v in di.items()]
+            # get years and scores as lists for uniplot, convert to ints/floats
+            years = [int(k) for k in list(di.keys())]
+            scores = [float(v) for v in list(di.values())]
+            print(years)
+            print(scores)
+            # uniplot graph - years on xaxis and scores on yaxis
+            plot(
+                xs=years, ys=scores, lines=True, legend_labels=["years"],
+                title="Happiness scores over time")
         else:
             print(di.get(choice))
 

@@ -143,6 +143,10 @@ class Country:
         print(f"The minimum happiness score for {self.name} is:")
         print(min(self.scores_list))
 
+    def show_max_score(self):
+        print(f"The maximum happiness score for {self.name} is:")
+        print(max(self.scores_list))
+
 
 def make_country(country, countries_dict):
     # get scores from dictionary, to be passed when creating Class instance
@@ -274,6 +278,8 @@ def more_data_path(c):
     if more_data_choice == "1":
         # option1 - min score - show_min_score method
         c.show_min_score()
+    elif more_data_choice == "2":
+        c.show_max_score()
 
 
 def main():

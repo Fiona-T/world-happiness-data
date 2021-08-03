@@ -212,3 +212,6 @@ ALL_YEARS = f"Get all years for {c.name}"
 # if choice of years is all, show graph option
 if choice == "all years":
     option = graph_option()
+else:
+    # if chose single year, show next options
+    show_options(ALL_YEARS, DIFF_COUNTRY, EXIT_APP)

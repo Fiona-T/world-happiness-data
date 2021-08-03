@@ -101,11 +101,14 @@ class Country:
     name is the country name
     scores is a list of tuples containing year, score
     di is dictionary with year as k, score as v
+    scores_list is a list of the scores for each year, as a float,
+    so that it can be used in graph and for min, max etc.
     """
     def __init__(self, name, scores):
         self.name = name
         self.scores = scores
         self.di = dict(self.scores)
+        self.scores_list = [float(v) for v in list(self.di.values())]
 
     def show_years(self):
         """
@@ -138,17 +141,15 @@ class Country:
         then plot the graph, years on x-axis, score on y-axis
         """
         years = [int(k) for k in list(self.di.keys())]
-        scores = [float(v) for v in list(self.di.values())]
         print(years)
-        print(scores)
+        print(self.scores_list)
         plot(
-            xs=years, ys=scores, lines=True, legend_labels=["years"],
+            xs=years, ys=self.scores_list, lines=True, legend_labels=["years"],
             title="Happiness scores over time")
 
     def show_min_score(self):
         print(f"The minimum happiness score for {self.name} is:")
-        scores = [float(v) for v in list(self.di.values())]
-        print(min(scores))
+        print(min(self.scores_list))
 
 
 def make_country(country, countries_dict):

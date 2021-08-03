@@ -218,7 +218,10 @@ def handle_all_years(option, c):
         print("option two all years path, choose different country")
         main()
     else:
-        print("exiting application, all years path")
+        # option 3 is to exit the application
+        print("Thank you, exiting application, all years path...")
+        # print the banner text then exit
+        print_banner_msg("Goodbye")
         exit()
 
 

@@ -8,6 +8,13 @@ import csv
 from uniplot import plot
 
 
+# variables for the show_options function
+MORE_DATA = "Get more data (max, min, median, average scores) for this country"
+DIFF_COUNTRY = "Choose a different country"
+EXIT_APP = "Exit the application"
+ALL_YEARS = "Get all years for this country"
+
+
 def print_banner_msg(text):
     """
     Print the text passed in, as a banner msg using Figlet font
@@ -150,10 +157,10 @@ def make_country(country, countries_dict):
     return c
 
 
-def get_years():
+def get_years(cy):
     # gets the list of available years from method of Country class
-    available_years = c.show_years()
-    print(f"The years available for {c.name} are: {available_years}")
+    available_years = cy.show_years()
+    print(f"The years available for {cy.name} are: {available_years}")
     requested_years = input(
         "Enter the year you want from this list, or type in A for all years\n")
     # test print the choice to terminal, choice All for A, or year if not A
@@ -165,7 +172,7 @@ def get_years():
     return choice
 
 
-def graph_option():
+def graph_option(c):
     """
     presents option to view graph and handles repsonse
     run show_graph method if Yes
@@ -198,7 +205,7 @@ def show_options(option1, option2, option3):
     return option
 
 
-def handle_all_years(option):
+def handle_all_years(option, c):
     """
     Handle the option chosen from show_options
     where the user chose all years in the get_years
@@ -212,50 +219,42 @@ def handle_all_years(option):
         exit()
 
 
-def handle_single_year(option):
+def handle_single_year(option, c):
     """
     Handle the option chosen from show_options
     where the user chose single year in the get_years
     """
     if option == "1":
-        print("option one single path")
+        print("option one single path, all years for same country")
         # option1 = view all years for same country
         # join the all years path - call get_scores method,
         # then call graph_option function and handle_all_years
         c.get_scores("all years")
-        option = graph_option()
-        handle_all_years(option)
+        option = graph_option(c)
+        handle_all_years(option, c)
     elif option == "2":
-        print("option two single year path")
+        print("option two single year path, different country")
+        main()
     else:
         print("exiting application, single year path")
         exit()
 
 
-welcome_msg()
-country = get_country()
-countries_dict = create_countries_dict("data/world-happiness-report.csv")
-c = make_country(country, countries_dict)
-choice = get_years()
-c.get_scores(choice)
-# variables for the show_options function
-MORE_DATA = f"Get more data (max, min, median, average scores) for {c.name}"
-DIFF_COUNTRY = "Choose a different country"
-EXIT_APP = "Exit the application"
-ALL_YEARS = f"Get all years for {c.name}"
-# if choice of years is all, show graph option
-if choice == "all years":
-    option = graph_option()
-    handle_all_years(option)
-else:
-    # if chose single year, show next options
-    option = show_options(ALL_YEARS, DIFF_COUNTRY, EXIT_APP)
-    handle_single_year(option)
+def main():
+    country = get_country()
+    countries_dict = create_countries_dict("data/world-happiness-report.csv")
+    c = make_country(country, countries_dict)
+    choice = get_years(c)
+    c.get_scores(choice)
+    # if choice of years is all, show graph option
+    if choice == "all years":
+        option = graph_option(c)
+        handle_all_years(option, c)
+    else:
+        # if chose single year, show next options
+        option = show_options(ALL_YEARS, DIFF_COUNTRY, EXIT_APP)
+        handle_single_year(option, c)
 
-# if option == "1":
-#     print("option 1")
-#     show_max_min_options()
-# elif option == "2":
-#     get_country()
-# else:
-#     exit()
+
+welcome_msg()
+main()

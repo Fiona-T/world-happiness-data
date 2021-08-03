@@ -153,8 +153,17 @@ class Country:
             print(f"This score was from the years {min_years.split(', ')}")
 
     def show_max_score(self):
-        print(f"The maximum happiness score for {self.name} is:")
-        print(max(self.scores_list))
+        max_score = max(self.scores_list)
+        print(f"The maximum happiness score for {self.name} is: {max_score}")
+        # print(max(self.scores_list))
+        # create a list of the years corresponding to the max score
+        max_years = [k for (k, v) in self.di.items() if float(v) == max_score]
+        # check if just 1 year in list, change the print msg accordingly
+        if len(max_years) == 1:
+            print(f"This score was from the year {max_years[0]}")
+        else:
+            # otherwise print each year separated with the comma
+            print(f"This score was from the years {max_years.split(', ')}")
 
 
 def make_country(country, countries_dict):

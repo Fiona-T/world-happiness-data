@@ -213,7 +213,10 @@ def handle_all_years(option, c):
     if option == "1":
         print("option one all years path")
     elif option == "2":
-        print("option two all years path")
+        # option 2 is choose different country
+        # goes back to main() to choose country from there
+        print("option two all years path, choose different country")
+        main()
     else:
         print("exiting application, all years path")
         exit()
@@ -233,6 +236,8 @@ def handle_single_year(option, c):
         option = graph_option(c)
         handle_all_years(option, c)
     elif option == "2":
+        # option 2 is choose different country
+        # goes back to main() to choose country from there
         print("option two single year path, different country")
         main()
     else:

@@ -219,6 +219,12 @@ def handle_single_year(option):
     """
     if option == "1":
         print("option one single path")
+        # option1 = view all years for same country
+        # join the all years path - call get_scores method,
+        # then call graph_option function and handle_all_years
+        c.get_scores("all years")
+        option = graph_option()
+        handle_all_years(option)
     elif option == "2":
         print("option two single year path")
     else:

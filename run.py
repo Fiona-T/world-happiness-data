@@ -140,8 +140,17 @@ class Country:
             title="Happiness scores over time")
 
     def show_min_score(self):
-        print(f"The minimum happiness score for {self.name} is:")
-        print(min(self.scores_list))
+        min_score = min(self.scores_list)
+        print(f"The minimum happiness score for {self.name} is: {min_score}")
+        # print(min(self.scores_list))
+        # create a list of the years corresponding to the min score
+        min_years = [k for (k, v) in self.di.items() if float(v) == min_score]
+        # check if just 1 year in list, change the print msg accordingly
+        if len(min_years) == 1:
+            print(f"This score was from the year {min_years[0]}")
+        else:
+            # otherwise print each year separated with the comma
+            print(f"This score was from the years {min_years.split(', ')}")
 
     def show_max_score(self):
         print(f"The maximum happiness score for {self.name} is:")

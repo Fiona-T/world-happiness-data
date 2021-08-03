@@ -175,22 +175,25 @@ def graph_option():
     if graph == "Y":
         c.show_graph()
         proceed = input(
-            "\nPress 1 to continue when you have finished with the graph\n")
+            "\nPress any key to continue when you have finished with the graph\
+                \n")
         if proceed:
-            show_options()
+            option = show_options(MORE_DATA, DIFF_COUNTRY, EXIT_APP)
+            return option
     else:
-        show_options()
+        option = show_options(MORE_DATA, DIFF_COUNTRY, EXIT_APP)
+        return option
 
 
-def show_options():
+def show_options(option1, option2, option3):
     """
     shows options for user to choose next
     returns the option to be handled by different function
     """
     print("\nChoose the option you want next:")
-    print(f"1. Get more data (max, min, median, average scores) for {c.name}")
-    print("2. Choose a different country")
-    print("3. Exit the application")
+    print(option1)
+    print(option2)
+    print(option3)
     option = input("Enter 1, 2, or 3 here:\n")
     return option
 
@@ -201,5 +204,9 @@ countries_dict = create_countries_dict("data/world-happiness-report.csv")
 c = make_country(country, countries_dict)
 choice = get_years()
 c.get_scores(choice)
+# variables for the show_options function
+MORE_DATA = f"1. Get more data (max, min, median, average scores) for {c.name}"
+DIFF_COUNTRY = "2. Choose a different country"
+EXIT_APP = "3. Exit the application"
 if choice == "all years":
-    graph_option()
+    option = graph_option()

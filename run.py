@@ -324,17 +324,38 @@ def handle_data_options(choice, c):
         c.show_average_score()
 
 
+def handle_options(option, c):
+    """
+    Handle the option chosen from show_options in the more_data_path
+    Option 1 loops back to start of more_data_path
+    Option 2 loops back to start of the main() path, to choose new country
+    Option 3 prints exit message and exits the application
+    """
+    if option == "1":
+        print("option one, back to min/max etc.")
+        more_data_path(c)
+    elif option == "2":
+        print("option two more data path, choose different country")
+        main()
+    else:
+        print("Thank you, exiting application, more data path...")
+        print_banner_msg("Goodbye")
+        exit()
+
+
 def more_data_path(c):
     """
     Path to run when Option3 chosen from handle_all_years
     Show the choices
     Pass the choice to handle_data_options function
     Show further options after this
+    Then handle the option chosen
     """
     more_data_choice = more_data_options(c)
     handle_data_options(more_data_choice, c)
     option = show_options(MORE_DATA, DIFF_COUNTRY, EXIT_APP)
     print(option)
+    handle_options(option, c)
 
 
 def main():

@@ -198,6 +198,34 @@ def show_options(option1, option2, option3):
     return option
 
 
+def handle_all_years(option):
+    """
+    Handle the option chosen from show_options
+    where the user chose all years in the get_years
+    """
+    if option == "1":
+        print("option one all years path")
+    elif option == "2":
+        print("option two all years path")
+    else:
+        print("exiting application, all years path")
+        exit()
+
+
+def handle_single_year(option):
+    """
+    Handle the option chosen from show_options
+    where the user chose single year in the get_years
+    """
+    if option == "1":
+        print("option one single path")
+    elif option == "2":
+        print("option two single year path")
+    else:
+        print("exiting application, single year path")
+        exit()
+
+
 welcome_msg()
 country = get_country()
 countries_dict = create_countries_dict("data/world-happiness-report.csv")
@@ -212,6 +240,16 @@ ALL_YEARS = f"Get all years for {c.name}"
 # if choice of years is all, show graph option
 if choice == "all years":
     option = graph_option()
+    handle_all_years(option)
 else:
     # if chose single year, show next options
-    show_options(ALL_YEARS, DIFF_COUNTRY, EXIT_APP)
+    option = show_options(ALL_YEARS, DIFF_COUNTRY, EXIT_APP)
+    handle_single_year(option)
+
+# if option == "1":
+#     print("option 1")
+#     show_max_min_options()
+# elif option == "2":
+#     get_country()
+# else:
+#     exit()

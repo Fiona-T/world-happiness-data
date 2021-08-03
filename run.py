@@ -145,6 +145,11 @@ class Country:
             xs=years, ys=scores, lines=True, legend_labels=["years"],
             title="Happiness scores over time")
 
+    def show_min_score(self):
+        print(f"The minimum happiness score for {self.name} is:")
+        scores = [float(v) for v in list(self.di.values())]
+        print(min(scores))
+
 
 def make_country(country, countries_dict):
     # get scores from dictionary, to be passed when creating Class instance
@@ -269,8 +274,14 @@ def more_data_options(c):
 
 
 def more_data_path(c):
+    """
+    Path to run when Option3 chosen from handle_all_years
+    """
     more_data_choice = more_data_options(c)
-    print(f"You chose {more_data_choice} xxx")
+    # handle choice from more_data_options
+    if more_data_choice == "1":
+        # option1 - min score - show_min_score method
+        c.show_min_score()
 
 
 def main():

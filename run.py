@@ -240,53 +240,6 @@ def show_options(option1, option2, option3):
     return option
 
 
-def handle_all_years(option, c):
-    """
-    Handle the option chosen from show_options
-    where the user chose all years in the get_years
-    """
-    if option == "1":
-        print("option one all years path, min/max etc.")
-        more_data_path(c)
-    elif option == "2":
-        # option 2 is choose different country
-        # goes back to main() to choose country from there
-        print("option two all years path, choose different country")
-        main()
-    else:
-        # option 3 is to exit the application
-        print("Thank you, exiting application, all years path...")
-        # print the banner text then exit
-        print_banner_msg("Goodbye")
-        exit()
-
-
-def handle_single_year(option, c):
-    """
-    Handle the option chosen from show_options
-    where the user chose single year in the get_years
-    """
-    if option == "1":
-        print("option one single path, all years for same country")
-        # option1 = view all years for same country
-        # join the all years path - call get_scores method,
-        # then call graph_option function and handle_all_years
-        c.get_scores("all years")
-        option = graph_option(c)
-        handle_all_years(option, c)
-    elif option == "2":
-        # option 2 is choose different country
-        # goes back to main() to choose country from there
-        print("option two single year path, different country")
-        main()
-    else:
-        # option 3 is to exit the application
-        print("Thank you, exiting application, single year path")
-        # print the banner text then exit
-        print_banner_msg("Goodbye")
-        exit()
-
-
 def more_data_options(c):
     """
     Show the options to user for Min, Max, Median, Average or All
@@ -324,21 +277,31 @@ def handle_data_options(choice, c):
         c.show_average_score()
 
 
-def handle_options(option, c):
+def handle_options(option, c, path):
     """
-    Handle the option chosen from show_options in the more_data_path
-    Option 1 loops back to start of more_data_path
+    Handle the option chosen from show_options
+    Option 1 - if single year path, joins the 'all years path'
+    Option 1 - if not single year, goes to (if coming from all years path),
+    or loops back to (if already on more_data_path), start of more_data_path
     Option 2 loops back to start of the main() path, to choose new country
     Option 3 prints exit message and exits the application
     """
-    if option == "1":
+    if path == "single year" and option == "1":
+        print("option one single path, all years for same country")
+        # option1 = view all years for same country
+        # join the all years path - call get_scores method,
+        # then call graph_option function and handle_all_years
+        c.get_scores("all years")
+        option = graph_option(c)
+        handle_options(option, c, "all years")
+    elif path != "single year" and option == "1":
         print("option one, back to min/max etc.")
         more_data_path(c)
     elif option == "2":
-        print("option two more data path, choose different country")
+        print("option two, choose different country")
         main()
     else:
-        print("Thank you, exiting application, more data path...")
+        print("Thank you, exiting application...")
         print_banner_msg("Goodbye")
         exit()
 
@@ -355,7 +318,7 @@ def more_data_path(c):
     handle_data_options(more_data_choice, c)
     option = show_options(MORE_DATA, DIFF_COUNTRY, EXIT_APP)
     print(option)
-    handle_options(option, c)
+    handle_options(option, c, "more data")
 
 
 def main():
@@ -367,11 +330,11 @@ def main():
     # if choice of years is all, show graph option
     if choice == "all years":
         option = graph_option(c)
-        handle_all_years(option, c)
+        handle_options(option, c, "all years")
     else:
         # if chose single year, show next options
         option = show_options(ALL_YEARS, DIFF_COUNTRY, EXIT_APP)
-        handle_single_year(option, c)
+        handle_options(option, c, "single year")
 
 
 welcome_msg()

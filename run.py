@@ -211,7 +211,8 @@ def handle_all_years(option, c):
     where the user chose all years in the get_years
     """
     if option == "1":
-        print("option one all years path")
+        print("option one all years path, min/max etc.")
+        more_data_path(c)
     elif option == "2":
         # option 2 is choose different country
         # goes back to main() to choose country from there
@@ -249,6 +250,27 @@ def handle_single_year(option, c):
         # print the banner text then exit
         print_banner_msg("Goodbye")
         exit()
+
+
+def more_data_options(c):
+    """
+    Show the options to user for Min, Max, Median, Average or All
+    """
+    print(f"Choose from the options below for {c.name}:")
+    print("1: Minimum happiness score")
+    print("2: Maximum happiness score")
+    print("3: Median happiness score")
+    print("4: Average happiness score")
+    print("5: All of these (min, max, median, average)")
+    more_data_choice = input(
+        "Enter 1/2/3/4/5 for the option you want from this list\n")
+    print(f"You chose {more_data_choice}")
+    return more_data_choice
+
+
+def more_data_path(c):
+    more_data_choice = more_data_options(c)
+    print(f"You chose {more_data_choice} xxx")
 
 
 def main():

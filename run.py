@@ -6,6 +6,8 @@ from termcolor import colored
 import csv
 # import uniplot for graph display in terminal
 from uniplot import plot
+# import python statistics module for median calculation
+import statistics
 
 
 # variables for the show_options function
@@ -165,6 +167,13 @@ class Country:
             # otherwise print each year separated with the comma
             print(f"This score was from the years {max_years.split(', ')}")
 
+    def show_median_score(self):
+        """
+        Get the median score from the scores_list, print to terminal
+        """
+        median_score = statistics.median(self.scores_list)
+        print(f"The median happiness score for {self.name} is: {median_score}")
+
     def show_average_score(self):
         total_score = sum(self.scores_list)
         # total divided by length is average, rounded to 2 decimal places
@@ -305,6 +314,8 @@ def more_data_path(c):
         c.show_min_score()
     elif more_data_choice == "2":
         c.show_max_score()
+    elif more_data_choice == "3":
+        c.show_median_score()
     elif more_data_choice == "4":
         c.show_average_score()
 

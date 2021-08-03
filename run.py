@@ -318,6 +318,11 @@ def more_data_path(c):
         c.show_median_score()
     elif more_data_choice == "4":
         c.show_average_score()
+    elif more_data_choice == "5":
+        c.show_min_score()
+        c.show_max_score()
+        c.show_median_score()
+        c.show_average_score()
 
 
 def main():

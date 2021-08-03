@@ -244,7 +244,10 @@ def handle_single_year(option, c):
         print("option two single year path, different country")
         main()
     else:
-        print("exiting application, single year path")
+        # option 3 is to exit the application
+        print("Thank you, exiting application, single year path")
+        # print the banner text then exit
+        print_banner_msg("Goodbye")
         exit()
 
 

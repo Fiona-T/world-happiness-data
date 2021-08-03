@@ -165,6 +165,13 @@ class Country:
             # otherwise print each year separated with the comma
             print(f"This score was from the years {max_years.split(', ')}")
 
+    def show_average_score(self):
+        total_score = sum(self.scores_list)
+        # total divided by length is average, rounded to 2 decimal places
+        average_score = round(total_score/len(self.scores_list), 2)
+        print(
+            f"The average happiness score for {self.name} is: {average_score}")
+
 
 def make_country(country, countries_dict):
     # get scores from dictionary, to be passed when creating Class instance
@@ -298,6 +305,8 @@ def more_data_path(c):
         c.show_min_score()
     elif more_data_choice == "2":
         c.show_max_score()
+    elif more_data_choice == "4":
+        c.show_average_score()
 
 
 def main():

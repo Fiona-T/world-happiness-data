@@ -191,9 +191,9 @@ def show_options(option1, option2, option3):
     returns the option to be handled by different function
     """
     print("\nChoose the option you want next:")
-    print(option1)
-    print(option2)
-    print(option3)
+    print(f"1: {option1}")
+    print(f"2: {option2}")
+    print(f"3: {option3}")
     option = input("Enter 1, 2, or 3 here:\n")
     return option
 
@@ -205,8 +205,10 @@ c = make_country(country, countries_dict)
 choice = get_years()
 c.get_scores(choice)
 # variables for the show_options function
-MORE_DATA = f"1. Get more data (max, min, median, average scores) for {c.name}"
-DIFF_COUNTRY = "2. Choose a different country"
-EXIT_APP = "3. Exit the application"
+MORE_DATA = f"Get more data (max, min, median, average scores) for {c.name}"
+DIFF_COUNTRY = "Choose a different country"
+EXIT_APP = "Exit the application"
+ALL_YEARS = f"Get all years for {c.name}"
+# if choice of years is all, show graph option
 if choice == "all years":
     option = graph_option()

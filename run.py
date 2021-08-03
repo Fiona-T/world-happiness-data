@@ -303,26 +303,33 @@ def more_data_options(c):
     return more_data_choice
 
 
+def handle_data_options(choice, c):
+    """
+    handle the choice for the more_data_options function,
+    i.e. Min, Max, Median, Average or All
+    """
+    if choice == "1":
+        # option1 - min score - show_min_score method
+        c.show_min_score()
+    elif choice == "2":
+        c.show_max_score()
+    elif choice == "3":
+        c.show_median_score()
+    elif choice == "4":
+        c.show_average_score()
+    elif choice == "5":
+        c.show_min_score()
+        c.show_max_score()
+        c.show_median_score()
+        c.show_average_score()
+
+
 def more_data_path(c):
     """
     Path to run when Option3 chosen from handle_all_years
     """
     more_data_choice = more_data_options(c)
-    # handle choice from more_data_options
-    if more_data_choice == "1":
-        # option1 - min score - show_min_score method
-        c.show_min_score()
-    elif more_data_choice == "2":
-        c.show_max_score()
-    elif more_data_choice == "3":
-        c.show_median_score()
-    elif more_data_choice == "4":
-        c.show_average_score()
-    elif more_data_choice == "5":
-        c.show_min_score()
-        c.show_max_score()
-        c.show_median_score()
-        c.show_average_score()
+    handle_data_options(more_data_choice, c)
 
 
 def main():

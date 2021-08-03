@@ -327,9 +327,14 @@ def handle_data_options(choice, c):
 def more_data_path(c):
     """
     Path to run when Option3 chosen from handle_all_years
+    Show the choices
+    Pass the choice to handle_data_options function
+    Show further options after this
     """
     more_data_choice = more_data_options(c)
     handle_data_options(more_data_choice, c)
+    option = show_options(MORE_DATA, DIFF_COUNTRY, EXIT_APP)
+    print(option)
 
 
 def main():

@@ -103,23 +103,15 @@ class Country:
     di is dictionary with year as k, score as v
     scores_list is a list of the scores for each year, as a float,
     so that it can be used in graph and for min, max etc.
+    years is list of years (keys from the di), converted to integer,
+    so that they can be used in graph
     """
     def __init__(self, name, scores):
         self.name = name
         self.scores = scores
         self.di = dict(self.scores)
         self.scores_list = [float(v) for v in list(self.di.values())]
-
-    def show_years(self):
-        """
-        creates a list of the available years,
-        from the self.scores list of tuples (year, score)
-        """
-        years = []
-        for data in self.scores:
-            year = int(data[0])
-            years.append(year)
-        return years
+        self.years = [int(k) for k in list(self.di.keys())]
 
     def get_scores(self, choice):
         """
@@ -137,14 +129,14 @@ class Country:
     def show_graph(self):
         """
         plots a graph of the scores over time, using uniplot
-        first get years and scores as lists, converted to ints/floats
+        years and scores were previously converted to ints/floats
         then plot the graph, years on x-axis, score on y-axis
         """
-        years = [int(k) for k in list(self.di.keys())]
-        print(years)
+        print(self.years)
         print(self.scores_list)
         plot(
-            xs=years, ys=self.scores_list, lines=True, legend_labels=["years"],
+            xs=self.years, ys=self.scores_list, lines=True,
+            legend_labels=["years"],
             title="Happiness scores over time")
 
     def show_min_score(self):
@@ -163,10 +155,9 @@ def make_country(country, countries_dict):
     return c
 
 
-def get_years(cy):
-    # gets the list of available years from method of Country class
-    available_years = cy.show_years()
-    print(f"The years available for {cy.name} are: {available_years}")
+def get_years(c):
+    # show the list of available years from Country class instance variable
+    print(f"The years available for {c.name} are: {c.years}")
     requested_years = input(
         "Enter the year you want from this list, or type in A for all years\n")
     # test print the choice to terminal, choice All for A, or year if not A

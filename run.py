@@ -266,13 +266,13 @@ def show_options(option1, option2, option3):
         print(f"2: {option2}")
         print(f"3: {option3}")
         option = input("Enter 1, 2, or 3 here:\n")
-        if validate_options(option, "3"):
+        if validate_options(option, 3):
             print("choice is OK")
             break
     return option
 
 
-def validate_options(option, choices):
+def validate_options(option, num_choices):
     """
     validate the option entered by the user in show_options. Must be 1,2, or 3.
     First check if input can be converted to an integer, Print error if not
@@ -293,12 +293,9 @@ def validate_options(option, choices):
                 f"Please enter only one number and no space or \
                     \ncharacters, you input '{option}', which \
                     \nis {len(option)} characters long")
-        elif choices == "3" and int(option) > 3 or int(option) == 0:
+        elif int(option) > num_choices or int(option) == 0:
             raise Exception(
-                f"Number must be 1, 2 or 3. You entered '{option}'")
-        elif choices == "5" and int(option) > 5 or int(option) == 0:
-            raise Exception(
-                f"Number must be 1, 2, 3, 4 or 5. You entered '{option}'")
+                f"Number must be between 1 and {num_choices}. You entered '{option}'")
     except (ValueError, Exception) as e:
         print(f"Invalid choice: {e}, try again.\n")
         return False
@@ -348,7 +345,7 @@ def more_data_options(c):
         more_data_choice = input(
             "Enter 1/2/3/4/5 for the option you want from this list\n")
         print(f"You chose {more_data_choice}")
-        if validate_options(more_data_choice, "5"):
+        if validate_options(more_data_choice, 5):
             print("valid choice")
             break
     return more_data_choice

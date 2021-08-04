@@ -230,13 +230,19 @@ def graph_option(c):
 def show_options(option1, option2, option3):
     """
     shows options for user to choose next
-    returns the option to be handled by different function
+    calls the validate_options function to check the input
+    continues looping until validate_options returns True
+    Then returns the option to be handled by handle_option function
     """
-    print("\nChoose the option you want next:")
-    print(f"1: {option1}")
-    print(f"2: {option2}")
-    print(f"3: {option3}")
-    option = input("Enter 1, 2, or 3 here:\n")
+    while True:
+        print("\nChoose the option you want next:")
+        print(f"1: {option1}")
+        print(f"2: {option2}")
+        print(f"3: {option3}")
+        option = input("Enter 1, 2, or 3 here:\n")
+        if validate_options(option):
+            print("choice is OK")
+            break
     return option
 
 
@@ -275,6 +281,36 @@ def handle_data_options(choice, c):
         c.show_max_score()
         c.show_median_score()
         c.show_average_score()
+
+
+def validate_options(option):
+    """
+    validate the option entered by the user in show_options. Must be 1,2, or 3.
+    First check if input can be converted to an integer, Print error if not
+    Next try block checks if more than one number entered, raises error
+    Then check if number entered is above 3 or equals 0, raise error
+    Except clause returns the errors raised in the try block
+    Returns True when validated or False if error, to the
+    while loop in the show_options() function
+    """
+    try:
+        int(option)
+    except ValueError:
+        print(f"Please enter a number, you entered '{option}'")
+        return False
+    try:
+        if len(option) > 1:
+            raise ValueError(
+                f"Please enter only one number and no space or \
+                    \ncharacters, you input '{option}', which \
+                    \nis {len(option)} characters long")
+        elif int(option) > 3 or int(option) == 0:
+            raise Exception(
+                f"Number must be 1, 2 or 3. You entered '{option}'")
+    except (ValueError, Exception) as e:
+        print(f"Invalid choice: {e}, try again.\n")
+        return False
+    return True
 
 
 def handle_options(option, c, path):

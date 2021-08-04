@@ -210,11 +210,18 @@ def get_years(c):
 def graph_option(c):
     """
     presents option to view graph and handles repsonse
-    run show_graph method if Yes
-    Otherwise show the next options
+    Run show_graph method if Y, Otherwise show the next options
+    Calls validate_y_n to validate the user input (converted to lowercase)
+    The while loop continues until validate_y_n returns True
     """
-    graph = input("Do you want to view graph of this data? Y/N\n")
-    if graph == "Y":
+    while True:
+        graph_q = input("Do you want to view graph of this data? Y/N\n")
+        graph = graph_q.lower()
+        print(graph)
+        if validate_y_n(graph):
+            print("valid choice")
+            break
+    if graph == "y":
         c.show_graph()
         proceed = input(
             "\nPress any key to continue when you have finished with the graph\
@@ -225,6 +232,25 @@ def graph_option(c):
     else:
         option = show_options(MORE_DATA, DIFF_COUNTRY, EXIT_APP)
         return option
+
+
+def validate_y_n(user_input):
+    """
+    Validate the input to the Y/N question
+    If it is a number, raise error
+    If it isn't equal to y or n, raise error
+    Print the error and return false
+    If no error return True back to the input function
+    """
+    try:
+        if user_input.isdigit():
+            raise Exception("Number is not a valid choice.")
+        elif user_input != "y" and user_input != "n":
+            raise Exception("You didn't enter Y or N.")
+    except Exception as e:
+        print(f"Invalid choice: {e}. You entered '{user_input}'. Try again.\n")
+        return False
+    return True
 
 
 def show_options(option1, option2, option3):

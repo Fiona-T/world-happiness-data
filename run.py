@@ -246,43 +246,6 @@ def show_options(option1, option2, option3):
     return option
 
 
-def more_data_options(c):
-    """
-    Show the options to user for Min, Max, Median, Average or All
-    """
-    print(f"Choose from the options below for {c.name}:")
-    print("1: Minimum happiness score")
-    print("2: Maximum happiness score")
-    print("3: Median happiness score")
-    print("4: Average happiness score")
-    print("5: All of these (min, max, median, average)")
-    more_data_choice = input(
-        "Enter 1/2/3/4/5 for the option you want from this list\n")
-    print(f"You chose {more_data_choice}")
-    return more_data_choice
-
-
-def handle_data_options(choice, c):
-    """
-    handle the choice for the more_data_options function,
-    i.e. Min, Max, Median, Average or All
-    """
-    if choice == "1":
-        # option1 - min score - show_min_score method
-        c.show_min_score()
-    elif choice == "2":
-        c.show_max_score()
-    elif choice == "3":
-        c.show_median_score()
-    elif choice == "4":
-        c.show_average_score()
-    elif choice == "5":
-        c.show_min_score()
-        c.show_max_score()
-        c.show_median_score()
-        c.show_average_score()
-
-
 def validate_options(option):
     """
     validate the option entered by the user in show_options. Must be 1,2, or 3.
@@ -340,6 +303,43 @@ def handle_options(option, c, path):
         print("Thank you, exiting application...")
         print_banner_msg("Goodbye")
         exit()
+
+
+def more_data_options(c):
+    """
+    Show the options to user for Min, Max, Median, Average or All
+    """
+    print(f"Choose from the options below for {c.name}:")
+    print("1: Minimum happiness score")
+    print("2: Maximum happiness score")
+    print("3: Median happiness score")
+    print("4: Average happiness score")
+    print("5: All of these (min, max, median, average)")
+    more_data_choice = input(
+        "Enter 1/2/3/4/5 for the option you want from this list\n")
+    print(f"You chose {more_data_choice}")
+    return more_data_choice
+
+
+def handle_data_options(choice, c):
+    """
+    handle the choice for the more_data_options function,
+    i.e. Min, Max, Median, Average or All
+    """
+    if choice == "1":
+        # option1 - min score - show_min_score method
+        c.show_min_score()
+    elif choice == "2":
+        c.show_max_score()
+    elif choice == "3":
+        c.show_median_score()
+    elif choice == "4":
+        c.show_average_score()
+    elif choice == "5":
+        c.show_min_score()
+        c.show_max_score()
+        c.show_median_score()
+        c.show_average_score()
 
 
 def more_data_path(c):

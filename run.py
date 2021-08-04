@@ -338,15 +338,19 @@ def more_data_options(c):
     """
     Show the options to user for Min, Max, Median, Average or All
     """
-    print(f"Choose from the options below for {c.name}:")
-    print("1: Minimum happiness score")
-    print("2: Maximum happiness score")
-    print("3: Median happiness score")
-    print("4: Average happiness score")
-    print("5: All of these (min, max, median, average)")
-    more_data_choice = input(
-        "Enter 1/2/3/4/5 for the option you want from this list\n")
-    print(f"You chose {more_data_choice}")
+    while True:
+        print(f"Choose from the options below for {c.name}:")
+        print("1: Minimum happiness score")
+        print("2: Maximum happiness score")
+        print("3: Median happiness score")
+        print("4: Average happiness score")
+        print("5: All of these (min, max, median, average)")
+        more_data_choice = input(
+            "Enter 1/2/3/4/5 for the option you want from this list\n")
+        print(f"You chose {more_data_choice}")
+        if validate_options(more_data_choice, "5"):
+            print("valid choice")
+            break
     return more_data_choice
 
 

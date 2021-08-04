@@ -51,11 +51,11 @@ def welcome_msg():
     Print banner msg, welcome text and smiley face
     """
     print_banner_msg("Welcome")
-    print("Welcome to the World Happiness Data Tool\
-        \nHere you can look up the Happiness Score \
-        \nper country, for the years 2005 - 2020.\
-            \nNote: For some countries data doesn't exist\
-            \nfor every year in the range.")
+    print("The World Happiness Data Tool lets you\
+        \nlook up the Happiness Score per country,\
+        \nfor the years 2005 - 2020.")
+    # print("Note: For some countries data doesn't exist\
+    #     \nfor every year in the range.")
     print_smiley()
 
 
@@ -94,7 +94,8 @@ def create_countries_dict(filepath):
                 country_dict[key] = [country_dict[key]]
             # append the new value to the exising list of values
             country_dict[key].append(value)
-    print(country_dict)
+    # print(country_dict)
+    print(f"Creating countries dictionary from {filepath}...")
     return country_dict
 
 

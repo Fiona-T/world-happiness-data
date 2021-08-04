@@ -79,6 +79,7 @@ def create_countries_dict(filepath):
     with open(filepath, "r") as f:
         data = list(csv.reader(f))
         # open the file and read it, convert to list of lists
+    global country_dict
     country_dict = {}
     # for each list in the list of lists, excluding first one
     for sublist in data[1:]:
@@ -324,7 +325,7 @@ def handle_options(option, c, path):
         more_data_path(c)
     elif option == "2":
         print("option two, choose different country")
-        main()
+        main(country_dict)
     else:
         print("Thank you, exiting application...")
         print_banner_msg("Goodbye")
@@ -387,10 +388,10 @@ def more_data_path(c):
     handle_options(option, c, "more data")
 
 
-def main():
+def main(dict):
     country = get_country()
-    countries_dict = create_countries_dict("data/world-happiness-report.csv")
-    c = make_country(country, countries_dict)
+    # countries_dict = create_countries_dict("data/world-happiness-report.csv")
+    c = make_country(country, dict)
     choice = get_years(c)
     c.get_scores(choice)
     # if choice of years is all, show graph option
@@ -403,5 +404,17 @@ def main():
         handle_options(option, c, "single year")
 
 
-welcome_msg()
-main()
+def start():
+    """
+    starts the application - shows the welcome message,
+    creates the country dictionary and then runs main,
+    passing country dictionary (application can be
+    developed further to do dictionary by year, so using
+    the type of dictionary as an argument for main function)
+    """
+    welcome_msg()
+    country_dict = create_countries_dict("data/world-happiness-report.csv")
+    main(country_dict)
+
+
+start()

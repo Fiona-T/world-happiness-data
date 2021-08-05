@@ -197,16 +197,57 @@ def make_country(country, countries_dict):
 
 def get_years(c):
     # show the list of available years from Country class instance variable
-    print(f"The years available for {c.name} are: {c.years}")
-    requested_years = input(
-        "Enter the year you want from this list, or type in A for all years\n")
-    # test print the choice to terminal, choice All for A, or year if not A
-    if requested_years == "A":
-        choice = "all years"
-    else:
-        choice = requested_years
+    years = c.years
+    while True:
+        print(f"The years available for {c.name} are: {c.years}")
+        requested_years = input(
+            "Enter the year you want from this list, "
+            "or type in A for all years\n")
+        if requested_years == "A" or requested_years == "a":
+            choice = "all years"
+            break
+        elif validate_years(requested_years, years):
+            print("valid choice")
+            choice = requested_years
+            break
     print(f"thanks, you asked for {choice}")
     return choice
+
+
+def validate_years(user_input, available_years):
+    """
+    Validate input from get_years, if it is not A or a:
+    If length of input is 1, user may be trying to input A
+    for all years - error to prompt user for A.
+    Then, try to convert to integer, as any other inputs
+    must be a number (year), so must be able to convert to int
+    Then, if length is not 4 or 1, prompt user for correct length
+    Then, if length is 4 (correct) but year is not in the list of
+    years for that country, prompt user for correct year.
+    Return False with any errors, or True if no error.
+    """
+    try:
+        if len(user_input) == 1:
+            raise Exception("Enter A for all years")
+    except Exception as e:
+        print(f"Invalid choice: {e}. You entered '{user_input}'. Try again.\n")
+        return False
+    try:
+        int(user_input)
+    except ValueError:
+        print(f"Please enter a number, you entered '{user_input}'")
+        return False
+    try:
+        if len(user_input) != 4 and len(user_input) != 1:
+            raise Exception(
+                f"Enter 4 numbers for a year, not {len(user_input)}. "
+                f"Or enter A for all years.")
+        elif len(user_input) == 4 and int(user_input) not in available_years:
+            raise Exception(f"{user_input} is not in the list")
+    except Exception as e:
+        print(f"Invalid choice: {e}. You entered '{user_input}'. Try again.\n")
+        return False
+    return True
 
 
 def graph_option(c):

@@ -63,13 +63,36 @@ def get_country():
     """
     Get country name from user
     """
-    print("\nChoose the country you want to look up.")
-    print("You will be shown the data for that country. \
-        \nThen you can choose to view a graph of that data.")
-    country = input(
-        "Please enter the name of the country you want to look up:\n")
-    print(f"You entered: {country}")
-    return country
+    countries = [k for k in list(country_dict.keys())]
+    countries_lowercase = [c.lower() for c in countries]
+    print(countries_lowercase)
+    while True:
+        print("\nChoose the country you want to look up.")
+        print("You will be shown the data for that country. \
+            \nThen you can choose to view a graph of that data.")
+        country = input(
+            "Please enter the name of the country you want to look up:\n")
+        print(f"You entered: {country}")
+        if validate_country(country):
+            print("choice is OK")
+            break
+    countryC = country.title()
+    print(countryC)
+    return countryC
+
+
+def validate_country(user_input):
+    countries = [k for k in list(country_dict.keys())]
+    countries_lowercase = [c.lower() for c in countries]
+    try:
+        if user_input.isnumeric():
+            raise Exception("Numbers are not valid inputs")
+        elif user_input.lower() not in countries_lowercase:
+            raise Exception(f"{user_input} is not in the list of countries")
+    except Exception as e:
+        print(f"Invalid choice: {e}. You entered '{user_input}'. Try again.\n")
+        return False
+    return True
 
 
 def create_countries_dict(filepath):

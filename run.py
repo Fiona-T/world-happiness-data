@@ -89,7 +89,8 @@ def create_countries_dict(filepath):
         if key not in country_dict:
             country_dict[key] = value
         else:
-            # if country exists, check if values are NOT a list, convert to list (1st time)
+            # if country exists, check if values are NOT a list
+            # if not then convert to list so new values added in same list
             if not isinstance(country_dict[key], list):
                 country_dict[key] = [country_dict[key]]
             # append the new value to the exising list of values
@@ -333,12 +334,13 @@ def validate_options(option, num_choices):
     try:
         if len(option) > 1:
             raise ValueError(
-                f"Please enter only one number and no space or \
-                    \ncharacters, you input '{option}', which \
-                    \nis {len(option)} characters long")
+                "Please enter only one number and no space or "
+                f"characters, you input '{option}', which "
+                f"is {len(option)} characters long")
         elif int(option) > num_choices or int(option) == 0:
             raise Exception(
-                f"Number must be between 1 and {num_choices}. You entered '{option}'")
+                f"Number must be between 1 and {num_choices}. "
+                f"You entered '{option}'")
     except (ValueError, Exception) as e:
         print(f"Invalid choice: {e}, try again.\n")
         return False

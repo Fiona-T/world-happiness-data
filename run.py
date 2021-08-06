@@ -76,7 +76,10 @@ def get_country():
         if validate_country(country):
             print("choice is OK")
             break
-    countryC = country.title()
+    # converts the input name to the standardised name
+    country_converted = convert_country_alias(country)
+    # capitalises the country name(s) for creating country instance
+    countryC = country_converted.title()
     print(countryC)
     return countryC
 
@@ -87,12 +90,40 @@ def validate_country(user_input):
     try:
         if user_input.isnumeric():
             raise Exception("Numbers are not valid inputs")
-        elif user_input.lower() not in countries_lowercase:
-            raise Exception(f"{user_input} is not in the list of countries")
+        else:
+            # get country name from alias list
+            country = convert_country_alias(user_input.lower())
+            print(f"country alias is {country}")
+            # then check if country is in list
+            if country not in countries_lowercase:
+                raise Exception(f"{user_input} is not in the list of countries")
     except Exception as e:
         print(f"Invalid choice: {e}. You entered '{user_input}'. Try again.\n")
         return False
     return True
+
+
+def convert_country_alias(input_name):
+    """
+    Converts 'alias' country, names that user may enter, to name held in csv
+    Returns 'std_name' which is the standardised name
+    Checks if the input name is in the list of alias names for each country
+    If it is, sets the input name to the standardised name
+    If not, the standardised name is the input name
+    """
+    country_alias_list = {"united states": ["usa", "united states of america", "america", "north america"], "united kingdom": ["uk", "great britain", "britain"]}
+    # print([k for k in country_alias.keys()])
+    # print([v for v in country_alias.values()])
+    std_name = None
+    for k, v in country_alias_list.items():
+        if input_name in v:
+            std_name = k
+            print("in the list")
+            print(f"k is {k}")
+            print(f"new country variable is {std_name}")
+    if std_name is None:
+        std_name = input_name
+    return std_name
 
 
 def create_countries_dict(filepath):

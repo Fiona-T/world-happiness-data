@@ -76,11 +76,12 @@ def get_country():
         if validate_country(country):
             print("choice is OK")
             break
-    # converts the input name to the standardised name
-    country_converted = convert_country_alias(country)
+    # converts the input name to the standardised name, pass lowercase
+    country_converted = convert_country_alias(country.lower())
+    print(f"converted name is: {country_converted}")
     # capitalises the country name(s) for creating country instance
     countryC = country_converted.title()
-    print(countryC)
+    print(f"capitalised name is: {countryC}")
     return countryC
 
 

@@ -169,22 +169,30 @@ class Country:
     def __init__(self, name, scores):
         self.name = name
         self.scores = scores
-        self.di = dict(self.scores)
-        self.scores_list = [float(v) for v in list(self.di.values())]
-        self.years = [int(k) for k in list(self.di.keys())]
+        # if country only has one year, scores will be a tuple not list
+        # in that case, don't need dictionary, scores_list or years list
+        # so these are only created when country has multiple years
+        if isinstance(self.scores, list):
+            self.di = dict(self.scores)
+            self.scores_list = [float(v) for v in list(self.di.values())]
+            self.years = [int(k) for k in list(self.di.keys())]
 
-    def get_scores(self, choice):
+    def get_scores(self, choice, single):
         """
         creates dictionary of the year and score from self.scores
         prints the score for the selected year
         or prints year + score for all years if all selected
         """
-        print(f"The score for {self.name} for {choice} is:")
-        if choice == "all years":
-            # print the key and value for each item in the dict
-            [print(k, ":", v) for k, v in self.di.items()]
+        if single == "y":
+            print(f"There is only one year available for {self.name}")
+            print(f"The score is {self.scores[1]} for {choice}")
         else:
-            print(self.di.get(choice))
+            print(f"The score for {self.name} for {choice} is:")
+            if choice == "all years":
+                # print the key and value for each item in the dict
+                [print(k, ":", v) for k, v in self.di.items()]
+            else:
+                print(self.di.get(choice))
 
     def show_graph(self):
         """
@@ -416,7 +424,7 @@ def handle_options(option, c, path):
         # option1 = view all years for same country
         # join the all years path - call get_scores method,
         # then call graph_option function and handle_all_years
-        c.get_scores("all years")
+        c.get_scores("all years", "n")
         option = graph_option(c)
         handle_options(option, c, "all years")
     elif path != "single year" and option == "1":
@@ -489,10 +497,16 @@ def more_data_path(c):
 
 def main(dict):
     country = get_country()
-    # countries_dict = create_countries_dict("data/world-happiness-report.csv")
     c = make_country(country, dict)
-    choice = get_years(c)
-    c.get_scores(choice)
+    # if country only has one year (self.scores is a tuple not list),
+    # then set choice to that yea and single year to y.
+    # Otherwise, choice is chosen year
+    if isinstance(c.scores, tuple):
+        choice = c.scores[0]
+        c.get_scores(choice, "y")
+    else:
+        choice = get_years(c)
+        c.get_scores(choice, "n")
     # if choice of years is all, show graph option
     if choice == "all years":
         option = graph_option(c)

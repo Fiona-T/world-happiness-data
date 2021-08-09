@@ -99,7 +99,9 @@ def validate_country(user_input):
             if country not in countries_lowercase:
                 raise Exception(f"{user_input} is not in the list of countries")
     except Exception as e:
-        print(f"Invalid choice: {e}. You entered '{user_input}'. Try again.\n")
+        print(colored(
+            f"Invalid choice: {e}. You entered '{user_input}'. Try again.\n",
+            "red", attrs=["bold"]))
         return False
     return True
 
@@ -470,12 +472,16 @@ def validate_years(user_input, available_years):
         if len(user_input) == 1:
             raise Exception("Enter A for all years")
     except Exception as e:
-        print(f"Invalid choice: {e}. You entered '{user_input}'. Try again.\n")
+        print(colored(
+            f"Invalid choice: {e}. You entered '{user_input}'. Try again.\n",
+            "red", attrs=["bold"]))
         return False
     try:
         int(user_input)
     except ValueError:
-        print(f"Please enter a number, you entered '{user_input}'")
+        print(colored(
+            f"Please enter a number, you entered '{user_input}'",
+            "red", attrs=["bold"]))
         return False
     try:
         if len(user_input) != 4 and len(user_input) != 1:
@@ -485,7 +491,9 @@ def validate_years(user_input, available_years):
         elif len(user_input) == 4 and int(user_input) not in available_years:
             raise Exception(f"{user_input} is not in the list")
     except Exception as e:
-        print(f"Invalid choice: {e}. You entered '{user_input}'. Try again.\n")
+        print(colored(
+            f"Invalid choice: {e}. You entered '{user_input}'. Try again.\n",
+            "red", attrs=["bold"]))
         return False
     return True
 
@@ -531,7 +539,9 @@ def validate_y_n(user_input):
         elif user_input != "y" and user_input != "n":
             raise Exception("You didn't enter Y or N.")
     except Exception as e:
-        print(f"Invalid choice: {e}. You entered '{user_input}'. Try again.\n")
+        print(colored(
+            f"Invalid choice: {e}. You entered '{user_input}'. Try again.\n",
+            "red", attrs=["bold"]))
         return False
     return True
 
@@ -568,7 +578,9 @@ def validate_options(option, num_choices):
     try:
         int(option)
     except ValueError:
-        print(f"Please enter a number, you entered '{option}'")
+        print(colored(
+            f"Please enter a number, you entered '{option}'",
+            "red", attrs=["bold"]))
         return False
     try:
         if len(option) > 1:
@@ -581,7 +593,8 @@ def validate_options(option, num_choices):
                 f"Number must be between 1 and {num_choices}. "
                 f"You entered '{option}'")
     except (ValueError, Exception) as e:
-        print(f"Invalid choice: {e}, try again.\n")
+        print(colored(
+            f"Invalid choice: {e}, try again.\n", "red", attrs=["bold"]))
         return False
     return True
 

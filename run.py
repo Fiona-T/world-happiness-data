@@ -22,9 +22,9 @@ def print_banner_msg(text):
     Print the text passed in, as a banner msg using Figlet font
     """
     font = Figlet(font="ogre")
-    print("-" * 44)
+    print("-" * 48)
     print(colored(font.renderText(text), "yellow"))
-    print("-" * 44)
+    print("-" * 48)
 
 
 def print_smiley():
@@ -51,10 +51,11 @@ def welcome_msg():
     Print banner msg, welcome text and smiley face
     """
     print_banner_msg("Welcome")
-    print("The World Happiness Data Tool lets you\
-        \nlook up the Happiness Score per country,\
-        \nfor the years 2005 - 2020.")
-    print_smiley()
+    print("This is the World Happiness Data Tool.")
+    print(
+        "You can look up the Happiness Score per country, "
+        "for the years 2005 - 2020.\n")
+    # print_smiley()
 
 
 def get_country():

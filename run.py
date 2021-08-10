@@ -98,7 +98,8 @@ def validate_country(user_input):
         else:
             country = convert_country_alias(user_input.lower())
             if country not in countries_lowercase:
-                raise Exception(f"{user_input} is not in the list of countries")
+                raise Exception(
+                            f"{user_input} is not in the list of countries")
     except Exception as e:
         print(colored(
             f"Invalid choice: {e}. You entered '{user_input}'. Try again.\n",
@@ -296,9 +297,6 @@ def convert_country_alias(input_name):
     for k, v in country_alias_list.items():
         if input_name in v:
             std_name = k
-            print("in the list")
-            print(f"k is {k}")
-            print(f"new country variable is {std_name}")
     if std_name is None:
         std_name = input_name
     return std_name
@@ -306,11 +304,12 @@ def convert_country_alias(input_name):
 
 def create_countries_dict(filepath):
     """
-    Open the specified csv file, create a list of countries from 1st column
+    Returns global variable dictionary from the specified file path
+    Key = country name
+    Value = list of tuples each containing year and score pairs
     """
     with open(filepath, "r") as f:
         data = list(csv.reader(f))
-        # open the file and read it, convert to list of lists
     global country_dict
     country_dict = {}
     # for each list in the list of lists, excluding first one

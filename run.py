@@ -72,13 +72,13 @@ def get_country():
         print("Use the common English name for the country, with no dots.")
         print("You will then be shown the years from which you can choose")
         country = input(
-            "Please enter the name of the country you want to look up:\n")
+            "Please enter the name of the country you want to look up: \n")
         if validate_country(country):
             break
     country_std = convert_country_alias(country.lower())
     country_cap = convert_to_titlecase(country_std)
     print(
-        f"You entered '{country}'. Showing results for '{country_cap}'.")
+        f"\nYou entered '{country}'. Showing results for '{country_cap}'.")
     return country_cap
 
 
@@ -489,10 +489,10 @@ def get_years(c):
     """
     years = c.years
     while True:
-        print(f"The years available for {c.name} are: {c.years}")
+        print(f"\nThe years available for {c.name} are: \n{c.years}")
         requested_years = input(
             "Enter the year you want from this list, "
-            "or type in A for all years\n")
+            "or type in A for all years: \n")
         if requested_years == "A" or requested_years == "a":
             choice = "all years"
             break
@@ -547,7 +547,7 @@ def graph_option(c):
     The while loop continues until validate_y_n returns True
     """
     while True:
-        graph_q = input("Do you want to view graph of this data? Y/N\n")
+        graph_q = input("Do you want to view graph of this data? Y/N: \n")
         graph = graph_q.lower()
         print(graph)
         if validate_y_n(graph):
@@ -556,8 +556,8 @@ def graph_option(c):
     if graph == "y":
         c.show_graph()
         proceed = input(
-            "\nPress any key to continue when you have finished with the graph\
-                \n")
+            "\nPress any key to continue when you are finished with the graph:"
+            " \n")
         if proceed:
             option = show_options(MORE_DATA, DIFF_COUNTRY, EXIT_APP)
             return option
@@ -597,7 +597,7 @@ def show_options(option1, option2, option3):
         print(f"1: {option1}")
         print(f"2: {option2}")
         print(f"3: {option3}")
-        option = input("Enter 1, 2, or 3 here:\n")
+        option = input("Enter 1, 2, or 3 here: \n")
         if validate_options(option, 3):
             print("choice is OK")
             break
@@ -615,7 +615,7 @@ def show_options_two(option1, option2):
         print("\nChoose the option you want next:")
         print(f"1: {option1}")
         print(f"2: {option2}")
-        option = input("Enter 1 or 2 here:\n")
+        option = input("Enter 1 or 2 here: \n")
         if validate_options(option, 2):
             print("choice is OK")
             break
@@ -700,14 +700,14 @@ def more_data_options(c):
     Show the options to user for Min, Max, Median, Average or All
     """
     while True:
-        print(f"Choose from the options below for {c.name}:")
+        print(f"\nChoose from the options below for {c.name}:")
         print("1: Minimum happiness score")
         print("2: Maximum happiness score")
         print("3: Median happiness score")
         print("4: Average happiness score")
         print("5: All of these (min, max, median, average)")
         more_data_choice = input(
-            "Enter 1/2/3/4/5 for the option you want from this list\n")
+            "Enter 1/2/3/4/5 for the option you want from this list: \n")
         print(f"You chose {more_data_choice}")
         if validate_options(more_data_choice, 5):
             print("valid choice")

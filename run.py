@@ -83,16 +83,20 @@ def get_country():
 
 
 def validate_country(user_input):
+    """
+    Validate the user input from get_country
+    1st check if numeric, if so raise error msg
+    Then check if in the countries list, raise error msg
+    (Convert input name to standard name in order to check if country in list)
+    Using lowercase for validation. Return false if any errors, true if none
+    """
     countries = [k for k in list(country_dict.keys())]
     countries_lowercase = [c.lower() for c in countries]
     try:
         if user_input.isnumeric():
             raise Exception("Numbers are not valid inputs")
         else:
-            # get country name from alias list
             country = convert_country_alias(user_input.lower())
-            print(f"country alias is {country}")
-            # then check if country is in list
             if country not in countries_lowercase:
                 raise Exception(f"{user_input} is not in the list of countries")
     except Exception as e:

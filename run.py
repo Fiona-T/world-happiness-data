@@ -60,24 +60,25 @@ def welcome_msg():
 def get_country():
     """
     Get country name from user
+    Calls validate_country to validate, loops until True returned
+    Calls convert_country_alias to convert the input name to the
+    standardised name (the name as per the csv file)
+    Then capitalises the name (as validation done with lowercase)
+    The capitalised name is returned, to be used to create country instance
     """
     while True:
         print("\nChoose the country you want to look up.")
-        print("You will be shown the data for that country. \
-            \nThen you can choose to view a graph of that data.")
+        print("Use the common English name for the country, with no dots.")
+        print("You will then be shown the years from which you can choose")
         country = input(
             "Please enter the name of the country you want to look up:\n")
-        print(f"You entered: {country}")
         if validate_country(country):
-            print("choice is OK")
             break
-    # converts the input name to the standardised name, pass lowercase
-    country_converted = convert_country_alias(country.lower())
-    print(f"converted name is: {country_converted}")
-    # capitalises the country name(s) for creating country instance
-    countryC = country_converted.title()
-    print(f"capitalised name is: {countryC}")
-    return countryC
+    country_std = convert_country_alias(country.lower())
+    country_cap = country_std.title()
+    print(
+        f"You entered '{country}'. Showing results for '{country_cap}'.")
+    return country_cap
 
 
 def validate_country(user_input):

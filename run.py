@@ -332,13 +332,14 @@ def create_countries_dict(filepath):
 
 class Country:
     """
-    creates an instance of Country class, for the chosen country.
-    name is the country name
-    scores is a list of tuples containing year, score
-    di is dictionary with year as k, score as v
-    scores_list is a list of the scores for each year, as a float,
+    Creates an instance of Country class, for the chosen country.
+    name = the country name
+    scores = a list of tuples containing year, score
+    for countries with more than one year, score pair:
+    di = dictionary with year as k, score as v
+    scores_list = a list of the scores for each year, as a float,
     so that it can be used in graph and for min, max etc.
-    years is list of years (keys from the di), converted to integer,
+    years = list of years (keys from the di), converted to integer,
     so that they can be used in graph
     """
     def __init__(self, name, scores):
@@ -354,9 +355,8 @@ class Country:
 
     def get_scores(self, choice, single):
         """
-        creates dictionary of the year and score from self.scores
-        prints the score for the selected year
-        or prints year + score for all years if all selected
+        If country has single score, prints the year + score
+        Else prints year + score for all years / selected year
         """
         if single == "y":
             print(f"There is only one year available for {self.name}")
@@ -364,16 +364,15 @@ class Country:
         else:
             print(f"The score for {self.name} for {choice} is:")
             if choice == "all years":
-                # print the key and value for each item in the dict
                 [print(k, ":", v) for k, v in self.di.items()]
             else:
                 print(self.di.get(choice))
 
     def show_graph(self):
         """
-        plots a graph of the scores over time, using uniplot
+        Plots a graph of the scores over time, using uniplot
         years and scores were previously converted to ints/floats
-        then plot the graph, years on x-axis, score on y-axis
+        years on x-axis, score on y-axis
         """
         print(self.years)
         print(self.scores_list)
@@ -383,27 +382,31 @@ class Country:
             title="Happiness scores over time")
 
     def show_min_score(self):
+        """
+        Gets the minimum score from the scores_list
+        Creates a list of the years corresponding to the min score
+        Prints the year OR list of years corresponding to the min score
+        """
         min_score = min(self.scores_list)
         print(f"The minimum happiness score for {self.name} is: {min_score}")
-        # create a list of the years corresponding to the min score
         min_years = [k for (k, v) in self.di.items() if float(v) == min_score]
-        # check if just 1 year in list, change the print msg accordingly
         if len(min_years) == 1:
             print(f"This score was from the year {min_years[0]}")
         else:
-            # otherwise print each year separated with the comma
             print(f"This score was from the years {min_years.split(', ')}")
 
     def show_max_score(self):
+        """
+        Gets the maximum score from the scores_list
+        Creates a list of the years corresponding to the max score
+        Prints the year OR list of years corresponding to the max score
+        """
         max_score = max(self.scores_list)
         print(f"The maximum happiness score for {self.name} is: {max_score}")
-        # create a list of the years corresponding to the max score
         max_years = [k for (k, v) in self.di.items() if float(v) == max_score]
-        # check if just 1 year in list, change the print msg accordingly
         if len(max_years) == 1:
             print(f"This score was from the year {max_years[0]}")
         else:
-            # otherwise print each year separated with the comma
             print(f"This score was from the years {max_years.split(', ')}")
 
     def show_median_score(self):
@@ -414,8 +417,11 @@ class Country:
         print(f"The median happiness score for {self.name} is: {median_score}")
 
     def show_average_score(self):
+        """
+        Get the average score from the scores_list: total/length, rounded
+        Print to terminal
+        """
         total_score = sum(self.scores_list)
-        # total divided by length is average, rounded to 2 decimal places
         average_score = round(total_score/len(self.scores_list), 2)
         print(
             f"The average happiness score for {self.name} is: {average_score}")

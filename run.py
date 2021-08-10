@@ -76,10 +76,28 @@ def get_country():
         if validate_country(country):
             break
     country_std = convert_country_alias(country.lower())
-    country_cap = country_std.title()
+    country_cap = convert_to_titlecase(country_std)
     print(
         f"You entered '{country}'. Showing results for '{country_cap}'.")
     return country_cap
+
+
+def convert_to_titlecase(string):
+    """
+    Converts the lower case country name back to title case
+    Does not capitalise the exceptions
+    Returns the country name in title case
+    """
+    # 'region' included below because it is not capitalised in csv file
+    exceptions = ["and", "of", "region"]
+    words = string.split(" ")
+    title_case_words = [words[0].capitalize()]
+    title_case_words += [
+        word if word in exceptions else word.capitalize()
+        for word in words[1:]
+        ]
+    title_case_string = " ".join(title_case_words)
+    return title_case_string
 
 
 def print_error_msg(e, user_input):

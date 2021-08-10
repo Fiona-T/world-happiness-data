@@ -570,6 +570,24 @@ def show_options(option1, option2, option3):
     return option
 
 
+def show_options_two(option1, option2):
+    """
+    shows options for user to choose next when country has only one year
+    calls the validate_options function to check the input
+    continues looping until validate_options returns True
+    Then returns the option to be handled by handle_option function
+    """
+    while True:
+        print("\nChoose the option you want next:")
+        print(f"1: {option1}")
+        print(f"2: {option2}")
+        option = input("Enter 1 or 2 here:\n")
+        if validate_options(option, 2):
+            print("choice is OK")
+            break
+    return option
+
+
 def validate_options(option, num_choices):
     """
     validate the option entered by the user in show_options. Must be 1,2, or 3.
@@ -626,6 +644,21 @@ def handle_options(option, c, path):
         more_data_path(c)
     elif option == "2":
         print("option two, choose different country")
+        main(country_dict)
+    else:
+        print("Thank you, exiting application...")
+        print_banner_msg("Goodbye")
+        exit()
+
+
+def handle_options_two(option, c):
+    """
+    Handle the option chosen from show_options_two
+    Option 1 loops back to start of the main() path, to choose new country
+    Option 2 prints exit message and exits the application
+    """
+    if option == "1":
+        print("option one, choose different country")
         main(country_dict)
     else:
         print("Thank you, exiting application...")
@@ -698,6 +731,8 @@ def main(dict):
     if isinstance(c.scores, tuple):
         choice = c.scores[0]
         c.get_scores(choice, "y")
+        option = show_options_two(DIFF_COUNTRY, EXIT_APP)
+        handle_options_two(option, c)
     else:
         choice = get_years(c)
         c.get_scores(choice, "n")

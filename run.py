@@ -154,6 +154,15 @@ def convert_country_alias(input_name):
         "china": ["people's republic of china"],
         "colombia": ["republic of colombia"],
         "comoros": ["union of the comoros", "united republic of the commoros"],
+        "congo (brazzaville)": [
+            "republic of the congo", "congo-brazzaville", "congo brazzaville",
+            "congo republic", "congo", "the congo"
+            ],
+        "congo (kinshasa)": [
+            "democratic republic of the congo", "democratic republic of congo",
+            "zaire", "congo kinshasa", "congo-kinshasa", "drc", "dr congo",
+            "the drc", "the droc"
+            ],
         "costa rica": ["republic of costa cica"],
         "croatia": ["republic of croatia", "hrvatska"],
         "cuba": ["republic of cuba"],
@@ -182,6 +191,13 @@ def convert_country_alias(input_name):
             ],
         "haiti": ["republic of haiti", "hayti"],
         "honduras": ["republic of honduras"],
+        "hong kong s a r of china": [
+            "hong kong", "hsar", "hong kong china",
+            "hong kong special administrative region of china",
+            "hong kong special administrative region of the people's "
+            "republic of china",
+            "hong kong sar of china", "hong kong, china"
+            ],
         "iceland": ["republic of iceland"],
         "india": ["republic of india", "union of india"],
         "indonesia": ["republic of indonesia"],

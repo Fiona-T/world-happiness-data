@@ -428,15 +428,23 @@ class Country:
 
 
 def make_country(country, countries_dict):
-    # get scores from dictionary, to be passed when creating Class instance
+    """
+    Create instance of Country class for the selected country using:
+    country = validated country input from user, and
+    country_scores = scores from the country dictionary
+    """
     country_scores = countries_dict.get(country)
-    # create instance of Country for the selected country
     c = Country(country, country_scores)
     return c
 
 
 def get_years(c):
-    # show the list of available years from Country class instance variable
+    """
+    Get the requested year from the user:
+    Show the list of available years from Country class instance variable
+    Calls validate_years to validate, loops until True returned
+    Returns choice - A for all years or specific year for one year
+    """
     years = c.years
     while True:
         print(f"The years available for {c.name} are: {c.years}")
@@ -447,7 +455,6 @@ def get_years(c):
             choice = "all years"
             break
         elif validate_years(requested_years, years):
-            print("valid choice")
             choice = requested_years
             break
     print(f"thanks, you asked for {choice}")

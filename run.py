@@ -54,8 +54,6 @@ def welcome_msg():
     print("The World Happiness Data Tool lets you\
         \nlook up the Happiness Score per country,\
         \nfor the years 2005 - 2020.")
-    # print("Note: For some countries data doesn't exist\
-    #     \nfor every year in the range.")
     print_smiley()
 
 
@@ -63,9 +61,6 @@ def get_country():
     """
     Get country name from user
     """
-    countries = [k for k in list(country_dict.keys())]
-    countries_lowercase = [c.lower() for c in countries]
-    print(countries_lowercase)
     while True:
         print("\nChoose the country you want to look up.")
         print("You will be shown the data for that country. \
@@ -291,8 +286,6 @@ def convert_country_alias(input_name):
         "zambia": ["republic of zambia"],
         "zimbabwe": ["republic of zimbabwe"],
         }
-    # print([k for k in country_alias.keys()])
-    # print([v for v in country_alias.values()])
     std_name = None
     for k, v in country_alias_list.items():
         if input_name in v:
@@ -328,7 +321,6 @@ def create_countries_dict(filepath):
                 country_dict[key] = [country_dict[key]]
             # append the new value to the exising list of values
             country_dict[key].append(value)
-    # print(country_dict)
     print(f"Creating countries dictionary from {filepath}...")
     return country_dict
 
@@ -388,7 +380,6 @@ class Country:
     def show_min_score(self):
         min_score = min(self.scores_list)
         print(f"The minimum happiness score for {self.name} is: {min_score}")
-        # print(min(self.scores_list))
         # create a list of the years corresponding to the min score
         min_years = [k for (k, v) in self.di.items() if float(v) == min_score]
         # check if just 1 year in list, change the print msg accordingly
@@ -401,7 +392,6 @@ class Country:
     def show_max_score(self):
         max_score = max(self.scores_list)
         print(f"The maximum happiness score for {self.name} is: {max_score}")
-        # print(max(self.scores_list))
         # create a list of the years corresponding to the max score
         max_years = [k for (k, v) in self.di.items() if float(v) == max_score]
         # check if just 1 year in list, change the print msg accordingly
@@ -429,11 +419,8 @@ class Country:
 def make_country(country, countries_dict):
     # get scores from dictionary, to be passed when creating Class instance
     country_scores = countries_dict.get(country)
-    print(country_scores)
     # create instance of Country for the selected country
     c = Country(country, country_scores)
-    # test print
-    print(f"Name: {c.name}, scores: {c.scores}")
     return c
 
 

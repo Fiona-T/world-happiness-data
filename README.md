@@ -52,14 +52,18 @@ The deployed application runs in a mock terminal on Heroku in order to demonstra
 - Welcome message with short note on the purpose of the application
 - Option for user to view the data by the selected country
 - Exception handling for the country choice 
-- When a valid country is entered, user is shown the years for which data exists for that country, since each country does not have data for every year
+- When a valid country is entered, show the years for which the happiness score is available for that country, since the dataset does not have a score recorded for every year for some countries. User can then choose from these years.
 - Option for user to choose the year they want to view for that country, or all years
+- Exception handling for the user input to the years choice input
 - Option for user, if they have chosen to view all years, to choose if they want to view a graph of the data. This will be the happiness score for that country over time
+- Exception handling for the user input to the Y/N choice input
 - Option for user, if they originally chose a single year, to then view all years for the selected country
 - Option for user to view min, max, median, average, or all of these values, for the selected country, if they chose to view all years for that country
 - Option for user to go back and select another option from min, max, median, average, or all options (e.g. they chose max first time, can go back and chose min or all, etc.)
 - Option for user to choose a different country, or to exit programme when they have viewed their data 
-- Exception handling for all user choices 
+- There are five countries in the dataset that only have a score recorded for one year. If the user chooses these countries, show the score and year along with a note confirming this is the only year available, and the option to choose a different country/exit
+- Exception handling for the user input to the numbered options choice inputs
+- Exit message confirming to user that they are exiting the application, and how to re-run the application 
 
 ### Future Features
 

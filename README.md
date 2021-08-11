@@ -163,6 +163,9 @@ You can refer to the [GitHub documentation](https://docs.github.com/en/github/cr
 ---
 ### Code
 ### Content
+- The dataset containing the happiness scores was sourced from [Kaggle](https://www.kaggle.com/ajaypalsinghlo/world-happiness-report-2021?select=world-happiness-report.csv).
+- Most of the alternative country names for the `"countries_alt_names"` `dictionary` were sourced from [this page on Wikipedia](https://en.wikipedia.org/wiki/List_of_alternative_country_names).
+
 ### Media
 
 ## Acknowledgements

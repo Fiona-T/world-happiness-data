@@ -136,6 +136,11 @@ The following steps show how to deploy the application to [Heroku](https://www.h
 14.	To re-start the programme from the beginning, press the RUN PROGRAM orange button at top of page
 
 ### Forking the GitHub Repository
+The repository can be forked on GitHub, this creates a copy of the repository that can be viewed or amended without affecting the original repository. This can be done using the following steps:
+1. Login to [GitHub](https://github.com/) 
+2. Locate the relevant repository on GitHub. [This is the repository for World Happiness Data tool](https://github.com/Fiona-T/world-happiness-data).
+3. At the top right of the repository (under your avatar) locate the Fork button and click this button
+4. You should now have a copy of the repository in your own GitHub account, to which you can make changes
 ### Cloning the GitHub Repository
 
 ## Credits

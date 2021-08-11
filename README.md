@@ -14,7 +14,13 @@ The [World Happiness Reports](https://worldhappiness.report/) are annual publica
 
 The World Happiness Data tool is a command-line application allowing users to look up a dataset containing the happiness scores from the World Happiness Reports over the years 2005 to 2020 inclusive. For example, to look at data for a particular country so that they can see how the happiness score changed over time. 
 
-The application provides the requested data to the user by printing it to the terminal. The application will also display a graph representing the requested data, also printed in the terminal. 
+A user can choose a country and then:
+- request the happiness score for a particular year for that country
+- request the happiness score for all the available years for that country, and then, if selected, see a graph of these scores over time
+- request the maximum, minimum, average or mean happiness score for that country, or request all of these scores.
+The user can choose a different country while in the application, after they have viewed the data they wanted for the previous country. 
+
+The application provides the requested data, and the graph if selected, to the user by printing it to the terminal. 
 
 The target market is relatively broad. In general, it would be people with a passing interest in the Happiness Reports, perhaps piqued when the results are announced each year in the general news. It is not aimed at people with in depth knowledge of the Happiness Reports nor those who want to do in depth data visualisations. The usefulness of the tool lies in the ability to quickly extract information from the large dataset. 
 
@@ -50,7 +56,7 @@ The deployed application runs in a mock terminal on Heroku in order to demonstra
 ---
 ### Existing Features
 - Welcome message with short note on the purpose of the application
-- Option for user to view the data by the selected country
+- Option for user to input the country name they want
 - Exception handling for the country choice 
 - When a valid country is entered, show the years for which the happiness score is available for that country, since the dataset does not have a score recorded for every year for some countries. User can then choose from these years.
 - Option for user to choose the year they want to view for that country, or all years
@@ -62,7 +68,7 @@ The deployed application runs in a mock terminal on Heroku in order to demonstra
 - Option for user to go back and select another option from min, max, median, average, or all options (e.g. they chose max first time, can go back and chose min or all, etc.)
 - Option for user to choose a different country, or to exit programme when they have viewed their data 
 - There are five countries in the dataset that only have a score recorded for one year. If the user chooses these countries, show the score and year along with a note confirming this is the only year available, and the option to choose a different country/exit
-- Exception handling for the user input to the numbered options choice inputs
+- Exception handling for the user inputs when selecting an option from the list of numbered options
 - Exit message confirming to user that they are exiting the application, and how to re-run the application 
 
 ### Future Features
@@ -99,11 +105,11 @@ The application was developed on Gitpod, using GitHub for version control and ho
 -   Files and code were added to the staging area in Gitpod using the command `git add .` and commited using `git commit -m "commit message"`. 
 -   Commited changes were then pushed to GitHub using the `git push` command.
 ### Deployment to Heroku
-The following steps show how to deploy the application to [Heroku](https://www.heroku.com/) so that the application can be ran in the mock terminal:
+The following steps show how to deploy the application to [Heroku](https://www.heroku.com/) so that the application can be run in the mock terminal:
 >Do the following in the Gitpod workspace:
-1. Go through the .py file(s) and check that every `input` has `\n`, for new line, at the end of the text inside the input. If not there, add now. This needs to be added due to a quirk in the software that creates the mock terminal, if the new line isn't added then the `input` will not appear in the mock terminal.
+1. Go through the .py file(s) and check that every `input` has `\n`, for new line, at the end of the text inside the `input`, adding `\n` if not already there. This needs to be added due to a quirk in the software that creates the mock terminal: if the new line isn't added then the `input` will not appear in the mock terminal.
 2. In the terminal type in the command: `pip3 freeze > requirements.txt`. This updates the requirements.txt file with the dependencies that were installed during development. Heroku will use this file to install the requirements when creating the application on Heroku.
-3. Then add, commit and push these changes to GitHub using `git add <filename>` then `git commit -m "message"` then `git push`
+3. Then add, commit and push these changes to GitHub using `git add <filename>` then `git commit -m "message"` then `git push`. Make sure all changes are added and commited in GitPod and pushed to GitHub before going to the next step.
 >Do the following in Heroku:
 4. In [Heroku](https://www.heroku.com/):
     - if you don't have an account, then set one up: Click the Sign up button in the header, fill out the form and Click Create Free Account when done. You will receive an email, click the link to confirm. Then you will be brought to page called SET YOUR PASSWORD. Enter password, click SET PASSWORD AND LOG IN. Will then show welcome page, click on CLICK HERE TO PROCEED, then click Accept to accept the terms of service. Then click on "Create new app"

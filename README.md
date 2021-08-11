@@ -4,7 +4,7 @@
 
 World Happiness Data is a tool to provide requested happiness scores from the historical World Happiness datasets. It is a command line application and runs in a mock terminal provided by Code Institute.
 
-[View the live application here](#) *link to be updated once application deployed*
+[View the live application here.](https://world-happiness-data.herokuapp.com/) 
 
 ## Table of Contents
 
@@ -20,7 +20,8 @@ The target market is relatively broad. In general, it would be people with a pas
 
 ### User’s goals:
 - the users of the tool want to access the happiness scores for a country or countries, within the years 2005 - 2020 
-- the user may also want to view a graph representing the happiness scores over time for a country
+- the user may want to view the score from a particular year, or for all years available for the chosen country
+- the user may also want to view a graph representing the happiness scores over time for a country, or get more information on that country such as maximium, minimum, average scores for that country.
 
 ### Site owner’s goal:
 - the goal of this tool is to provide an easy way for users to get different information from the World Happiness historical scores dataset.
@@ -29,11 +30,13 @@ The target market is relatively broad. In general, it would be people with a pas
 ---
 ### User stories
 *Note:* there is no login or registered users for this application, so each user story is from the point of view of a visiting user using the application.
-1. As a visiting user, I want to understand the dataset that the application uses so that I decide if I want to use this data and therefore use this application
-2. As a visiting user, I want to see what data the application allows me to look up and what data will be provided to me, so that I can decide how to use the application and plan what information I need from the application
-3. As a visiting user, I want to be able to choose a country so that I can view the data related to that country
+1. As a visiting user, I want to understand what data I can access from the application so that I know what information I can get from it
+2. As a visiting user, I want to be able to choose a country so that I can view the data related to that country
+3. As a visiting user, I want to see the happiness score for a particular year (from those available) for my selected country
 4. As a visiting user, I want to be able to see the happiness score over time for a particular country, so that I can see the scores and trends over time for that country
 5. As a visiting user, I want to be able to see a graph of the happiness score over time for a particular country so that I can visualise the data more easily
+6. As a visiting user, I want to be able to see the maximum, minimum, average and median happiness score for my selected country. 
+7. As a visting user, I want to be able to select one option at a time from: maximum, minimum, average and median happiness score for my selected country
 
 ### Design
 *Note:* Since the application runs in the terminal, there is no design of the user interface. 

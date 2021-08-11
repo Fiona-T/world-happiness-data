@@ -99,6 +99,42 @@ The application was developed on Gitpod, using GitHub for version control and ho
 -   Files and code were added to the staging area in Gitpod using the command `git add .` and commited using `git commit -m "commit message"`. 
 -   Commited changes were then pushed to GitHub using the `git push` command.
 ### Deployment to Heroku
+The following steps show how to deploy the application to [Heroku](https://www.heroku.com/) so that the application can be ran in the mock terminal:
+>Do the following in the Gitpod workspace:
+1. Go through the .py file(s) and check that every `input` has `\n`, for new line, at the end of the text inside the input. If not there, add now. This needs to be added due to a quirk in the software that creates the mock terminal, if the new line isn't added then the `input` will not appear in the mock terminal.
+2. In the terminal type in the command: `pip3 freeze > requirements.txt`. This updates the requirements.txt file with the dependencies that were installed during development. Heroku will use this file to install the requirements when creating the application on Heroku.
+3. Then add, commit and push these changes to GitHub using `git add <filename>` then `git commit -m "message"` then `git push`
+>Do the following in Heroku:
+4. In [Heroku](https://www.heroku.com/):
+    - if you don't have an account, then set one up: Click the Sign up button in the header, fill out the form and Click Create Free Account when done. You will receive an email, click the link to confirm. Then you will be brought to page called SET YOUR PASSWORD. Enter password, click SET PASSWORD AND LOG IN. Will then show welcome page, click on CLICK HERE TO PROCEED, then click Accept to accept the terms of service. Then click on "Create new app"
+    - if you do have an account then Sign In to your account and go to the Dashboard. Click on "New" on the top right of the screen and then "Create new app"
+5. Under App name, enter the name of the application. Note: the name must be unique, so you would not be able to name it the same as the already deployed version
+6. Then choose the Region and click "Create app"
+7. In the list of tabs at the top of the page underneath Personal, click on the Settings tab
+8. If there was a creds.json file in the application then you would update the details under the Config Vars. This is not explained here, since there is no creds.json file in the World Happiness Data application
+9. Scroll down to the section called Buildpacks. This is where you indicate the dependencies needed, outside of thos in the requirements.txt file.
+    - Click "Add buildpack" button
+    - Select Python from the list and press "Save changes"
+    - Click "Add buildpack" again, select nodejs and save. This is needed for the mock terminal code
+    - Make sure they are in that order with Python on top. If not, drag to change the order
+10. Now go to the Deploy section. Scroll to top of page with tabs. Click Deploy
+    - Go to Deployment method and click GitHub
+    - If have not connected to GitHub previously:
+        - Underneath, it will show a section called Connect to GitHub, with a button at the bottom called “Connect to GitHub”. Press this button.
+        - A pop up will ask you to Authorize Heroku’s access to your GitHub – click to Authorize, then enter your password and Confirm Password
+        - The pop up will close and in the Connect to GitHub section it will show your GitHub username and a box to search for the repository to connect to. 
+    - If have already connected to GitHub you do not need to do the above and it should show your GitHub username and a box to search for the repo name as above
+    - Enter the repo-name in the box and press Search
+    - Underneath, it will display the repo: `yourGitHubUsername/your-github-repo-name`, then press "Connect"
+    - Once connected it will then show: Connected to `yourGitHubUsername/your-github-repo-name` by `yourGitHubUsername`
+11. Underneath the Connect section, there are two options "Automatic deploys" or "Manual deploy"
+    - Automatic – future pushes to GitHub will mean Heroku automatically builds a new version of the app with the pushed changes
+    - Manual – the app is not automatically updated with future pushes to GitHub but these can be manually made if needed.
+    - click Deploy Branch. I deployed using Manual. The logs will show the buildpacks, dependencies and requirements being installed. When done, the page will refresh and say “Your app was successfully deployed” with a View button.
+12.	Click the View button to view the app – it opens in a new window
+13.	The Python program automatically runs, you no longer need to type `python3 run.py` in the terminal once the application is deployed
+14.	To re-start the programme from the beginning, press the RUN PROGRAM orange button at top of page
+
 ### Forking the GitHub Repository
 ### Cloning the GitHub Repository
 

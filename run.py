@@ -477,9 +477,7 @@ def handle_options(option, c, path):
         print("option two, choose different country")
         country_choice(country_dict)
     else:
-        print("Thank you, exiting application...")
-        print_banner_msg("Goodbye")
-        exit()
+        exit_program()
 
 
 def handle_options_two(option, c):
@@ -492,9 +490,7 @@ def handle_options_two(option, c):
         print("option one, choose different country")
         country_choice(country_dict)
     else:
-        print("Thank you, exiting application...")
-        print_banner_msg("Goodbye")
-        exit()
+        exit_program()
 
 
 def more_data_options(c):
@@ -617,6 +613,12 @@ def start():
     welcome_msg()
     country_dict = create_countries_dict("data/world-happiness-report.csv")
     country_choice(country_dict)
+
+
+def exit_program():
+    print("Thank you, exiting application...")
+    print_banner_msg("Goodbye")
+    exit()
 
 
 def main():

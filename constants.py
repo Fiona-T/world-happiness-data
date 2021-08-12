@@ -1,3 +1,9 @@
+# variables for the show_options functions in run.py
+MORE_DATA = "Get more data (max, min, median, average scores) for this country"
+DIFF_COUNTRY = "Choose a different country"
+EXIT_APP = "Exit the application"
+ALL_YEARS = "Get all years for this country"
+
 # dictionary of alternative names for countries that user might input
 # used by convert_country_alias function in run.py
 COUNTRIES_ALT_NAMES = {

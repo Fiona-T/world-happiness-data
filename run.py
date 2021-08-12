@@ -8,14 +8,8 @@ import csv
 from uniplot import plot
 # import python statistics module for median calculation
 import statistics
-
-from constants import COUNTRIES_ALT_NAMES
-
-# variables for the show_options function
-MORE_DATA = "Get more data (max, min, median, average scores) for this country"
-DIFF_COUNTRY = "Choose a different country"
-EXIT_APP = "Exit the application"
-ALL_YEARS = "Get all years for this country"
+# import the constant variables from constants.py
+import constants
 
 
 def print_banner_msg(text):
@@ -144,7 +138,7 @@ def convert_country_alias(input_name):
     If not, the standardised name is the input name
     """
     std_name = None
-    for k, v in COUNTRIES_ALT_NAMES.items():
+    for k, v in constants.COUNTRIES_ALT_NAMES.items():
         if input_name in v:
             std_name = k
     if std_name is None:
@@ -367,10 +361,10 @@ def graph_option(c):
             "\nPress any key to continue when you are finished with the graph:"
             " \n")
         if proceed:
-            option = show_options(MORE_DATA, DIFF_COUNTRY, EXIT_APP)
+            option = show_options(constants.MORE_DATA, constants.DIFF_COUNTRY, constants.EXIT_APP)
             return option
     else:
-        option = show_options(MORE_DATA, DIFF_COUNTRY, EXIT_APP)
+        option = show_options(constants.MORE_DATA, constants.DIFF_COUNTRY, constants.EXIT_APP)
         return option
 
 
@@ -554,7 +548,7 @@ def more_data_path(c):
     """
     more_data_choice = more_data_options(c)
     handle_data_options(more_data_choice, c)
-    option = show_options(MORE_DATA, DIFF_COUNTRY, EXIT_APP)
+    option = show_options(constants.MORE_DATA, constants.DIFF_COUNTRY, constants.EXIT_APP)
     print(option)
     handle_options(option, c, "more data")
 
@@ -568,7 +562,7 @@ def main(dict):
     if isinstance(c.scores, tuple):
         choice = c.scores[0]
         c.get_scores(choice, "y")
-        option = show_options_two(DIFF_COUNTRY, EXIT_APP)
+        option = show_options_two(constants.DIFF_COUNTRY, constants.EXIT_APP)
         handle_options_two(option, c)
     else:
         choice = get_years(c)
@@ -579,7 +573,7 @@ def main(dict):
         handle_options(option, c, "all years")
     else:
         # if chose single year, show next options
-        option = show_options(ALL_YEARS, DIFF_COUNTRY, EXIT_APP)
+        option = show_options(constants.ALL_YEARS, constants.DIFF_COUNTRY, constants.EXIT_APP)
         handle_options(option, c, "single year")
 
 

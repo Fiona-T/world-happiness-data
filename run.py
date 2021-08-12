@@ -475,7 +475,7 @@ def handle_options(option, c, path):
         more_data_path(c)
     elif option == "2":
         print("option two, choose different country")
-        main(country_dict)
+        country_choice(country_dict)
     else:
         print("Thank you, exiting application...")
         print_banner_msg("Goodbye")
@@ -490,7 +490,7 @@ def handle_options_two(option, c):
     """
     if option == "1":
         print("option one, choose different country")
-        main(country_dict)
+        country_choice(country_dict)
     else:
         print("Thank you, exiting application...")
         print_banner_msg("Goodbye")
@@ -553,41 +553,74 @@ def more_data_path(c):
     handle_options(option, c, "more data")
 
 
-def main(dict):
+def all_years_choice(c):
+    """
+    Path if user choose to view scores for all years
+    """
+    option = graph_option(c)
+    handle_options(option, c, "all years")
+
+
+def single_yr_choice(c):
+    """
+    Path if user chooses a single year
+    """
+    option = show_options(constants.ALL_YEARS, constants.DIFF_COUNTRY, constants.EXIT_APP)
+    handle_options(option, c, "single year")
+
+
+def years_choice(c):
+    """
+    Gets the user choice of year(s) they want the score(s) for
+    Decides the next path available to user based on their choice
+    """
+    choice = get_years(c)
+    c.get_scores(choice, "n")
+    if choice == "all years":
+        all_years_choice(c)
+    else:
+        single_yr_choice(c)
+
+
+def one_score_path(c):
+    """
+    Path where country only has one year/score
+    """
+    choice = c.scores[0]
+    c.get_scores(choice, "y")
+    option = show_options_two(constants.DIFF_COUNTRY, constants.EXIT_APP)
+    handle_options_two(option, c)
+
+
+def country_choice(dict):
+    """
+    Gets the user choice of country and creates instance of
+    Country class after validating choice.
+    Decides the next path available to user:
+    If country only has one year (self.scores is a tuple not list)
+    Then one_score_path, otherwise gets years choice from user
+    """
     country = get_country()
     c = make_country(country, dict)
-    # if country only has one year (self.scores is a tuple not list),
-    # then set choice to that yea and single year to y.
-    # Otherwise, choice is chosen year
     if isinstance(c.scores, tuple):
-        choice = c.scores[0]
-        c.get_scores(choice, "y")
-        option = show_options_two(constants.DIFF_COUNTRY, constants.EXIT_APP)
-        handle_options_two(option, c)
+        one_score_path(c)
     else:
-        choice = get_years(c)
-        c.get_scores(choice, "n")
-    # if choice of years is all, show graph option
-    if choice == "all years":
-        option = graph_option(c)
-        handle_options(option, c, "all years")
-    else:
-        # if chose single year, show next options
-        option = show_options(constants.ALL_YEARS, constants.DIFF_COUNTRY, constants.EXIT_APP)
-        handle_options(option, c, "single year")
+        years_choice(c)
 
 
 def start():
     """
     starts the application - shows the welcome message,
-    creates the country dictionary and then runs main,
-    passing country dictionary (application can be
-    developed further to do dictionary by year, so using
-    the type of dictionary as an argument for main function)
+    creates the country dictionary and then calls country
+    choice to get user choice
     """
     welcome_msg()
     country_dict = create_countries_dict("data/world-happiness-report.csv")
-    main(country_dict)
+    country_choice(country_dict)
 
 
-start()
+def main():
+    start()
+
+
+main()

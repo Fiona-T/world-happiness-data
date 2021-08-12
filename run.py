@@ -72,7 +72,7 @@ def get_country():
             break
     country_std = convert_country_alias(country.lower())
     country_cap = convert_to_titlecase(country_std)
-    print(
+    print_output(
         f"\nYou entered '{country}'. Showing results for '{country_cap}'.")
     return country_cap
 
@@ -93,6 +93,13 @@ def convert_to_titlecase(string):
         ]
     title_case_string = " ".join(title_case_words)
     return title_case_string
+
+
+def print_output(text):
+    """
+    Prints the text in yellow. Used for outputs to user.
+    """
+    print(colored(text, "yellow"))
 
 
 def print_error_msg(e, user_input):
@@ -203,14 +210,14 @@ class Country:
         Else prints year + score for all years / selected year
         """
         if single == "y":
-            print(f"There is only one year available for {self.name}")
-            print(f"The score is {self.scores[1]} for {choice}")
+            print_output(f"There is only one year available for {self.name}")
+            print_output(f"The score is {self.scores[1]} for {choice}")
         else:
-            print(f"The score for {self.name} for {choice} is:")
+            print_output(f"The score for {self.name} for {choice} is:")
             if choice == "all years":
-                [print(k, ":", v) for k, v in self.di.items()]
+                [print_output(f"{k} : {v}") for k, v in self.di.items()]
             else:
-                print(self.di.get(choice))
+                print_output(self.di.get(choice))
 
     def show_graph(self):
         """
@@ -232,12 +239,14 @@ class Country:
         Prints the year OR list of years corresponding to the min score
         """
         min_score = min(self.scores_list)
-        print(f"The minimum happiness score for {self.name} is: {min_score}")
+        print_output(
+            f"The minimum happiness score for {self.name} is: {min_score}")
         min_years = [k for (k, v) in self.di.items() if float(v) == min_score]
         if len(min_years) == 1:
-            print(f"This score was from the year {min_years[0]}")
+            print_output(f"This score was from the year {min_years[0]}")
         else:
-            print(f"This score was from the years {min_years.split(', ')}")
+            print_output(
+                f"This score was from the years {min_years.split(', ')}")
 
     def show_max_score(self):
         """
@@ -246,19 +255,22 @@ class Country:
         Prints the year OR list of years corresponding to the max score
         """
         max_score = max(self.scores_list)
-        print(f"The maximum happiness score for {self.name} is: {max_score}")
+        print_output(
+            f"The maximum happiness score for {self.name} is: {max_score}")
         max_years = [k for (k, v) in self.di.items() if float(v) == max_score]
         if len(max_years) == 1:
-            print(f"This score was from the year {max_years[0]}")
+            print_output(f"This score was from the year {max_years[0]}")
         else:
-            print(f"This score was from the years {max_years.split(', ')}")
+            print_output(
+                f"This score was from the years {max_years.split(', ')}")
 
     def show_median_score(self):
         """
         Get the median score from the scores_list, print to terminal
         """
         median_score = statistics.median(self.scores_list)
-        print(f"The median happiness score for {self.name} is: {median_score}")
+        print_output(
+            f"The median happiness score for {self.name} is: {median_score}")
 
     def show_average_score(self):
         """
@@ -267,7 +279,7 @@ class Country:
         """
         total_score = sum(self.scores_list)
         average_score = round(total_score/len(self.scores_list), 2)
-        print(
+        print_output(
             f"The average happiness score for {self.name} is: {average_score}")
 
 
@@ -291,7 +303,7 @@ def get_years(c):
     """
     years = c.years
     while True:
-        print(f"\nThe years available for {c.name} are: \n{c.years}")
+        print_output(f"\nThe years available for {c.name} are: \n{c.years}")
         requested_years = input(
             "Enter the year you want from this list, "
             "or type in A for all years: \n")

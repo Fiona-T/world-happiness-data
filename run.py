@@ -633,8 +633,6 @@ def exit_program():
     exit()
 
 
-def main():
+# check if file is being ran directly, if it is start the program
+if __name__ == "__main__":
     start()
-
-
-main()

@@ -366,6 +366,21 @@ def handle_years_choice(choice, c):
         single_yr_path(choice, c)
 
 
+def get_graph_choice():
+    """
+    Presents option to view graph,
+    Calls validate_y_n to validate the user input (converted to lowercase)
+    The while loop continues until validate_y_n returns True
+    And returns repsonse
+    """
+    while True:
+        graph_q = input("Do you want to view graph of this data? Y/N: \n")
+        graph = graph_q.lower()
+        if validate_y_n(graph):
+            break
+    return graph
+
+
 def validate_y_n(user_input):
     """
     Validate the input to the Y/N question
@@ -383,6 +398,21 @@ def validate_y_n(user_input):
         print_error_msg(e, user_input)
         return False
     return True
+
+
+def handle_graph_choice(choice, c):
+    """
+    Run show_graph method if choice is Y
+    The while loop continues until user enters a key to proceed
+    """
+    if choice == "y":
+        while True:
+            c.show_graph()
+            proceed = input(
+                "\nEnter any key(s) to continue when you are finished with the graph:"
+                " \n")
+            if proceed:
+                break
 
 
 def show_options(option1, option2, option3):
@@ -575,34 +605,10 @@ def all_years_path(c):
     Path if user choose to view scores for all years
     """
     c.get_scores("all years", False)
-    option = graph_option(c)
-    handle_options(option, c, "all years")
-
-
-def graph_option(c):
-    """
-    presents option to view graph and handles repsonse
-    Run show_graph method if Y, Otherwise show the next options
-    Calls validate_y_n to validate the user input (converted to lowercase)
-    The while loop continues until validate_y_n returns True
-    """
-    while True:
-        graph_q = input("Do you want to view graph of this data? Y/N: \n")
-        graph = graph_q.lower()
-        print(graph)
-        if validate_y_n(graph):
-            break
-    if graph == "y":
-        c.show_graph()
-        proceed = input(
-            "\nPress any key to continue when you are finished with the graph:"
-            " \n")
-        if proceed:
-            option = show_options(constants.MORE_DATA, constants.DIFF_COUNTRY, constants.EXIT_APP)
-            return option
-    else:
-        option = show_options(constants.MORE_DATA, constants.DIFF_COUNTRY, constants.EXIT_APP)
-        return option
+    graph = get_graph_choice()
+    handle_graph_choice(graph, c)
+    new_choice = show_options(constants.MORE_DATA, constants.DIFF_COUNTRY, constants.EXIT_APP)
+    handle_options(new_choice, c, "all years")
 
 
 def more_data_path(c):

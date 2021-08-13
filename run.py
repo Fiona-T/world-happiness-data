@@ -320,7 +320,6 @@ def get_years(c):
         elif validate_years(requested_years, years):
             choice = requested_years
             break
-    print(f"thanks, you asked for {choice}")
     return choice
 
 
@@ -400,7 +399,6 @@ def show_options(option1, option2, option3):
         print(f"3: {option3}")
         option = input("Enter 1, 2, or 3 here: \n")
         if validate_options(option, 3):
-            print("choice is OK")
             break
     return option
 
@@ -418,7 +416,6 @@ def show_options_two(option1, option2):
         print(f"2: {option2}")
         option = input("Enter 1 or 2 here: \n")
         if validate_options(option, 2):
-            print("choice is OK")
             break
     return option
 
@@ -462,13 +459,10 @@ def handle_options(option, c, path):
     Option 3 prints exit message and exits the application
     """
     if path == "single year" and option == "1":
-        print("option one single path, all years for same country")
         all_years_path(c)
     elif path != "single year" and option == "1":
-        print("option one, back to min/max etc.")
         more_data_path(c)
     elif option == "2":
-        print("option two, choose different country")
         country_choice(country_dict)
     else:
         exit_program()
@@ -481,7 +475,6 @@ def handle_options_two(option, c):
     Option 2 prints exit message and exits the application
     """
     if option == "1":
-        print("option one, choose different country")
         country_choice(country_dict)
     else:
         exit_program()
@@ -500,9 +493,7 @@ def more_data_options(c):
         print("5: All of these (min, max, median, average)")
         more_data_choice = input(
             "Enter 1/2/3/4/5 for the option you want from this list: \n")
-        print(f"You chose {more_data_choice}")
         if validate_options(more_data_choice, 5):
-            print("valid choice")
             break
     return more_data_choice
 
@@ -513,7 +504,6 @@ def handle_data_options(choice, c):
     i.e. Min, Max, Median, Average or All
     """
     if choice == "1":
-        # option1 - min score - show_min_score method
         c.show_min_score()
     elif choice == "2":
         c.show_max_score()
@@ -601,7 +591,6 @@ def graph_option(c):
         graph = graph_q.lower()
         print(graph)
         if validate_y_n(graph):
-            print("valid choice")
             break
     if graph == "y":
         c.show_graph()

@@ -360,6 +360,13 @@ def validate_years(user_input, available_years):
     return True
 
 
+def handle_years_choice(choice, c):
+    if choice == "all years":
+        all_years_choice(c)
+    else:
+        single_yr_choice(c)
+
+
 def validate_y_n(user_input):
     """
     Validate the input to the Y/N question
@@ -567,10 +574,7 @@ def years_choice(c):
     """
     choice = get_years(c)
     c.get_scores(choice, "n")
-    if choice == "all years":
-        all_years_choice(c)
-    else:
-        single_yr_choice(c)
+    handle_years_choice(choice, c)
 
 
 def single_yr_choice(c):

@@ -10,7 +10,7 @@ from uniplot import plot
 import statistics
 # import the constant variables from constants.py
 from constants import (
-    COUNTRIES_ALT_NAMES, MORE_DATA, DIFF_COUNTRY, EXIT_APP, ALL_YEARS)
+    COUNTRIES_ALT_NAMES, MORE_DATA, DIFF_COUNTRY, EXIT_APP, ALL_YEARS, DIFF_YR)
 
 
 def print_banner_msg(text):
@@ -451,6 +451,26 @@ def show_options_two(option1, option2):
     return option
 
 
+def show_options_5(option1, option2, option3, option4, option5):
+    """
+    shows options for user to choose next
+    calls the validate_options function to check the input
+    continues looping until validate_options returns True
+    Then returns the option to be handled by handle_option function
+    """
+    while True:
+        print("\nChoose the option you want next:")
+        print(f"1: {option1}")
+        print(f"2: {option2}")
+        print(f"3: {option3}")
+        print(f"4: {option4}")
+        print(f"5: {option5}")
+        option = input("Enter 1, 2, 3, 4 or 5 here: \n")
+        if validate_options(option, 5):
+            break
+    return option
+
+
 def validate_options(option, num_choices):
     """
     validate the option entered by the user in show_options.
@@ -506,6 +526,23 @@ def handle_options_two(option, c):
     Option 2 prints exit message and exits the application
     """
     if option == "1":
+        country_choice(country_dict)
+    else:
+        exit_program()
+
+
+def handle_options5(option, c):
+    """
+    Handle the option chosen from show_options5
+    5 options
+    """
+    if option == "1":
+        all_years_path(c)
+    elif option == "2":
+        years_choice(c)
+    elif option == "3":
+        more_data_path(c)
+    elif option == "4":
         country_choice(country_dict)
     else:
         exit_program()
@@ -597,8 +634,9 @@ def single_yr_path(year, c):
     Path if user chooses a single year
     """
     c.get_scores(year, False)
-    option = show_options(ALL_YEARS, DIFF_COUNTRY, EXIT_APP)
-    handle_options(option, c, "single year")
+    option = show_options_5(
+        ALL_YEARS, DIFF_YR, MORE_DATA, DIFF_COUNTRY, EXIT_APP)
+    handle_options5(option, c)
 
 
 def all_years_path(c):

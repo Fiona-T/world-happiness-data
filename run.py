@@ -9,7 +9,8 @@ from uniplot import plot
 # import python statistics module for median calculation
 import statistics
 # import the constant variables from constants.py
-import constants
+from constants import (
+    COUNTRIES_ALT_NAMES, MORE_DATA, DIFF_COUNTRY, EXIT_APP, ALL_YEARS)
 
 
 def print_banner_msg(text):
@@ -145,7 +146,7 @@ def convert_country_alias(input_name):
     If not, the standardised name is the input name
     """
     std_name = None
-    for k, v in constants.COUNTRIES_ALT_NAMES.items():
+    for k, v in COUNTRIES_ALT_NAMES.items():
         if input_name in v:
             std_name = k
     if std_name is None:
@@ -578,7 +579,7 @@ def one_score_path(c):
     """
     year = c.scores[0]
     c.get_scores(year, True)
-    option = show_options_two(constants.DIFF_COUNTRY, constants.EXIT_APP)
+    option = show_options_two(DIFF_COUNTRY, EXIT_APP)
     handle_options_two(option, c)
 
 
@@ -596,7 +597,7 @@ def single_yr_path(year, c):
     Path if user chooses a single year
     """
     c.get_scores(year, False)
-    option = show_options(constants.ALL_YEARS, constants.DIFF_COUNTRY, constants.EXIT_APP)
+    option = show_options(ALL_YEARS, DIFF_COUNTRY, EXIT_APP)
     handle_options(option, c, "single year")
 
 
@@ -607,7 +608,7 @@ def all_years_path(c):
     c.get_scores("all years", False)
     graph = get_graph_choice()
     handle_graph_choice(graph, c)
-    new_choice = show_options(constants.MORE_DATA, constants.DIFF_COUNTRY, constants.EXIT_APP)
+    new_choice = show_options(MORE_DATA, DIFF_COUNTRY, EXIT_APP)
     handle_options(new_choice, c, "all years")
 
 
@@ -621,7 +622,7 @@ def more_data_path(c):
     """
     more_data_choice = more_data_options(c)
     handle_data_options(more_data_choice, c)
-    option = show_options(constants.MORE_DATA, constants.DIFF_COUNTRY, constants.EXIT_APP)
+    option = show_options(MORE_DATA, DIFF_COUNTRY, EXIT_APP)
     print(option)
     handle_options(option, c, "more data")
 

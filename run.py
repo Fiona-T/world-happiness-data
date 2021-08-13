@@ -353,33 +353,6 @@ def validate_years(user_input, available_years):
     return True
 
 
-def graph_option(c):
-    """
-    presents option to view graph and handles repsonse
-    Run show_graph method if Y, Otherwise show the next options
-    Calls validate_y_n to validate the user input (converted to lowercase)
-    The while loop continues until validate_y_n returns True
-    """
-    while True:
-        graph_q = input("Do you want to view graph of this data? Y/N: \n")
-        graph = graph_q.lower()
-        print(graph)
-        if validate_y_n(graph):
-            print("valid choice")
-            break
-    if graph == "y":
-        c.show_graph()
-        proceed = input(
-            "\nPress any key to continue when you are finished with the graph:"
-            " \n")
-        if proceed:
-            option = show_options(constants.MORE_DATA, constants.DIFF_COUNTRY, constants.EXIT_APP)
-            return option
-    else:
-        option = show_options(constants.MORE_DATA, constants.DIFF_COUNTRY, constants.EXIT_APP)
-        return option
-
-
 def validate_y_n(user_input):
     """
     Validate the input to the Y/N question
@@ -546,58 +519,15 @@ def handle_data_options(choice, c):
         c.show_average_score()
 
 
-def more_data_path(c):
+def start():
     """
-    Path to run when Option3 chosen from handle_all_years
-    Show the choices
-    Pass the choice to handle_data_options function
-    Show further options after this
-    Then handle the option chosen
+    starts the application - shows the welcome message,
+    creates the country dictionary and then calls country
+    choice to get user choice
     """
-    more_data_choice = more_data_options(c)
-    handle_data_options(more_data_choice, c)
-    option = show_options(constants.MORE_DATA, constants.DIFF_COUNTRY, constants.EXIT_APP)
-    print(option)
-    handle_options(option, c, "more data")
-
-
-def all_years_choice(c):
-    """
-    Path if user choose to view scores for all years
-    """
-    option = graph_option(c)
-    handle_options(option, c, "all years")
-
-
-def single_yr_choice(c):
-    """
-    Path if user chooses a single year
-    """
-    option = show_options(constants.ALL_YEARS, constants.DIFF_COUNTRY, constants.EXIT_APP)
-    handle_options(option, c, "single year")
-
-
-def years_choice(c):
-    """
-    Gets the user choice of year(s) they want the score(s) for
-    Decides the next path available to user based on their choice
-    """
-    choice = get_years(c)
-    c.get_scores(choice, "n")
-    if choice == "all years":
-        all_years_choice(c)
-    else:
-        single_yr_choice(c)
-
-
-def one_score_path(c):
-    """
-    Path where country only has one year/score
-    """
-    choice = c.scores[0]
-    c.get_scores(choice, "y")
-    option = show_options_two(constants.DIFF_COUNTRY, constants.EXIT_APP)
-    handle_options_two(option, c)
+    welcome_msg()
+    country_dict = create_countries_dict("data/world-happiness-report.csv")
+    country_choice(country_dict)
 
 
 def country_choice(dict):
@@ -616,15 +546,85 @@ def country_choice(dict):
         years_choice(c)
 
 
-def start():
+def one_score_path(c):
     """
-    starts the application - shows the welcome message,
-    creates the country dictionary and then calls country
-    choice to get user choice
+    Path where country only has one year/score
     """
-    welcome_msg()
-    country_dict = create_countries_dict("data/world-happiness-report.csv")
-    country_choice(country_dict)
+    choice = c.scores[0]
+    c.get_scores(choice, "y")
+    option = show_options_two(constants.DIFF_COUNTRY, constants.EXIT_APP)
+    handle_options_two(option, c)
+
+
+def years_choice(c):
+    """
+    Gets the user choice of year(s) they want the score(s) for
+    Decides the next path available to user based on their choice
+    """
+    choice = get_years(c)
+    c.get_scores(choice, "n")
+    if choice == "all years":
+        all_years_choice(c)
+    else:
+        single_yr_choice(c)
+
+
+def single_yr_choice(c):
+    """
+    Path if user chooses a single year
+    """
+    option = show_options(constants.ALL_YEARS, constants.DIFF_COUNTRY, constants.EXIT_APP)
+    handle_options(option, c, "single year")
+
+
+def all_years_choice(c):
+    """
+    Path if user choose to view scores for all years
+    """
+    option = graph_option(c)
+    handle_options(option, c, "all years")
+
+
+def graph_option(c):
+    """
+    presents option to view graph and handles repsonse
+    Run show_graph method if Y, Otherwise show the next options
+    Calls validate_y_n to validate the user input (converted to lowercase)
+    The while loop continues until validate_y_n returns True
+    """
+    while True:
+        graph_q = input("Do you want to view graph of this data? Y/N: \n")
+        graph = graph_q.lower()
+        print(graph)
+        if validate_y_n(graph):
+            print("valid choice")
+            break
+    if graph == "y":
+        c.show_graph()
+        proceed = input(
+            "\nPress any key to continue when you are finished with the graph:"
+            " \n")
+        if proceed:
+            option = show_options(constants.MORE_DATA, constants.DIFF_COUNTRY, constants.EXIT_APP)
+            return option
+    else:
+        option = show_options(constants.MORE_DATA, constants.DIFF_COUNTRY, constants.EXIT_APP)
+        return option
+
+
+def more_data_path(c):
+    """
+    Path to run when Option3 chosen from handle_all_years
+    Show the choices
+    Pass the choice to handle_data_options function
+    Show further options after this
+    Then handle the option chosen
+    """
+    more_data_choice = more_data_options(c)
+    handle_data_options(more_data_choice, c)
+    option = show_options(constants.MORE_DATA, constants.DIFF_COUNTRY, constants.EXIT_APP)
+    print(option)
+    handle_options(option, c, "more data")
 
 
 def exit_program():

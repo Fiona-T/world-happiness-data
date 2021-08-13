@@ -204,12 +204,12 @@ class Country:
             self.scores_list = [float(v) for v in list(self.di.values())]
             self.years = [int(k) for k in list(self.di.keys())]
 
-    def get_scores(self, years_choice, single_score):
+    def get_scores(self, years_choice, single_score_c):
         """
         If country has single score, prints the year + score
         Else prints year + score for all years / selected year
         """
-        if single_score == "y":
+        if single_score_c:
             print_output(f"There is only one year available for {self.name}")
             print_output(f"The score is {self.scores[1]} for {years_choice}")
         else:
@@ -556,8 +556,8 @@ def one_score_path(c):
     """
     Path where country only has one year/score
     """
-    choice = c.scores[0]
-    c.get_scores(choice, "y")
+    year = c.scores[0]
+    c.get_scores(year, True)
     option = show_options_two(constants.DIFF_COUNTRY, constants.EXIT_APP)
     handle_options_two(option, c)
 
@@ -575,7 +575,7 @@ def single_yr_path(year, c):
     """
     Path if user chooses a single year
     """
-    c.get_scores(year, "n")
+    c.get_scores(year, False)
     option = show_options(constants.ALL_YEARS, constants.DIFF_COUNTRY, constants.EXIT_APP)
     handle_options(option, c, "single year")
 
@@ -584,7 +584,7 @@ def all_years_path(c):
     """
     Path if user choose to view scores for all years
     """
-    c.get_scores("all years", "n")
+    c.get_scores("all years", False)
     option = graph_option(c)
     handle_options(option, c, "all years")
 

@@ -294,6 +294,13 @@ def make_country(country, countries_dict):
     return c
 
 
+def handle_country_choice(c):
+    if isinstance(c.scores, tuple):
+        one_score_path(c)
+    else:
+        years_choice(c)
+
+
 def get_years(c):
     """
     Get the requested year from the user:
@@ -540,10 +547,7 @@ def country_choice(dict):
     """
     country = get_country()
     c = make_country(country, dict)
-    if isinstance(c.scores, tuple):
-        one_score_path(c)
-    else:
-        years_choice(c)
+    handle_country_choice(c)
 
 
 def one_score_path(c):

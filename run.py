@@ -416,59 +416,24 @@ def handle_graph_choice(choice, c):
                 break
 
 
-def show_options(option1, option2, option3):
+def show_num_options(*options):
     """
-    shows options for user to choose next
-    calls the validate_options function to check the input
-    continues looping until validate_options returns True
-    Then returns the option to be handled by handle_option function
-    """
-    while True:
-        print("\nChoose the option you want next:")
-        print(f"1: {option1}")
-        print(f"2: {option2}")
-        print(f"3: {option3}")
-        option = input("Enter 1, 2, or 3 here: \n")
-        if validate_options(option, 3):
-            break
-    return option
-
-
-def show_options_two(option1, option2):
-    """
-    shows options for user to choose next when country has only one year
-    calls the validate_options function to check the input
-    continues looping until validate_options returns True
-    Then returns the option to be handled by handle_option function
+    Shows options for user to choose next - iterates through
+    options tuple, show number and option text.
+    Calls validate_options function to check the input,
+    passing length of options tuple as the max number for validation
+    Continues looping until validate_options returns True
+    Then returns the choice to be handled by handle_option function
     """
     while True:
         print("\nChoose the option you want next:")
-        print(f"1: {option1}")
-        print(f"2: {option2}")
-        option = input("Enter 1 or 2 here: \n")
-        if validate_options(option, 2):
+        for option in options:
+            print(f"{options.index(option)+1}: {option}")
+        choice = input(
+            "Enter the number corresponding to your choice here: \n")
+        if validate_options(choice, len(options)):
             break
-    return option
-
-
-def show_options_5(option1, option2, option3, option4, option5):
-    """
-    shows options for user to choose next
-    calls the validate_options function to check the input
-    continues looping until validate_options returns True
-    Then returns the option to be handled by handle_option function
-    """
-    while True:
-        print("\nChoose the option you want next:")
-        print(f"1: {option1}")
-        print(f"2: {option2}")
-        print(f"3: {option3}")
-        print(f"4: {option4}")
-        print(f"5: {option5}")
-        option = input("Enter 1, 2, 3, 4 or 5 here: \n")
-        if validate_options(option, 5):
-            break
-    return option
+    return choice
 
 
 def validate_options(option, num_choices):
@@ -616,7 +581,7 @@ def one_score_path(c):
     """
     year = c.scores[0]
     c.get_scores(year, True)
-    option = show_options_two(DIFF_COUNTRY, EXIT_APP)
+    option = show_num_options(DIFF_COUNTRY, EXIT_APP)
     handle_options_two(option, c)
 
 
@@ -634,7 +599,7 @@ def single_yr_path(year, c):
     Path if user chooses a single year
     """
     c.get_scores(year, False)
-    option = show_options_5(
+    option = show_num_options(
         ALL_YEARS, DIFF_YR, MORE_DATA, DIFF_COUNTRY, EXIT_APP)
     handle_options5(option, c)
 
@@ -646,7 +611,7 @@ def all_years_path(c):
     c.get_scores("all years", False)
     graph = get_graph_choice()
     handle_graph_choice(graph, c)
-    new_choice = show_options(MORE_DATA, DIFF_COUNTRY, EXIT_APP)
+    new_choice = show_num_options(MORE_DATA, DIFF_COUNTRY, EXIT_APP)
     handle_options(new_choice, c, "all years")
 
 
@@ -660,8 +625,7 @@ def more_data_path(c):
     """
     more_data_choice = more_data_options(c)
     handle_data_options(more_data_choice, c)
-    option = show_options(MORE_DATA, DIFF_COUNTRY, EXIT_APP)
-    print(option)
+    option = show_num_options(MORE_DATA, DIFF_COUNTRY, EXIT_APP)
     handle_options(option, c, "more data")
 
 

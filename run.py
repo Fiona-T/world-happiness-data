@@ -15,7 +15,10 @@ from constants import (
 
 def print_banner_msg(text):
     """
-    Print the text passed in, as a banner msg using Figlet font
+    Print banner msg using Figlet font.
+
+    Args:
+        text (str): text to be printed
     """
     font = Figlet(font="ogre")
     print("-" * 48)
@@ -56,12 +59,14 @@ def welcome_msg():
 
 def get_country():
     """
-    Get country name from user
-    Calls validate_country to validate, loops until True returned
+    Get country name from user.
+    Calls validate_country to validate, loops until True returned.
     Calls convert_country_alias to convert the input name to the
-    standardised name (the name as per the csv file)
-    Then capitalises the name (as validation done with lowercase)
-    The capitalised name is returned, to be used to create country instance
+    standardised name (the name as per the csv file).
+    Then capitalises the name (as validation done with lowercase).
+
+    Returns:
+        capitalised country name, to be used to create country instance
     """
     while True:
         print("\nChoose the country you want to look up.")
@@ -80,9 +85,14 @@ def get_country():
 
 def convert_to_titlecase(string):
     """
-    Converts the lower case country name back to title case
-    Does not capitalise the exceptions
-    Returns the country name in title case
+    Converts the lower case country name back to title case.
+    Does not capitalise the words listed in exceptions.
+
+    Args:
+        string (str): the string to be converted, i.e. country name
+
+    Returns:
+        the country name in title case
     """
     # 'region' included below because it is not capitalised in csv file
     exceptions = ["and", "of", "region"]
@@ -99,14 +109,20 @@ def convert_to_titlecase(string):
 def print_output(text):
     """
     Prints the text in yellow. Used for outputs to user.
+
+    Args:
+        text (str): the text to be printed
     """
     print(colored(text, "yellow"))
 
 
 def print_error_msg(e, user_input):
     """
-    prints error message from the validate functions
-    prints in red bold text
+    Prints error message from the validate functions, in red bold.
+
+    Args:
+        e (str): the error message
+        user_input (str): the input from the user, that generated the error
     """
     print(colored(
             f"Invalid choice: {e}. You entered '{user_input}'. Try again.\n",
@@ -115,11 +131,19 @@ def print_error_msg(e, user_input):
 
 def validate_country(user_input):
     """
-    Validate the user input from get_country
-    1st check if numeric, if so raise error msg
-    Then check if in the countries list, raise error msg
+    Validate the user input from get_country.
+    1st check if numeric, if so raise error msg.
+    Then check if in the countries list, raise error msg if not.
     (Convert input name to standard name in order to check if country in list)
-    Using lowercase for validation. Return false if any errors, true if none
+
+    Args:
+        user_input (str): the input of country name from the user to check
+
+    Returns:
+        bool: True if no errors raised, False otherwise
+
+    Raises:
+        Exceptions
     """
     countries = [k for k in list(country_dict.keys())]
     countries_lowercase = [c.lower() for c in countries]
@@ -139,11 +163,16 @@ def validate_country(user_input):
 
 def convert_country_alias(input_name):
     """
-    Converts 'alias' country, names that user may enter, to name held in csv
-    Returns 'std_name' which is the standardised name
-    Checks if the input name is in the list of alt names for each country
-    If it is, sets the input name to the standardised name
-    If not, the standardised name is the input name
+    Converts 'alias' country, names that user may enter, to name held in csv.
+    Checks if the input name is in the list of alt names for each country.
+
+    Args:
+        input_name (str): the country name input by the user
+
+    Returns:
+        std_name (str): the standardised country name, which will be the name
+        from the csv file if user input an alternative country name, otherwise
+        it is the same as the user input
     """
     std_name = None
     for k, v in COUNTRIES_ALT_NAMES.items():
@@ -156,9 +185,14 @@ def convert_country_alias(input_name):
 
 def create_countries_dict(filepath):
     """
-    Returns global variable dictionary from the specified file path
-    Key = country name
-    Value = list of tuples each containing year and score pairs
+    Create dictionary of countries from the csv file specified.
+
+    Args:
+        filepath (str): the path to the file
+
+    Returns:
+        country_dict (dict): global variable dictionary where key = country
+        name, value = list of tuples each containing year and score pairs
     """
     with open(filepath, "r") as f:
         data = list(csv.reader(f))
@@ -286,9 +320,13 @@ class Country:
 
 def make_country(country, countries_dict):
     """
-    Create instance of Country class for the selected country using:
-    country = validated country input from user, and
-    country_scores = scores from the country dictionary
+    Create instance of Country class for the selected country
+
+    Args:
+        country (str): the validated country input from user
+        countries_dict (dict): dictionary of countries with their scores
+    Returns:
+        c (obj): instance of Country class for chosen country
     """
     country_scores = countries_dict.get(country)
     c = Country(country, country_scores)
@@ -296,6 +334,15 @@ def make_country(country, countries_dict):
 
 
 def handle_country_choice(c):
+    """
+    Decides next path for user, based on country chosen in country_choice path.
+    If c.scores variable is a tuple, then the country only has one score, so
+    next path is the one_score_path. Otherwise, years_choice to show list of
+    years to user.
+
+    Args:
+        c (obj): the instance of Country for chosen country
+    """
     if isinstance(c.scores, tuple):
         one_score_path(c)
     else:
@@ -305,9 +352,16 @@ def handle_country_choice(c):
 def get_years(c):
     """
     Get the requested year from the user:
-    Show the list of available years from Country class instance variable
+    Show the list of available years from Country class instance variable.
+    Sets choice to "all years" if input is A or a.
     Calls validate_years to validate, loops until True returned
-    Returns choice - A for all years or specific year for one year
+
+    Args:
+        c(obj): the instance of Country for chosen country
+
+    Returns:
+        choice (str): user choice for years - either "all years" if
+        they chose all, otherwise the selected year
     """
     years = c.years
     while True:
@@ -330,11 +384,20 @@ def validate_years(user_input, available_years):
     If length of input is 1, user may be trying to input A
     for all years - error to prompt user for A.
     Then, try to convert to integer, as any other inputs
-    must be a number (year), so must be able to convert to int
-    Then, if length is not 4 or 1, prompt user for correct length
+    must be a number (year), so must be able to convert to int.
+    Then, if length is not 4 or 1, prompt user for correct length.
     Then, if length is 4 (correct) but year is not in the list of
     years for that country, prompt user for correct year.
-    Return False with any errors, or True if no error.
+
+    Args:
+        user_input (str): the input of years choice from the user to check
+        available_years (list): list of years for country
+
+    Returns:
+        bool: True if no errors raised, False otherwise.
+
+    Raises:
+        Exceptions
     """
     try:
         if len(user_input) == 1:
@@ -361,6 +424,14 @@ def validate_years(user_input, available_years):
 
 
 def handle_years_choice(choice, c):
+    """
+    Decides next path for user, based on the yr choice from years_choice path.
+    Either show score for all years path, or show score for single year path.
+
+    Args:
+        choice (str): "all years" or the selected year, after validating.
+        c (obj): the instance of Country for chosen country
+    """
     if choice == "all years":
         all_years_path(c)
     else:
@@ -369,10 +440,11 @@ def handle_years_choice(choice, c):
 
 def get_graph_choice():
     """
-    Presents option to view graph,
-    Calls validate_y_n to validate the user input (converted to lowercase)
+    Presents option to view graph, calls validate_y_n to validate user input.
     The while loop continues until validate_y_n returns True
-    And returns repsonse
+
+    Returns:
+        graph (str): user choice y/n whether they want to view graph or not
     """
     while True:
         graph_q = input("Do you want to view graph of this data? Y/N: \n")
@@ -384,11 +456,20 @@ def get_graph_choice():
 
 def validate_y_n(user_input):
     """
-    Validate the input to the Y/N question
-    If it is a number, raise error
-    If it isn't equal to y or n, raise error
-    Print the error and return false
-    If no error return True back to the input function
+    Validate the input to Y/N question (to view graph):
+    If it is a number, raise error.
+    If it isn't equal to y or n, raise error.
+    Print the error and return false.
+    If no error return True back to the input function.
+
+    Args:
+        user_input (str): the input of y/n graph choice from user to check
+
+    Returns:
+        bool: True if no errors raised, False otherwise.
+
+    Raises:
+        Exceptions
     """
     try:
         if user_input.isdigit():
@@ -403,8 +484,12 @@ def validate_y_n(user_input):
 
 def handle_graph_choice(choice, c):
     """
-    Run show_graph method if choice is Y
+    Run show_graph method if choice is Y. s
     The while loop continues until user enters a key to proceed
+
+    Args:
+        choice (str): validated user input to graph question - y or n
+        c (obj): the instance of Country for chosen country
     """
     if choice == "y":
         while True:
@@ -418,12 +503,17 @@ def handle_graph_choice(choice, c):
 
 def show_num_options(*options):
     """
-    Shows options for user to choose next - iterates through
-    options tuple, show number and option text.
+    Shows numbered options for user to choose next - iterates through
+    options tuple, displays number along with option text.
     Calls validate_options function to check the input,
     passing length of options tuple as the max number for validation
     Continues looping until validate_options returns True
-    Then returns the choice to be handled by handle_option function
+
+    Args:
+        *options: variable length tuple of options to show the user
+
+    Returns:
+        opt_chosen: name of option chosen by user
     """
     while True:
         print("\nChoose the option you want next:")
@@ -438,39 +528,51 @@ def show_num_options(*options):
     return opt_chosen
 
 
-def validate_options(option, num_choices):
+def validate_options(user_input, num_choices):
     """
-    validate the option entered by the user in show_options.
-    First check if input can be converted to an integer, Print error if not
-    Next try block checks if more than one number entered, raises error
-    Then check if number entered is above num of options or = 0, raise error
-    Except clause returns the errors raised in the try block
-    Returns True when validated or False if error, to the
-    while loop in the show_options() function
+    Validate the option entered by the user in show_options.
+    First check if input can be converted to an integer, Print error if not.
+    Next try block checks if more than one number entered, raises error.
+    Then check if number entered is above num of options or = 0, raise error.
+
+    Args:
+        user_input (str): the input option choice from user to check
+        num_choices (int): the number of options that were presented
+
+    Returns:
+        bool: True if no errors raised, False otherwise.
+
+    Raises:
+        Exceptions
     """
     try:
-        int(option)
+        int(user_input)
     except ValueError:
-        print_error_msg("Please enter a number", option)
+        print_error_msg("Please enter a number", user_input)
         return False
     try:
-        if len(option) > 1:
+        if len(user_input) > 1:
             raise ValueError(
                 "Please enter only one number and no space or "
-                f"characters. '{option}' is {len(option)} characters long")
-        elif int(option) > num_choices or int(option) == 0:
+                f"characters. '{user_input}' is {len(user_input)} characters"
+                " long")
+        elif int(user_input) > num_choices or int(user_input) == 0:
             raise Exception(
                 f"Number must be between 1 and {num_choices}")
     except (ValueError, Exception) as e:
-        print_error_msg(e, option)
+        print_error_msg(e, user_input)
         return False
     return True
 
 
 def handle_options(option_chosen, c):
     """
-    Handle the option chosen from show_num_options
-    Sends user to the relevant path based on their choice
+    Handle the option chosen from show_num_options.
+    Sends user to the relevant next path based on their choice
+
+    Args:
+        option_chosen: name of option chosen by user
+        c (obj): the instance of Country for chosen country
     """
     if option_chosen == MORE_DATA:
         more_data_path(c)
@@ -489,7 +591,15 @@ def handle_options(option_chosen, c):
 
 def more_data_options(c):
     """
-    Show the options to user for Min, Max, Median, Average or All
+    Show the options to user for Min, Max, Median, Average or All.
+    Calls validate_options function to check the input.
+    Continues looping until validate_options returns True.
+
+    Args:
+        c (obj): the instance of Country for chosen country
+
+    Returns:
+        more_data_choice (str): number for option chosen by user
     """
     while True:
         print(f"\nChoose from the options below for {c.name}:")
@@ -507,8 +617,12 @@ def more_data_options(c):
 
 def handle_data_options(choice, c):
     """
-    handle the choice for the more_data_options function,
-    i.e. Min, Max, Median, Average or All
+    Handle the choice by user from more_data_options function, sends user to
+    relevant next path based on their choice (Min, Max, Median, Average or All.
+
+    Args:
+        choice: number for the option chosen by user
+        c (obj): the instance of Country for chosen country
     """
     if choice == "1":
         c.show_min_score()
@@ -527,31 +641,38 @@ def handle_data_options(choice, c):
 
 def start():
     """
-    starts the application - shows the welcome message,
-    creates the country dictionary and then calls country
-    choice to get user choice
+    Starts the application - shows the welcome message, creates the
+    country dictionary and then calls next path: country_choice()
     """
     welcome_msg()
     country_dict = create_countries_dict("data/world-happiness-report.csv")
     country_choice(country_dict)
 
 
-def country_choice(dict):
+def country_choice(country_dict):
     """
-    Gets the user choice of country and creates instance of
-    Country class after validating choice.
-    Decides the next path available to user:
-    If country only has one year (self.scores is a tuple not list)
-    Then one_score_path, otherwise gets years choice from user
+    Gets user choice of country, creates instance of Country class.
+    handle_country_choice  function decides the next path available to user:
+    one_score_path if country only has one score available,
+    otherwise years_choice section.
+
+    Args:
+        country_dict(dict): dictionary of countries with years,scores
     """
     country = get_country()
-    c = make_country(country, dict)
+    c = make_country(country, country_dict)
     handle_country_choice(c)
 
 
 def one_score_path(c):
     """
-    Path where country only has one year/score
+    Path where country only has one year/score.
+    Shows the score for that year and presents next options.
+    handle_options function decides the next path available to user
+    based on their choice from show_num_options function.
+
+    Args:
+        c (obj): the instance of Country for chosen country
     """
     year = c.scores[0]
     c.get_scores(year, True)
@@ -561,8 +682,12 @@ def one_score_path(c):
 
 def years_choice(c):
     """
-    Gets the user choice of year(s) they want the score(s) for
-    Decides the next path available to user based on their choice
+    Gets user choice of year(s) they want the score(s) for.
+    Decides the next path available to user based on their choice:
+    single_yr_path or all_years_path
+
+    Args:
+        c (obj): the instance of Country for chosen country
     """
     choice = get_years(c)
     handle_years_choice(choice, c)
@@ -570,7 +695,13 @@ def years_choice(c):
 
 def single_yr_path(year, c):
     """
-    Path if user chooses a single year
+    Path if user chooses a single year to view score for.
+    Shows the score for that year and presents next options.
+    handle_options function decides the next path available to user
+    based on their choice from show_num_options function.
+
+    Args:
+        c (obj): the instance of Country for chosen country
     """
     c.get_scores(year, False)
     option = show_num_options(
@@ -581,6 +712,13 @@ def single_yr_path(year, c):
 def all_years_path(c):
     """
     Path if user choose to view scores for all years
+    Shows the scores for the years, shows option to view graph. Handles
+    graph choice (show graph if choice is "y"), then present next options.
+    handle_options function decides the next path available to user
+    based on their choice from show_num_options function.
+
+    Args:
+        c (obj): the instance of Country for chosen country
     """
     c.get_scores("all years", False)
     graph = get_graph_choice()
@@ -591,11 +729,14 @@ def all_years_path(c):
 
 def more_data_path(c):
     """
-    Path to run when Option3 chosen from handle_all_years
-    Show the choices
-    Pass the choice to handle_data_options function
-    Show further options after this
-    Then handle the option chosen
+    Path that runs when user chooses MORE_DATA from show_num_options.
+    Show the choices availables - min, max, median, average, all.
+    handle_data_options calls the relevant methods to show the requested data.
+    Then presents next options, then handle_options function decides the
+    next path available to user based on choice from show_num_options function.
+
+    Args:
+        c (obj): the instance of Country for chosen country
     """
     more_data_choice = more_data_options(c)
     handle_data_options(more_data_choice, c)
@@ -604,6 +745,10 @@ def more_data_path(c):
 
 
 def exit_program():
+    """
+    Runs when user chooses EXIT from show_num_options.
+    Exits the application with exit message.
+    """
     print("Thank you, exiting application...")
     print_banner_msg("Goodbye")
     exit()

@@ -54,6 +54,7 @@ def welcome_msg():
     print(
         "You can look up the Happiness Score per country, "
         "for the years 2005 - 2020.\n")
+    print("For all inputs, remember to press Enter after typing your input\n")
 
 
 def get_country():
@@ -72,7 +73,7 @@ def get_country():
         print("Use the common English name for the country, with no dots.")
         print("You will then be shown the years from which you can choose")
         country = input(
-            "Please enter the name of the country you want to look up: \n")
+            "\nType in the name of the country you want to look up: \n")
         if validate_country(country):
             break
     country_std = convert_country_alias(country.lower())
@@ -246,10 +247,10 @@ class Country:
         Else prints year + score for all years / selected year
         """
         if single_score_c:
-            print_output(f"There is only one year available for {self.name}")
+            print_output(f"\nThere is only one year available for {self.name}")
             print_output(f"The score is {self.scores[1]} for {years_choice}")
         else:
-            print_output(f"The score for {self.name} for {years_choice} is:")
+            print_output(f"\nThe score for {self.name} for {years_choice} is:")
             if years_choice == "all years":
                 [print_output(f"{k} : {v}") for k, v in self.di.items()]
             else:
@@ -368,8 +369,9 @@ def get_years(c):
     while True:
         print_output(f"\nThe years available for {c.name} are: \n{c.years}")
         requested_years = input(
-            "Enter the year you want from this list, "
-            "or type in A for all years: \n")
+            "\nEnter the year from this list for which you want to see the "
+            f"happiness score for {c.name}. \nOr type in A to see the "
+            f"happiness scores for all years for {c.name}: \n")
         if requested_years == "A" or requested_years == "a":
             choice = "all years"
             break
@@ -448,7 +450,7 @@ def get_graph_choice():
         graph (str): user choice y/n whether they want to view graph or not
     """
     while True:
-        graph_q = input("Do you want to view graph of this data? Y/N: \n")
+        graph_q = input("\nDo you want to view graph of this data? Y/N: \n")
         graph = graph_q.lower()
         if validate_y_n(graph):
             break
@@ -521,7 +523,7 @@ def show_num_options(*options):
         for option in options:
             print(f"{options.index(option)+1}: {option}")
         choice = input(
-            "Enter the number corresponding to your choice here: \n")
+            "\nEnter the number corresponding to your choice here: \n")
         # convert the number chosen back to the option variable name
         opt_chosen = options[int(choice)-1]
         if validate_options(choice, len(options)):
@@ -610,8 +612,9 @@ def more_data_options(c):
         print("4: Average happiness score")
         print("5: All of these (min, max, median, average)")
         more_data_choice = input(
-            "Enter 1/2/3/4/5 for the option you want from this list: \n")
+            "\nEnter 1/2/3/4/5 for the option you want from this list: \n")
         if validate_options(more_data_choice, 5):
+            print("\n")
             break
     return more_data_choice
 

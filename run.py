@@ -431,9 +431,11 @@ def show_num_options(*options):
             print(f"{options.index(option)+1}: {option}")
         choice = input(
             "Enter the number corresponding to your choice here: \n")
+        # convert the number chosen back to the option variable name
+        opt_chosen = options[int(choice)-1]
         if validate_options(choice, len(options)):
             break
-    return choice
+    return opt_chosen
 
 
 def validate_options(option, num_choices):
@@ -465,51 +467,23 @@ def validate_options(option, num_choices):
     return True
 
 
-def handle_options(option, c, path):
+def handle_options(option_chosen, c):
     """
-    Handle the option chosen from show_options
-    Option 1 - if single year path, joins the 'all years path'
-    Option 1 - if not single year, goes to (if coming from all years path),
-    or loops back to (if already on more_data_path), start of more_data_path
-    Option 2 loops back to start of the main() path, to choose new country
-    Option 3 prints exit message and exits the application
+    Handle the option chosen from show_num_options
+    Sends user to the relevant path based on their choice
     """
-    if path == "single year" and option == "1":
-        all_years_path(c)
-    elif path != "single year" and option == "1":
+    if option_chosen == MORE_DATA:
         more_data_path(c)
-    elif option == "2":
+    elif option_chosen == DIFF_COUNTRY:
         country_choice(country_dict)
-    else:
-        exit_program()
-
-
-def handle_options_two(option, c):
-    """
-    Handle the option chosen from show_options_two
-    Option 1 loops back to start of the main() path, to choose new country
-    Option 2 prints exit message and exits the application
-    """
-    if option == "1":
-        country_choice(country_dict)
-    else:
-        exit_program()
-
-
-def handle_options5(option, c):
-    """
-    Handle the option chosen from show_options5
-    5 options
-    """
-    if option == "1":
+    elif option_chosen == ALL_YEARS:
         all_years_path(c)
-    elif option == "2":
+    elif option_chosen == DIFF_YR:
         years_choice(c)
-    elif option == "3":
-        more_data_path(c)
-    elif option == "4":
-        country_choice(country_dict)
+    elif option_chosen == EXIT_APP:
+        exit_program()
     else:
+        print("Unknown choice, exiting programme")
         exit_program()
 
 
@@ -582,7 +556,7 @@ def one_score_path(c):
     year = c.scores[0]
     c.get_scores(year, True)
     option = show_num_options(DIFF_COUNTRY, EXIT_APP)
-    handle_options_two(option, c)
+    handle_options(option, c)
 
 
 def years_choice(c):
@@ -601,7 +575,7 @@ def single_yr_path(year, c):
     c.get_scores(year, False)
     option = show_num_options(
         ALL_YEARS, DIFF_YR, MORE_DATA, DIFF_COUNTRY, EXIT_APP)
-    handle_options5(option, c)
+    handle_options(option, c)
 
 
 def all_years_path(c):
@@ -612,7 +586,7 @@ def all_years_path(c):
     graph = get_graph_choice()
     handle_graph_choice(graph, c)
     new_choice = show_num_options(MORE_DATA, DIFF_COUNTRY, EXIT_APP)
-    handle_options(new_choice, c, "all years")
+    handle_options(new_choice, c)
 
 
 def more_data_path(c):
@@ -626,7 +600,7 @@ def more_data_path(c):
     more_data_choice = more_data_options(c)
     handle_data_options(more_data_choice, c)
     option = show_num_options(MORE_DATA, DIFF_COUNTRY, EXIT_APP)
-    handle_options(option, c, "more data")
+    handle_options(option, c)
 
 
 def exit_program():

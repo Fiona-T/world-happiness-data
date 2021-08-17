@@ -107,6 +107,10 @@ Explanation of Happiness score:
 ## Testing
 ---
 ### Code Validation
+The Python code has been validated using [PEP8 online checker](http://pep8online.com/). Errors that were raised were: `line too long (86 > 79 characters)` relating to strings for user input that were too long. This was corrected by wrapping the string onto multiple lines.
+
+ There are no validation errors in the sumitted code.
+
 ### Test Cases - user stories
 ### Fixed Bugs
 ### Manual Testing

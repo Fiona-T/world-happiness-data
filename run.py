@@ -750,7 +750,7 @@ def exit_program():
     """
     print_smiley()
     print("Thank you, exiting application...")
-    print("\nClick on the orange RUN PROGRAM button to run again.")
+    print("Click the RUN PROGRAM button above to run again.")
     print_banner_msg("Goodbye")
     exit()
 

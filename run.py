@@ -47,14 +47,13 @@ def print_smiley():
 
 def welcome_msg():
     """
-    Print banner msg, welcome text and smiley face
+    Print banner msg and intro text
     """
     print_banner_msg("Welcome")
     print("This is the World Happiness Data Tool.")
     print(
         "You can look up the Happiness Score per country, "
         "for the years 2005 - 2020.\n")
-    # print_smiley()
 
 
 def get_country():
@@ -749,7 +748,9 @@ def exit_program():
     Runs when user chooses EXIT from show_num_options.
     Exits the application with exit message.
     """
+    print_smiley()
     print("Thank you, exiting application...")
+    print("\nClick on the orange RUN PROGRAM button to run again.")
     print_banner_msg("Goodbye")
     exit()
 

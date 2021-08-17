@@ -52,6 +52,8 @@ The deployed application runs in a mock terminal on Heroku in order to demonstra
 ### Flow Chart
 [View the flowchart here](docs/flowchart.pdf), showing the steps that run in the application, how the user can move through the application and the user options at each stage. 
 
+The application is split into different 'paths' or sections. Each section is a path that the user can link into from a different section of the application, when they are presented with options. (Except for the `one_score_path()` which is not selected by the user, but determined by their choice of country - there are five countries in the dataset where the happiness score is only recorded for one year.) At the end of each section the user is presented with options, and put onto the new relevant path (or exit the application), based on their choice.
+
 ## Features
 ---
 ### Existing Features

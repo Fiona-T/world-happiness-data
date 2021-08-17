@@ -153,7 +153,9 @@ def validate_country(user_input):
             country = convert_country_alias(user_input.lower())
             if country not in countries_lowercase:
                 raise Exception(
-                            f"{user_input} is not in the list of countries")
+                            f"{user_input} is not in the list of countries"
+                            "\nHere are the countries you can choose from,"
+                            f" please choose from this list: \n{countries}\n")
     except Exception as e:
         print_error_msg(e, user_input)
         return False

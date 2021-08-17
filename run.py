@@ -410,8 +410,8 @@ def handle_graph_choice(choice, c):
         while True:
             c.show_graph()
             proceed = input(
-                "\nEnter any key(s) to continue when you are finished with the graph:"
-                " \n")
+                "\nEnter any key(s) to continue when you are finished with the"
+                " graph: \n")
             if proceed:
                 break
 

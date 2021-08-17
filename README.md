@@ -66,7 +66,8 @@ The application is split into different 'paths' or sections. Each section is a p
 - Option for user, if they have chosen to view all years, to choose if they want to view a graph of the data. This will be the happiness score for that country over time
 - Exception handling for the user input to the Y/N choice input
 - Option for user, if they originally chose a single year, to then view all years for the selected country
-- Option for user to view min, max, median, average, or all of these values, for the selected country, if they chose to view all years for that country
+- Option for the user to choose a different year for the selected country, after viewing a single year's score or viewing all years' scores (this option is not applicable when a country only has one score for one year)
+- Option for user to view min, max, median, average, or all of these values, for the selected country - this option can be chosen after selecting a single year's score to view, or after selecting all years, but is not available when a country only has one score
 - Option for user to go back and select another option from min, max, median, average, or all options (e.g. they chose max first time, can go back and chose min or all, etc.)
 - Option for user to choose a different country, or to exit programme when they have viewed their data 
 - There are five countries in the dataset that only have a score recorded for one year. If the user chooses these countries, show the score and year along with a note confirming this is the only year available, and the option to choose a different country/exit

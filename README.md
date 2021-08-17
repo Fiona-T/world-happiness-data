@@ -73,6 +73,8 @@ The application is split into different 'paths' or sections. Each section is a p
 - There are five countries in the dataset that only have a score recorded for one year. If the user chooses these countries, show the score and year along with a note confirming this is the only year available, and the option to choose a different country/exit
 - Exception handling for the user inputs when selecting an option from the list of numbered options
 - Exit message confirming to user that they are exiting the application, and how to re-run the application 
+- For the country choice user input, accept different alternative/alias names for the countries as far as possible, for example 'britain' will retrieve data for United Kingdom. 
+- For user inputs requiring text, accept lowercase, uppercase, titlecase and combinations of same, for example iReLanD will retrieve data for Ireland. 
 
 ### Future Features
 

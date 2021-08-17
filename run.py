@@ -585,7 +585,7 @@ def all_years_path(c):
     c.get_scores("all years", False)
     graph = get_graph_choice()
     handle_graph_choice(graph, c)
-    new_choice = show_num_options(MORE_DATA, DIFF_COUNTRY, EXIT_APP)
+    new_choice = show_num_options(MORE_DATA, DIFF_COUNTRY, DIFF_YR, EXIT_APP)
     handle_options(new_choice, c)
 
 

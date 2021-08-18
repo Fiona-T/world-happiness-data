@@ -524,9 +524,9 @@ def show_num_options(*options):
             print(f"{options.index(option)+1}: {option}")
         choice = input(
             "\nEnter the number corresponding to your choice here: \n")
-        # convert the number chosen back to the option variable name
-        opt_chosen = options[int(choice)-1]
         if validate_options(choice, len(options)):
+            # convert the number chosen back to the option variable name
+            opt_chosen = options[int(choice)-1]
             break
     return opt_chosen
 

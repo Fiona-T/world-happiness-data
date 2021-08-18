@@ -376,9 +376,10 @@ def get_years(c):
         choice (str): user choice for years - either "all years" if
         they chose all, otherwise the selected year
     """
-    years = c.years
+    available_years = c.years
     while True:
-        print_output(f"\nThe years available for {c.name} are: \n{c.years}")
+        print_output(f"\nThe years available for {c.name} are:")
+        print_output(", ".join(map(str, c.years)))
         requested_years = input(
             "\nEnter the year from this list for which you want to see the "
             f"happiness score for {c.name}. \nOr type in A to see the "
@@ -386,7 +387,7 @@ def get_years(c):
         if requested_years == "A" or requested_years == "a":
             choice = "all years"
             break
-        elif validate_years(requested_years, years):
+        elif validate_years(requested_years, available_years):
             choice = requested_years
             break
     return choice

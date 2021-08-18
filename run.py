@@ -220,34 +220,44 @@ def print_output(text):
 
 class Country:
     """
-    Creates an instance of Country class, for the chosen country.
-    name = the country name
-    scores = a list of tuples containing year, score
-    for countries with more than one year, score pair:
-    di = dictionary with year as k, score as v
-    scores_list = a list of the scores for each year, as a float,
-    so that it can be used in graph and for min, max etc.
-    years = list of years (keys from the di), converted to integer,
-    so that they can be used in graph
+    Country class, to create instance for the chosen country and use methods.
+
     """
     def __init__(self, name, scores):
+        """
+        Initializer to create instance of Country.
+        The attributes self.di, self.scores_list and self.years are
+        only created for countries with more than one score/year recorded.
+        If country only has one year, then scores will be a tuple not list
+        and these attributes are not created.
+
+        Args:
+            name (str): the country name
+            scores (list): of tuples containing year, score
+        """
         self.name = name
         self.scores = scores
-        # if country only has one year, scores will be a tuple not list
-        # in that case, don't need dictionary, scores_list or years list
-        # so these are only created when country has multiple years
         if isinstance(self.scores, list):
+            # dictionary with year as k, score as v
             self.di = dict(self.scores)
+            # list of scores for each year, as a float (for graph, max, etc.)
             self.scores_list = [float(v) for v in list(self.di.values())]
+            # list of years (keys from the di), converted to int for later use
             self.years = [int(k) for k in list(self.di.keys())]
 
-    def get_scores(self, years_choice, single_score_c):
+    def show_scores(self, years_choice, single_score_c):
         """
-        If country has single score, prints the year + score
-        Else prints year + score for all years / selected year
+        If country has single score only, prints the year + score.
+        Else prints year + score for all years / selected year.
+
+        Args:
+            years_choice (str): "all years" for all, or year for single year
+            single_score_c (bool): True if single score country, else False
         """
         if single_score_c:
-            print_output(f"\nThere is only one year available for {self.name}")
+            print_output(
+                "\nThere is only one year with a happiness score recorded for "
+                f"{self.name}:")
             print_output(f"The score is {self.scores[1]} for {years_choice}")
         else:
             print_output(f"\nThe score for {self.name} for {years_choice} is:")
@@ -258,12 +268,9 @@ class Country:
 
     def show_graph(self):
         """
-        Plots a graph of the scores over time, using uniplot
-        years and scores were previously converted to ints/floats
-        years on x-axis, score on y-axis
+        Plots a graph of the scores over time, using uniplot.
+        years (floats so whole number) on x-axis, scores_list on y-axis
         """
-        print(self.years)
-        print(self.scores_list)
         plot(
             xs=self.years, ys=self.scores_list, lines=True,
             legend_labels=["years"],
@@ -271,9 +278,9 @@ class Country:
 
     def show_min_score(self):
         """
-        Gets the minimum score from the scores_list
-        Creates a list of the years corresponding to the min score
-        Prints the year OR list of years corresponding to the min score
+        Gets the minimum score from the scores_list.
+        Creates a list of the years corresponding to the min score.
+        Prints the year OR list of years corresponding to the min score.
         """
         min_score = min(self.scores_list)
         print_output(
@@ -287,9 +294,9 @@ class Country:
 
     def show_max_score(self):
         """
-        Gets the maximum score from the scores_list
-        Creates a list of the years corresponding to the max score
-        Prints the year OR list of years corresponding to the max score
+        Gets the maximum score from the scores_list.
+        Creates a list of the years corresponding to the max score.
+        Prints the year OR list of years corresponding to the max score.
         """
         max_score = max(self.scores_list)
         print_output(
@@ -303,7 +310,7 @@ class Country:
 
     def show_median_score(self):
         """
-        Get the median score from the scores_list, print to terminal
+        Gets the median score from the scores_list, prints to terminal.
         """
         median_score = statistics.median(self.scores_list)
         print_output(
@@ -311,8 +318,8 @@ class Country:
 
     def show_average_score(self):
         """
-        Get the average score from the scores_list: total/length, rounded
-        Print to terminal
+        Gets the average score from the scores_list: total/length, rounded.
+        Prints to terminal.
         """
         total_score = sum(self.scores_list)
         average_score = round(total_score/len(self.scores_list), 2)
@@ -679,7 +686,7 @@ def one_score_path(c):
         c (obj): the instance of Country for chosen country
     """
     year = c.scores[0]
-    c.get_scores(year, True)
+    c.show_scores(year, True)
     option = show_num_options(DIFF_COUNTRY, EXIT_APP)
     handle_options(option, c)
 
@@ -707,7 +714,7 @@ def single_yr_path(year, c):
     Args:
         c (obj): the instance of Country for chosen country
     """
-    c.get_scores(year, False)
+    c.show_scores(year, False)
     option = show_num_options(
         ALL_YEARS, DIFF_YR, MORE_DATA, DIFF_COUNTRY, EXIT_APP)
     handle_options(option, c)
@@ -724,7 +731,7 @@ def all_years_path(c):
     Args:
         c (obj): the instance of Country for chosen country
     """
-    c.get_scores("all years", False)
+    c.show_scores("all years", False)
     graph = get_graph_choice()
     handle_graph_choice(graph, c)
     new_choice = show_num_options(MORE_DATA, DIFF_COUNTRY, DIFF_YR, EXIT_APP)

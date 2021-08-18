@@ -31,17 +31,17 @@ def print_smiley():
     Print smiley face using ASCII characters
     """
     print("-" * 78)
-    print(" " * 18 + "_" * 8)
-    print(" " * 15 + "_'" + " " * 10 + "'_")
-    print(" " * 13 + "." + " " * 16 + ".")
-    print(" " * 12 + "/" + " " * 5 + "." + " " * 7 + "." + " " * 5 + "\\")
-    print(" " * 11 + ":" + " " * 21 + ":")
-    print(" " * 11 + "|" + " " * 21 + "|")
-    print(" " * 11 + ":" + " " * 3 + "\\" + " " * 13 + "/" + " " * 3 + ":")
-    print(" " * 12 + "\\" + " " * 3 + "`. _______ .'" + " " * 3 + "/")
-    print(" " * 13 + "`." + " " * 15 + ".'")
-    print(" " * 15 + "`_" + " " * 11 + "_'")
-    print(" " * 18 + "' " + "-" * 6 + " '")
+    print(" " * 32 + "_" * 8)
+    print(" " * 29 + "_'" + " " * 10 + "'_")
+    print(" " * 27 + "." + " " * 16 + ".")
+    print(" " * 26 + "/" + " " * 5 + "." + " " * 7 + "." + " " * 5 + "\\")
+    print(" " * 25 + ":" + " " * 21 + ":")
+    print(" " * 25 + "|" + " " * 21 + "|")
+    print(" " * 25 + ":" + " " * 3 + "\\" + " " * 13 + "/" + " " * 3 + ":")
+    print(" " * 26 + "\\" + " " * 3 + "`. _______ .'" + " " * 3 + "/")
+    print(" " * 27 + "`." + " " * 15 + ".'")
+    print(" " * 29 + "`_" + " " * 11 + "_'")
+    print(" " * 32 + "' " + "-" * 6 + " '")
     print("-" * 78)
 
 
@@ -54,7 +54,9 @@ def welcome_msg():
     print(
         "You can look up the Happiness Score per country, "
         "for the years 2005 - 2020.\n")
-    print("For all inputs, remember to press Enter after typing your input\n")
+    print(colored(
+            "For all inputs, remember to press Enter after typing your input\n",
+            attrs=["bold"]))
     print("-" * 78)
 
 

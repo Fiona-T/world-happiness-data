@@ -55,8 +55,8 @@ def welcome_msg():
         "You can look up the Happiness Score per country, "
         "for the years 2005 - 2020.\n")
     print(colored(
-            "For all inputs, remember to press Enter after typing your input\n",
-            attrs=["bold"]))
+            "For all inputs, remember to press Enter after typing your input"
+            "\n", attrs=["bold"]))
     print("-" * 78)
 
 
@@ -384,7 +384,7 @@ def get_years(c):
         print_output(", ".join(map(str, c.years)))
         requested_years = input(
             "\nEnter the year from this list for which you want to see the "
-            f"happiness score for {c.name}. \nOr type in A to see the "
+            f"\nhappiness score for {c.name}. \nOr type in A to see the "
             f"happiness scores for all years for {c.name}: \n")
         if requested_years == "A" or requested_years == "a":
             choice = "all years"
@@ -768,7 +768,7 @@ def exit_program():
     Exits the application with exit message.
     """
     print_smiley()
-    print("Thank you, exiting application...")
+    print("Thank you, exiting World Happiness Data application...")
     print("Click the RUN PROGRAM button above to run again.")
     print_banner_msg(" "*14 + "Goodbye")
     exit()

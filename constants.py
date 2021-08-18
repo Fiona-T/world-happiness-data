@@ -23,7 +23,10 @@ COUNTRIES_ALT_NAMES = {
         "benin": ["republic of benin", "dahomey"],
         "bhutan": ["kingdom of bhutan"],
         "bolivia": ["plurinational state of bolivia"],
-        "bosnia and herzegovina": ["republic of bosnia and herzegovina"],
+        "bosnia and herzegovina": [
+            "republic of bosnia and herzegovina", "bih", "bosnia-herzegovina",
+            "bosnia"
+            ],
         "botswana": ["republic of botswana", "bechuanaland"],
         "brazil": ["federative republic of brazil"],
         "bulgaria": ["republic of bulgaria"],
@@ -34,7 +37,7 @@ COUNTRIES_ALT_NAMES = {
         "central african republic": ["central african empire"],
         "chad": ["republic of chad"],
         "chile": ["republic of chile", "chilli", "chili"],
-        "china": ["people's republic of china"],
+        "china": ["people's republic of china", "peoples republic of china"],
         "colombia": ["republic of colombia"],
         "comoros": ["union of the comoros", "united republic of the commoros"],
         "congo (brazzaville)": [
@@ -46,7 +49,7 @@ COUNTRIES_ALT_NAMES = {
             "zaire", "congo kinshasa", "congo-kinshasa", "drc", "dr congo",
             "the drc", "the droc"
             ],
-        "costa rica": ["republic of costa cica"],
+        "costa rica": ["republic of costa rica"],
         "croatia": ["republic of croatia", "hrvatska"],
         "cuba": ["republic of cuba"],
         "cyprus": ["republic of cyprus"],
@@ -79,6 +82,8 @@ COUNTRIES_ALT_NAMES = {
             "hong kong special administrative region of china",
             "hong kong special administrative region of the people's "
             "republic of china",
+            "hong kong special administrative region of the peoples "
+            "republic of china",
             "hong kong sar of china", "hong kong, china"
             ],
         "iceland": ["republic of iceland"],
@@ -100,7 +105,10 @@ COUNTRIES_ALT_NAMES = {
         "kosovo": ["republic of kosovo"],
         "kuwait": ["state of kuwait"],
         "kyrgyzstan": ["kyrgyz republic"],
-        "laos": ["lao people's democratic republic"],
+        "laos": [
+            "lao people's democratic republic",
+            "lao peoples democratic republic"
+            ],
         "latvia": ["republic of latvia"],
         "lebanon": ["the lebanese republic", "the lebanon"],
         "lesotho": ["kingdom of lesotho"],

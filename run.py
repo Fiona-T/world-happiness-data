@@ -274,9 +274,11 @@ class Country:
         """
         start = self.years[0]
         end = self.years[-1]
+        print("\n")
         plot(
             xs=self.years, ys=self.scores_list, lines=True, color=True,
-            title=f"Happiness scores from {start} to {end} for {self.name}")
+            title=f"Happiness scores from {start} to {end} for {self.name}",
+            height=16)
 
     def show_min_score(self):
         """

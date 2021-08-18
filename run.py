@@ -269,12 +269,14 @@ class Country:
     def show_graph(self):
         """
         Plots a graph of the scores over time, using uniplot.
-        years (floats so whole number) on x-axis, scores_list on y-axis
+        years (floats so whole number) on x-axis, scores_list on y-axis.
+        Title of graph includes start and end years for the time period.
         """
+        start = self.years[0]
+        end = self.years[-1]
         plot(
-            xs=self.years, ys=self.scores_list, lines=True,
-            legend_labels=["years"],
-            title="Happiness scores over time")
+            xs=self.years, ys=self.scores_list, lines=True, color=True,
+            title=f"Happiness scores from {start} to {end} for {self.name}")
 
     def show_min_score(self):
         """

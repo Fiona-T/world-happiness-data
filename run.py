@@ -57,6 +57,39 @@ def welcome_msg():
     print("For all inputs, remember to press Enter after typing your input\n")
 
 
+def create_countries_dict(filepath):
+    """
+    Create dictionary of countries from the csv file specified.
+
+    Args:
+        filepath (str): the path to the file
+
+    Returns:
+        country_dict (dict): global variable dictionary where key = country
+        name, value = list of tuples each containing year and score pairs
+    """
+    with open(filepath, "r") as f:
+        data = list(csv.reader(f))
+    global country_dict
+    country_dict = {}
+    # for each list in the list of lists, excluding first one
+    for sublist in data[1:]:
+        # key is the first column (country), value is tuple of year and score
+        key, value = sublist[0], tuple(sublist[1:3])
+        # if the country is not already there, then add the corresponding value
+        if key not in country_dict:
+            country_dict[key] = value
+        else:
+            # if country exists, check if values are NOT a list
+            # if not then convert to list so new values added in same list
+            if not isinstance(country_dict[key], list):
+                country_dict[key] = [country_dict[key]]
+            # append the new value to the exising list of values
+            country_dict[key].append(value)
+    print(f"Creating countries dictionary from {filepath}...")
+    return country_dict
+
+
 def get_country():
     """
     Get country name from user.
@@ -81,52 +114,6 @@ def get_country():
     print_output(
         f"\nYou entered '{country}'. Showing results for '{country_cap}'.")
     return country_cap
-
-
-def convert_to_titlecase(string):
-    """
-    Converts the lower case country name back to title case.
-    Does not capitalise the words listed in exceptions.
-
-    Args:
-        string (str): the string to be converted, i.e. country name
-
-    Returns:
-        the country name in title case
-    """
-    # 'region' included below because it is not capitalised in csv file
-    exceptions = ["and", "of", "region"]
-    words = string.split(" ")
-    title_case_words = [words[0].capitalize()]
-    title_case_words += [
-        word if word in exceptions else word.capitalize()
-        for word in words[1:]
-        ]
-    title_case_string = " ".join(title_case_words)
-    return title_case_string
-
-
-def print_output(text):
-    """
-    Prints the text in yellow. Used for outputs to user.
-
-    Args:
-        text (str): the text to be printed
-    """
-    print(colored(text, "yellow"))
-
-
-def print_error_msg(e, user_input):
-    """
-    Prints error message from the validate functions, in red bold.
-
-    Args:
-        e (str): the error message
-        user_input (str): the input from the user, that generated the error
-    """
-    print(colored(
-            f"Invalid choice: {e}. You entered '{user_input}'. Try again.\n",
-            "red", attrs=["bold"]))
 
 
 def validate_country(user_input):
@@ -185,37 +172,50 @@ def convert_country_alias(input_name):
     return std_name
 
 
-def create_countries_dict(filepath):
+def convert_to_titlecase(string):
     """
-    Create dictionary of countries from the csv file specified.
+    Converts the lower case country name back to title case.
+    Does not capitalise the words listed in exceptions.
 
     Args:
-        filepath (str): the path to the file
+        string (str): the string to be converted, i.e. country name
 
     Returns:
-        country_dict (dict): global variable dictionary where key = country
-        name, value = list of tuples each containing year and score pairs
+        the country name in title case
     """
-    with open(filepath, "r") as f:
-        data = list(csv.reader(f))
-    global country_dict
-    country_dict = {}
-    # for each list in the list of lists, excluding first one
-    for sublist in data[1:]:
-        # key is the first column (country), value is tuple of year and score
-        key, value = sublist[0], tuple(sublist[1:3])
-        # if the country is not already there, then add the corresponding value
-        if key not in country_dict:
-            country_dict[key] = value
-        else:
-            # if country exists, check if values are NOT a list
-            # if not then convert to list so new values added in same list
-            if not isinstance(country_dict[key], list):
-                country_dict[key] = [country_dict[key]]
-            # append the new value to the exising list of values
-            country_dict[key].append(value)
-    print(f"Creating countries dictionary from {filepath}...")
-    return country_dict
+    # 'region' included below because it is not capitalised in csv file
+    exceptions = ["and", "of", "region"]
+    words = string.split(" ")
+    title_case_words = [words[0].capitalize()]
+    title_case_words += [
+        word if word in exceptions else word.capitalize()
+        for word in words[1:]
+        ]
+    title_case_string = " ".join(title_case_words)
+    return title_case_string
+
+
+def print_error_msg(e, user_input):
+    """
+    Prints error message from the validate functions, in red bold.
+
+    Args:
+        e (str): the error message
+        user_input (str): the input from the user, that generated the error
+    """
+    print(colored(
+            f"Invalid choice: {e}. You entered '{user_input}'. Try again.\n",
+            "red", attrs=["bold"]))
+
+
+def print_output(text):
+    """
+    Prints the text in yellow. Used for outputs to user.
+
+    Args:
+        text (str): the text to be printed
+    """
+    print(colored(text, "yellow"))
 
 
 class Country:

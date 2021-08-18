@@ -21,16 +21,16 @@ def print_banner_msg(text):
         text (str): text to be printed
     """
     font = Figlet(font="ogre")
-    print("-" * 48)
+    print("-" * 78)
     print(colored(font.renderText(text), "yellow"))
-    print("-" * 48)
+    print("-" * 78)
 
 
 def print_smiley():
     """
     Print smiley face using ASCII characters
     """
-    print("-" * 44)
+    print("-" * 78)
     print(" " * 18 + "_" * 8)
     print(" " * 15 + "_'" + " " * 10 + "'_")
     print(" " * 13 + "." + " " * 16 + ".")
@@ -42,19 +42,20 @@ def print_smiley():
     print(" " * 13 + "`." + " " * 15 + ".'")
     print(" " * 15 + "`_" + " " * 11 + "_'")
     print(" " * 18 + "' " + "-" * 6 + " '")
-    print("-" * 44)
+    print("-" * 78)
 
 
 def welcome_msg():
     """
     Print banner msg and intro text
     """
-    print_banner_msg("Welcome")
+    print_banner_msg(" "*14 + "Welcome")
     print("This is the World Happiness Data Tool.")
     print(
         "You can look up the Happiness Score per country, "
         "for the years 2005 - 2020.\n")
     print("For all inputs, remember to press Enter after typing your input\n")
+    print("-" * 78)
 
 
 def create_countries_dict(filepath):
@@ -86,7 +87,6 @@ def create_countries_dict(filepath):
                 country_dict[key] = [country_dict[key]]
             # append the new value to the exising list of values
             country_dict[key].append(value)
-    print(f"Creating countries dictionary from {filepath}...")
     return country_dict
 
 
@@ -768,7 +768,7 @@ def exit_program():
     print_smiley()
     print("Thank you, exiting application...")
     print("Click the RUN PROGRAM button above to run again.")
-    print_banner_msg("Goodbye")
+    print_banner_msg(" "*14 + "Goodbye")
     exit()
 
 

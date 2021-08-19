@@ -47,7 +47,11 @@ The target market is relatively broad. In general, it would be people with a pas
 ### Design
 *Note:* Since the application runs in the terminal, there is no design of the user interface. 
 
-The deployed application runs in a mock terminal on Heroku in order to demonstrate the project, the design of the mock terminal is built into the template provided by Code Institute. 
+The deployed application runs in a mock terminal on Heroku in order to demonstrate the project, the design of the mock terminal is built into the template provided by Code Institute.
+
+The font 'ogre' is used to print the banner message on starting and exiting the application, using [pyfiglet](https://pypi.org/project/pyfiglet/). pyfiglet uses fonts created from ASCII characters, the 'ogre' font generates a readable banner message. 
+
+Limited use of colour for the text pritned to the terminal is possible, using [termcolor](https://pypi.org/project/termcolor/). Error messages are printed in red text, while outputs of information are printed in yellow so that they stand out to the user amongst the other text in the terminal.
 
 ### Flow Chart
 [View the flowchart here](docs/flowchart.pdf), showing the steps that run in the application, how the user can move through the application and the user options at each stage. 

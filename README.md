@@ -143,6 +143,7 @@ Then in the `validate_years function`:
 - Then checks for length of `input`, finally checks if year is in the list, if length correct.
 
 The revised code is below:
+
 ![Years Choice Bug Revised Code](docs/bugs/years-choice-bug-revised-code.png)
 
 - **Issue: Countries with more than one word cannot be found when creating instance of Country class:**
@@ -161,14 +162,38 @@ The '`country_alias`' `dictionary` holds alternative names for the countries, th
 
 - **Issue: Creating instance of `Country class` when country only has one score entry in the csv file:**
 ![Error message when creating Country instance for single score country](docs/bugs/single-score-country-bug.png)
+
 This error happens because the `self.di` can't be created - this is the `dictionary` created from `self.scores`, which is `list` of `tuples` like: [(year, score), (year, score)]. There are 5 countries in the source csv file that only have one entry - i.e. only one happiness score recorded for one year.
 > Solution: amended the instance variables for `Country class`. The `self.di`, `self.scores_list` and `self.years_list` do not need to be created for these countries. Amended the `__init__ `method for `Country` `class`, to only create these attributes if the `self.scores` `data-type` is `list` (as the single score country's `self.scores` is a `tuple`).
 
 - **Issue: Capitalising of 'And', 'Of, etc. in country names:**
 ![Countries with 'And', 'Of', etc. in name, error message](docs/bugs/capitalising-and-of-bug.png)
+
 As perviously mentioned, the user input country name is converted to lowercase for validation, and after validation they are capitalised using .title(), in order to create the instance of Country class using the country name in the dictionary of countries. Using .title() capitalises *all* words in the country's name, including 'and', 'of', etc., but these words are not capitalised in the csv file from which the dictionary is created. See above, 'trinidad and tobago' is converted to 'Trinidad And Tobago', instead of 'Trinidad and Tobago'.
  
 > Solution: Using the guidance shown [in this article from kite.com](https://www.kite.com/python/answers/how-to-titlecase-a-string-in-python), created a small function `convert_to_titlecase` to capitalise each word except those in a list of exception words such as 'and', 'of'. Note: I included ‘region’ in the list of exceptions also as this word is not capitalised in the csv file.
+
+- **Issue: Passing choice from numbered options to handle_options function:**
+![NUmbered options bug error message](docs/bugs/handle-numbered-options-bug.png)
+
+The number entered by the user has 1 deducted from it, to get the corresponding option by index number from the tuple of options: 
+
+    choice = input(
+        "\nEnter the number corresponding to your choice here: \n")
+    opt_chosen = options[int(choice)-1]
+
+This is passed to the handle_options function to decide the next path. However if an invalid input is entered, this throws an error as shown above without showing a custom error message to the user.
+> Solution: The line `opt_chosen = options[int(choice)-1]` was happening after the user input but before the input was validated. Moved this line so that it happens after the validation:
+
+    choice = input("\nEnter the number corresponding to your choice here: \n")
+        if validate_options(choice, len(options)):
+            opt_chosen = options[int(choice)-1]
+            break
+
+- **Issue: Graph too big for terminal window:**
+
+As there is an input underneath the graph, for the user to press a key to continue, this pushed the graph up in the terminal window and it could not be viewed without scrolling up.
+> Solution: There is an option within the uniplot plot function to set the height (defaults to 17 if not set). Added a slightly smaller height of 16 so that full graph fits in terminal window with space around.
 
 ### Manual Testing
 ### Supported Screens and Browsers

@@ -2,7 +2,7 @@
 ---
 *Note: this project was created for educational purposes as a student of Code Institute.*
 
-World Happiness Data is a tool to provide requested happiness scores from the historical World Happiness datasets. It is a command line application and runs in a mock terminal provided by Code Institute.
+World Happiness Data is a tool to provide requested happiness scores from the World Happiness datasets from 2005 to 2020. It is a command line application and runs in a mock terminal provided by Code Institute. Users can select a country, get the happiness score for a specified year or all recorded years, view a graph of the happiness scores over time, and get the maximum, minimum, average and median happiness scores for the particular country.
 
 [View the live application here.](https://world-happiness-data.herokuapp.com/) 
 
@@ -30,7 +30,7 @@ The target market is relatively broad. In general, it would be people with a pas
 - the user may also want to view a graph representing the happiness scores over time for a country, or get more information on that country such as maximium, minimum, average scores for that country.
 
 ### Site owner’s goal:
-- the goal of this tool is to provide an easy way for users to get different information from the World Happiness historical scores dataset.
+- the goal of this tool is to provide an easy way for users to get different information from the World Happiness historical scores dataset, by requesting and viewing the results to the terminal.
 
 ## User Experience (UX)
 ---

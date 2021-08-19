@@ -103,6 +103,28 @@ Explanation of Happiness score:
 
 ## Data Model
 ---
+The data for the application is contained in a csv file. The csv file contains the following headings that are used in the application: "Country name", "year", and "Life Ladder". (There are further headings in the csv file however these are not used in the application since the focus of the appplication is the happiness score only - referred to as "Life Ladder" in the csv file.) The csv file contains a line for each year and it's associated score - so for example, a country with scores recorded for 12 years will have 12 lines in the csv file. 
+
+Within the application, the relevant data from csv file is first used to create a `dictionary`, `country_dict`, containing `key value` pairs as follows: 
+- `key` = country name, 
+- `value` = list of tuples each containing year and score pairs for that country (or if country has only one score, this is a single tuple containing year and score)
+
+Following on from this, the `Country class` is used as the data model. The `Country class` stores the following information:
+- name: country name
+- scores: a `list` of `tuples` containing the year and associated score, this is the `value` from the countries `dictionary` mentioned above.
+
+If the country has more than one score recorded (this is the case for the majority of the countries) then the following information is also stored in the Class:
+- `dictionary` with years as the `key` and happiness score for that year as the `value`
+- `list` of the happiness scores, converted to `floats` so that they can be used for plotting the graph, getting maximum, minimum, average, median.
+- `list` of the years converted to `int` so that they can be used for plotting the graph, getting maximum, minimum, average, median.
+
+An instance of `Country class` is created by the `make_country` function, each time the user selects a country that they want to view the scores/data for, in the `get_country function`(the instance is created after the country input has been validated). The `class` instance is created using the country name, and the `list` of year and scores `tuples` retrieved from the countries `dictionary`.
+
+The methods in the `Country class` are used throughout the application, to get the information for the relevant country, to present to the user in the terminal:
+- `show_scores`: prints the requested score(s) to the terminal for the requested year or years
+- `show_graph`: uses plot function from uniplot to plot a graph in the terminal showing all available happiness scores over time
+- `show_min_score`, `show_max_score`: these methods print the min or max score for the country to the terminal, along with the corresponding year for that score
+- `show_median_score`, `show_average_score`: these methods print the median or average score for the country to the terminal
 
 ## Testing
 ---
@@ -130,7 +152,7 @@ This was in the `create_countries_dict` `function`.
 
 - **Issue: Uniplot graph not working in `show_graph method`:**
 ![Graph Plotting bug](docs/bugs/graph-plot-bug.png)
->Solution: I was passing the list of years and list of scores to plot the graph. However since these came from the csv file, the `data-type` was `string` therefore they needed to be converted. Converted the years to `float` (so they will be whole numbers) and the scores to `int` (as they have decimals).
+>Solution: I was passing the list of years and list of scores to plot the graph. However since these came from the csv file, the `data-type` was `string` therefore they needed to be converted. Converted the years to `int` (so they will be whole numbers) and the scores to `float` (as they have decimal point).
 
 - **Issue: Exception handling for `get_years input`:**
 ![Exception handling for years choice bug](docs/bugs/years-choice-exception-bug.png)

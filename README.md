@@ -113,6 +113,63 @@ The Python code has been validated using [PEP8 online checker](http://pep8online
 
 ### Test Cases - user stories
 ### Fixed Bugs
+The following bugs were encountered during development and during testing.
+- **Issue: Creating countries dictionary: appending the year and score pair to existing country value creates a list within a list:**
+
+In the `create_countries_dict` function, a dictionary is created from the source csv file that contains the data. The csv file contains a line per country, each line for a different year, when opening the csv file I first converted it to a list of lists. In creating the dictionary from the list of lists, the country name is the `key`, and the `value` is a list of the year and score pairs from each year. If the country has already been added to the dictionary, then the new year and score pair needs to be added to the existing `value` for that country - to create a list of year and score pairs. The original code is below:
+![Original Code Create Dict bug](docs/bugs/create-dict-list-values-bug-code.png)
+This code resulted in the first year and score pair being added as the value, but the subsequent year and score pairs being appended as sub-lists *within* the existing list of the first year and score. As can be seen in the example below for Zimbabwe:
+![Create Dict Values List bug](docs/bugs/create-dict-list-values-bug.png)
+>Solution: Made the year, score pair a `tuple`. Added a check when checking if the `key` already exists, to also check if the `data-type` of the `value` is a `list`, and if it isn't,  convert it to a `list` before `appending` the new `value` to the `list`. I found this solution (to check instance and convert to list) in [this article from thispointer.com](https://thispointer.com/python-how-to-add-append-key-value-pairs-in-dictionary-using-dict-update/#6). The extra line of code is shown below: 
+![Revised Code Create Dict bug](docs/bugs/create-dict-list-values-new-code.png)
+
+- **Issue: Title line of csv file included in country dictionary:**
+![Create Dict Header bug](docs/bugs/create-dict-header-bug.png)
+This was in the `create_countries_dict` `function`.
+>Solution: I had omitted to exclude the first row when creating the dictionary. Amended the line at the beginning of the iteration through `data` (which is the list of lists created when reading the csv file) from: `for sublist in data` to: `for sublist in data[1:]` in order to exclude the heading row.
+
+- **Issue: Uniplot graph not working in `show_graph method`:**
+![Graph Plotting bug](docs/bugs/graph-plot-bug.png)
+>Solution: I was passing the list of years and list of scores to plot the graph. However since these came from the csv file, the `data-type` was `string` therefore they needed to be converted. Converted the years to `float` (so they will be whole numbers) and the scores to `int` (as they have decimals).
+
+- **Issue: Exception handling for `get_years input`:**
+![Exception handling for years choice bug](docs/bugs/years-choice-exception-bug.png)
+In the above test a Python error is generated instead of the custom error message "Please enter a number". The valid inputs for the `input` in `get_years` are a mix of numbers and ints, and a mix of lengths. Valid choices are: A/a with a length of 1, or else a year from the list of years for the selected country, length of 4. The code was as below, in the `validate_years function`:
+![Years Choice Bug Code](docs/bugs/years-choice-bug-code.png)
+>Solution: Amended the code so that a check is done in the `get_years function` to check if the `input` is A or a. If it is, this is a valid choice and the `input` does not get passed to the `validate_years function`.
+Then in the `validate_years function`:
+- first check if length is 1 and raise an error if it is (as the only valid input with length of 1 is A or a which is already checked for in get_years), 
+- then try to convert to `int` and raises a `Value Error` if it can't. This catches the mixture of letters and symbols. 
+- Then checks for length of `input`, finally checks if year is in the list, if length correct.
+
+The revised code is below:
+![Years Choice Bug Revised Code](docs/bugs/years-choice-bug-revised-code.png)
+
+- **Issue: Countries with more than one word cannot be found when creating instance of Country class:**
+
+![Multi-word country name bug](docs/bugs/multi-word-country-name-bug.png)
+
+The input is valid, but the country cannot be found in the dictionary when creating the instance of Country class. The inputs are converted to lowercase, to do the validation against the lowercase country names from the countries dictionary, the reason for this is to handle cases where the user types a mix of cases when inputting the country name. Then the input name is converted back to propercase using `.capitalize()`, to create the Country instance from the countries dictionary. This works for single word country names but not multi-word. 
+> Solution: Use `.title()`, which capitalises each word, instead of `.capitalize()`, which only capitalises the first word.
+
+- **Issue: Country alternative/alias names dictionary - only working for first key value pair when iterating:**
+![Country alias bug terminal view](docs/bugs/country-alias-bug.png)
+The '`country_alias`' `dictionary` holds alternative names for the countries, that the user might input. The `convert_country_alias` `function` checks if the name input by the user is in the `value list` in the `dictionary` for each country, if it is, sets the country name to the corresponding `key` in the `dictionary`. Below is the original code causing the bug (*this is an early version, testing with just two country `keys` in the `dictonary`, before creating the full `dictionary`*). The code functioned only for the first country, united states, and not for the second one, united kingdom.
+![Country alias bug original code](docs/bugs/country-alias-bug-code.png)
+> Solution: The error was happening because the `else` block was within the `k,v loop`. Removed the `else` block and put new `if` statement outside the `for loop` instead. Also set the new country to be the same as input country if the input country is not in the alias list. 
+![Country alias bug revised code](docs/bugs/country-alias-bug-revised-code.png)
+
+- **Issue: Creating instance of `Country class` when country only has one score entry in the csv file:**
+![Error message when creating Country instance for single score country](docs/bugs/single-score-country-bug.png)
+This error happens because the `self.di` can't be created - this is the `dictionary` created from `self.scores`, which is `list` of `tuples` like: [(year, score), (year, score)]. There are 5 countries in the source csv file that only have one entry - i.e. only one happiness score recorded for one year.
+> Solution: amended the instance variables for `Country class`. The `self.di`, `self.scores_list` and `self.years_list` do not need to be created for these countries. Amended the `__init__ `method for `Country` `class`, to only create these attributes if the `self.scores` `data-type` is `list` (as the single score country's `self.scores` is a `tuple`).
+
+- **Issue: Capitalising of 'And', 'Of, etc. in country names:**
+![Countries with 'And', 'Of', etc. in name, error message](docs/bugs/capitalising-and-of-bug.png)
+As perviously mentioned, the user input country name is converted to lowercase for validation, and after validation they are capitalised using .title(), in order to create the instance of Country class using the country name in the dictionary of countries. Using .title() capitalises *all* words in the country's name, including 'and', 'of', etc., but these words are not capitalised in the csv file from which the dictionary is created. See above, 'trinidad and tobago' is converted to 'Trinidad And Tobago', instead of 'Trinidad and Tobago'.
+ 
+> Solution: Using the guidance shown [in this article from kite.com](https://www.kite.com/python/answers/how-to-titlecase-a-string-in-python), created a small function `convert_to_titlecase` to capitalise each word except those in a list of exception words such as 'and', 'of'. Note: I included ‘region’ in the list of exceptions also as this word is not capitalised in the csv file.
+
 ### Manual Testing
 ### Supported Screens and Browsers
 

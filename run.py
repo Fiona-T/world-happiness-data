@@ -320,7 +320,8 @@ class Country:
         """
         median_score = statistics.median(self.scores_list)
         print_output(
-            f"The median happiness score for {self.name} is: {median_score}")
+            f"The median happiness score for {self.name} over the years "
+            f"{self.years[0]} to {self.years[-1]} is: {median_score}")
 
     def show_average_score(self):
         """
@@ -328,9 +329,10 @@ class Country:
         Prints to terminal.
         """
         total_score = sum(self.scores_list)
-        average_score = round(total_score/len(self.scores_list), 2)
+        average_score = round(total_score/len(self.scores_list), 4)
         print_output(
-            f"The average happiness score for {self.name} is: {average_score}")
+            f"The average happiness score for {self.name} over the years "
+            f"{self.years[0]} to {self.years[-1]} is: {average_score}")
 
 
 def make_country(country, countries_dict):

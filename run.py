@@ -282,37 +282,33 @@ class Country:
             title=f"Happiness scores from {start} to {end} for {self.name}",
             height=16)
 
-    def show_min_score(self):
+    def show_min_or_max_score(self, min_or_max):
         """
-        Gets the minimum score from the scores_list.
-        Creates a list of the years corresponding to the min score.
-        Prints the year OR list of years corresponding to the min score.
-        """
-        min_score = min(self.scores_list)
-        print_output(
-            f"The minimum happiness score for {self.name} is: {min_score}")
-        min_years = [k for (k, v) in self.di.items() if float(v) == min_score]
-        if len(min_years) == 1:
-            print_output(f"This score was from the year {min_years[0]}")
-        else:
-            print_output(
-                f"This score was from the years {min_years.split(', ')}")
+        Gets the minimum OR maximum score from the scores_list.
+        Creates a list of the years corresponding to the min or max score.
+        Prints the year OR list of years corresponding to the min or max score.
 
-    def show_max_score(self):
+        Args:
+            min_or_max (str): "minimum" or "maximum", set by handle_num_options
         """
-        Gets the maximum score from the scores_list.
-        Creates a list of the years corresponding to the max score.
-        Prints the year OR list of years corresponding to the max score.
-        """
-        max_score = max(self.scores_list)
+        if min_or_max == "minimum":
+            score = min(self.scores_list)
+        elif min_or_max == "maximum":
+            score = max(self.scores_list)
+        else:
+            print("unknown minimum or maximum request, exiting.")
+            exit_program()
         print_output(
-            f"The maximum happiness score for {self.name} is: {max_score}")
-        max_years = [k for (k, v) in self.di.items() if float(v) == max_score]
-        if len(max_years) == 1:
-            print_output(f"This score was from the year {max_years[0]}")
+            f"The {min_or_max} happiness score for {self.name} is: {score}")
+        min_or_max_years = [
+            k for (k, v) in self.di.items() if float(v) == score]
+        if len(min_or_max_years) == 1:
+            print_output(
+                f"This score was from the year {min_or_max_years[0]}.")
         else:
             print_output(
-                f"This score was from the years {max_years.split(', ')}")
+                f"This score was from the years {min_or_max_years.split(', ')}"
+                )
 
     def show_median_score(self):
         """
@@ -645,16 +641,16 @@ def handle_data_options(choice, c):
         c (obj): the instance of Country for chosen country
     """
     if choice == "1":
-        c.show_min_score()
+        c.show_min_or_max_score("minimum")
     elif choice == "2":
-        c.show_max_score()
+        c.show_min_or_max_score("maximum")
     elif choice == "3":
         c.show_median_score()
     elif choice == "4":
         c.show_average_score()
     elif choice == "5":
-        c.show_min_score()
-        c.show_max_score()
+        c.show_min_or_max_score("minimum")
+        c.show_min_or_max_score("maximum")
         c.show_median_score()
         c.show_average_score()
 

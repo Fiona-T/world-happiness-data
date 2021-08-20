@@ -268,18 +268,26 @@ class Country:
             else:
                 print_output(self.di.get(years_choice))
 
+    def yrs_span(self):
+        """
+        Gets the first and last year from the years list, to be used in
+        the other class methods.
+
+        Returns:
+            f string stating the span of years i.e. first and last years
+        """
+        return f"the years {self.years[0]} to {self.years[-1]}"
+
     def show_graph(self):
         """
         Plots a graph of the scores over time, using uniplot.
         years (floats so whole number) on x-axis, scores_list on y-axis.
         Title of graph includes start and end years for the time period.
         """
-        start = self.years[0]
-        end = self.years[-1]
         print("\n")
         plot(
             xs=self.years, ys=self.scores_list, lines=True, color=True,
-            title=f"Happiness scores from {start} to {end} for {self.name}",
+            title=f"Happiness scores for {self.yrs_span()} for {self.name}",
             height=16)
 
     def show_min_or_max_score(self, min_or_max):
@@ -299,7 +307,8 @@ class Country:
             print("unknown minimum or maximum request, exiting.")
             exit_program()
         print_output(
-            f"The {min_or_max} happiness score for {self.name} is: {score}")
+            f"The {min_or_max} happiness score for {self.name} over "
+            f"{self.yrs_span()} is: {score}")
         min_or_max_years = [
             k for (k, v) in self.di.items() if float(v) == score]
         if len(min_or_max_years) == 1:
@@ -316,8 +325,8 @@ class Country:
         """
         median_score = statistics.median(self.scores_list)
         print_output(
-            f"The median happiness score for {self.name} over the years "
-            f"{self.years[0]} to {self.years[-1]} is: {median_score}")
+            f"The median happiness score for {self.name} over "
+            f"{self.yrs_span()} is: {median_score}")
 
     def show_average_score(self):
         """
@@ -327,8 +336,8 @@ class Country:
         total_score = sum(self.scores_list)
         average_score = round(total_score/len(self.scores_list), 4)
         print_output(
-            f"The average happiness score for {self.name} over the years "
-            f"{self.years[0]} to {self.years[-1]} is: {average_score}")
+            f"The average happiness score for {self.name} over "
+            f"{self.yrs_span()} is: {average_score}")
 
 
 def make_country(country, countries_dict):

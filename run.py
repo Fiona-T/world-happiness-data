@@ -262,7 +262,9 @@ class Country:
                 f"{self.name}:")
             print_output(f"The score is {self.scores[1]} for {years_choice}")
         else:
-            print_output(f"\nThe score for {self.name} for {years_choice} is:")
+            print_output(
+                f"\nThe happiness score for {self.name} for "
+                f"{years_choice} is:")
             if years_choice == "all years":
                 [print_output(f"{k} : {v}") for k, v in self.di.items()]
             else:
@@ -281,8 +283,7 @@ class Country:
     def show_graph(self):
         """
         Plots a graph of the scores over time, using uniplot.
-        years (floats so whole number) on x-axis, scores_list on y-axis.
-        Title of graph includes start and end years for the time period.
+        years (ints so whole number) on x-axis, scores_list on y-axis.
         """
         print("\n")
         plot(
@@ -290,11 +291,31 @@ class Country:
             title=f"Happiness scores for {self.yrs_span()} for {self.name}",
             height=16)
 
+    def print_yr_for_min_max(self, score):
+        """
+        Creates a list of the years corresponding to the min or max score.
+        Prints the year OR list of years corresponding to the min or max score.
+        Called by other methods that display the min or max score.
+
+        Args:
+            score (float): min or max score for which the year will be found
+
+        Returns:
+            f string printing the year or years corresponding to min or max
+        """
+        min_or_max_years = [
+            k for (k, v) in self.di.items() if float(v) == score]
+        if len(min_or_max_years) == 1:
+            score_year = f"year {min_or_max_years[0]}"
+        else:
+            score_year = f"years {min_or_max_years.split(', ')}"
+        return f"This score was from the {score_year}."
+
     def show_min_or_max_score(self, min_or_max):
         """
         Gets the minimum OR maximum score from the scores_list.
-        Creates a list of the years corresponding to the min or max score.
-        Prints the year OR list of years corresponding to the min or max score.
+        Calls print_yr_for_min_max method to show year(s) corresponding to
+        min/max score.
 
         Args:
             min_or_max (str): "minimum" or "maximum", set by handle_num_options
@@ -308,16 +329,8 @@ class Country:
             exit_program()
         print_output(
             f"The {min_or_max} happiness score for {self.name} over "
-            f"{self.yrs_span()} is: {score}")
-        min_or_max_years = [
-            k for (k, v) in self.di.items() if float(v) == score]
-        if len(min_or_max_years) == 1:
-            print_output(
-                f"This score was from the year {min_or_max_years[0]}.")
-        else:
-            print_output(
-                f"This score was from the years {min_or_max_years.split(', ')}"
-                )
+            f"{self.yrs_span()} is: {score}.")
+        print_output(f"{self.print_yr_for_min_max(score)}")
 
     def show_median_score(self):
         """
@@ -326,18 +339,44 @@ class Country:
         median_score = statistics.median(self.scores_list)
         print_output(
             f"The median happiness score for {self.name} over "
-            f"{self.yrs_span()} is: {median_score}")
+            f"{self.yrs_span()} is: {median_score}.")
+
+    def get_average_score(self):
+        """
+        Gets the average score from the scores_list: total/length, rounded.
+        Called by other methods that display the average score.
+
+        Returns:
+            average_score (float): average score
+        """
+        total_score = sum(self.scores_list)
+        average_score = round(total_score/len(self.scores_list), 3)
+        return average_score
 
     def show_average_score(self):
         """
-        Gets the average score from the scores_list: total/length, rounded.
-        Prints to terminal.
+        Prints average score to terminal.
         """
-        total_score = sum(self.scores_list)
-        average_score = round(total_score/len(self.scores_list), 4)
         print_output(
             f"The average happiness score for {self.name} over "
-            f"{self.yrs_span()} is: {average_score}")
+            f"{self.yrs_span()} is: {self.get_average_score()}.")
+
+    def show_min_max_ave_med(self):
+        """
+        Displays the min, max, average and median scores with associated text.
+        """
+        min_score = min(self.scores_list)
+        max_score = max(self.scores_list)
+        print_output(f"Scores for {self.name} over {self.yrs_span()}:")
+        print_output(
+            f"Minimum happiness score: {min_score}. "
+            f"{self.print_yr_for_min_max(min_score)}")
+        print_output(
+            f"Maximum happiness score: {max_score}. "
+            f"{self.print_yr_for_min_max(max_score)}")
+        print_output(
+            f"Median happiness score: {statistics.median(self.scores_list)}.")
+        print_output(f"Average happiness score: {self.get_average_score()}.")
 
 
 def make_country(country, countries_dict):
@@ -658,10 +697,7 @@ def handle_data_options(choice, c):
     elif choice == "4":
         c.show_average_score()
     elif choice == "5":
-        c.show_min_or_max_score("minimum")
-        c.show_min_or_max_score("maximum")
-        c.show_median_score()
-        c.show_average_score()
+        c.show_min_max_ave_med()
 
 
 def start():

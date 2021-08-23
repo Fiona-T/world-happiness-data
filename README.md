@@ -12,12 +12,13 @@ World Happiness Data is a tool to provide requested happiness scores from the Wo
 ---
 The [World Happiness Reports](https://worldhappiness.report/) are annual publications which interpret and draw conclusions from data collected from people in over 150 countries. 
 
-The World Happiness Data tool is a command-line application allowing users to look up a dataset containing the happiness scores from the World Happiness Reports over the years 2005 to 2020 inclusive. For example, to look at data for a particular country so that they can see how the happiness score changed over time. 
+The World Happiness Data tool is a command-line application allowing users to look up a dataset containing the happiness scores from the World Happiness Reports over the years 2005 to 2020 inclusive. The focus of this tool/application is to allow the user view **happiness scores** for particular countries, and get some basic information on these scores. 
 
 A user can choose a country and then:
 - request the happiness score for a particular year for that country
 - request the happiness score for all the available years for that country, and then, if selected, see a graph of these scores over time
 - request the maximum, minimum, average or mean happiness score for that country, or request all of these scores.
+
 The user can choose a different country while in the application, after they have viewed the data they wanted for the previous country. 
 
 The application provides the requested data, and the graph if selected, to the user by printing it to the terminal. 
@@ -30,7 +31,14 @@ The target market is relatively broad. In general, it would be people with a pas
 - the user may also want to view a graph representing the happiness scores over time for a country, or get more information on that country such as maximium, minimum, average scores for that country.
 
 ### Site owner’s goal:
-- the goal of this tool is to provide an easy way for users to get different information from the World Happiness historical scores dataset, by requesting and viewing the results to the terminal.
+- the goal of this tool is to provide an easy way for users to get different information relating to the happiness scores from the World Happiness historical scores dataset, by requesting and viewing the results in the terminal.
+
+*Notes on the dataset:*
+- the originating dataset contains other measures such as "Social support", "Freedom to make life choices", etc. which are used by the World Happiness Reports to draw conclusions. However this application does not use this information as the focus is solely the happiness scores.
+- the dataset spans the years 2005 to 2020 inclusive, however it does not hold a happiness score for every year for every country - this is dependant on the data available at the time. Therefore the application shows the users the years available to choose from.
+- there are five countries for which a score is only recorded for a single year. The application handles these also by providing the score and year to the user once they select the country (they are not given a choice of years in this case). The user can then select to view a different country or simply exit the application.
+- the country names in the dataset are generally in the informal English name. The application holds alternative names so that if a user enters these names it will retrieve the correct country and not generate an error.
+- further information on the dataset can be found it the [Content Requirements](#content-requirements) section.
 
 ## User Experience (UX)
 ---
@@ -87,7 +95,7 @@ The application is split into different 'paths' or sections. Each section is a p
 Th content required to create the project was the dataset with which the user will interact. It contains the happiness score for each country over the years 2005 - 2020 inclusive. Not every country has a score in every year, due to the way the data is collected. The [dataset was sourced from Kaggle](https://www.kaggle.com/ajaypalsinghlo/world-happiness-report-2021?select=world-happiness-report.csv).
 
 Explanation of Happiness score:
->It is referred to as "Life Ladder" in the dataset. This is the metric used to rate happiness and is based on a "Cantril life ladder" or subjective life evaluation. Survey respondents are asked to think of a ladder, with the best possible life for them being a 10, and the worst possible life being a 0. They are then asked to state which step of the ladder they feel they are at currently. The score for each country is the national average of each respondent's answer. The other metrics such as GDP, Social Support etc. are used by the Happiness Reports to explain the Life Ladder or Happiness score.
+>It is referred to as "Life Ladder" in the dataset. This is the metric used to rate happiness and is based on a "Cantril life ladder" or subjective life evaluation. Survey respondents are asked to think of a ladder, with the best possible life for them being a 10, and the worst possible life being a 0. They are then asked to state which step of the ladder they feel they are at currently. The score for each country is the national average of each respondent's answer. The other metrics such as GDP, Social Support etc. are used by the Happiness Reports to explain the Life Ladder or Happiness score, these metrics are not used in this application.
 
 ## Technology
 ---
@@ -128,7 +136,7 @@ The methods in the `Country class` are used throughout the application, to get t
 - `show_scores`: prints the requested score(s) to the terminal for the requested year or years, along with a relevant message if the country is a single score country
 - `yrs_span`: returns an `f-string` stating the span of years for the country, i.e.e. the first and last years in the available years. This is used by other methods when printing results to the terminal   
 - `show_graph`: uses plot function from uniplot to plot a graph in the terminal showing all available happiness scores over time
-`print_yr_for_min_max`: gets the year(s) corresponding to the relevant score (min score or max score) and returns an f-string stating the year(s). Used by other methods when printing the max or min score to the terminal
+- `print_yr_for_min_max`: gets the year(s) corresponding to the relevant score (min score or max score) and returns an f-string stating the year(s). Used by other methods when printing the max or min score to the terminal
 - `show_min_or_max_score`: this method prints the min or max score for the country to the terminal, along with the corresponding year for that score
 - `show_median_score`, `show_average_score`: these methods print the median or average score for the country to the terminal
 - `show_min_max_ave_med`: prints the max, min, average and median scores for the country to the terminal, with associated text

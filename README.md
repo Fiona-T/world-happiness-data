@@ -149,6 +149,55 @@ The Python code has been validated using [PEP8 online checker](http://pep8online
  There are no validation errors in the sumitted code.
 
 ### Test Cases - user stories
+This section covers testing the user stories from the [User Experience (UX)](#user-experience-ux) section. All users are visiting users since there is no user registration/login to the application.
+
+1. **Expectation:** *As a visiting user, I want to understand what data I can access from the application so that I know what information I can get from it*
+>**Result:** Pass
+- When the application starts, there is a short intro text explaining that the tool allows you to look up the happiness score for a country, and the years covered. In the paragraph below this, the user is also told that they will see the years available for that country once they choose a country. 
+![user story 1 - intro text](docs/user-stories/user-story-1-intro-text.png)
+2. **Expectation:** *As a visiting user, I want to be able to choose a country so that I can view the data related to that country*
+>**Result:** Pass
+- The user can type in the name of the country that they want to view the score(s) for. After the country name has been validated as a country that exists in the dataset, the application prints back to the user the name they entered, along with the name of the country from the file, so that it is clear to the user which country results are being shown for. (In some cases, the user may type in an 'alternative' name for a country, e.g. 'us' for 'United States' so this message is to ensure clarity)
+![user story 2 - choose country](docs/user-stories/user-story-2-choose-country.png)
+3. **Expectation:** *As a visiting user, I want to see the happiness score for a particular year (from those available) for my selected country*
+>**Result:** Pass
+- The application presents a list of the years available for the chosen country. The user then types in the specific year that they want to see the happiness score for.
+- They can then select number 2 from the next menu shown, to view the score from a different year (or 1 from that menu to see the score for all years)
+![user story 3 - happiness score for particular year](docs/user-stories/user-story-3-specific-year.png)
+4. **Expectation:** *As a visiting user, I want to be able to see the happiness score over time for a particular country, so that I can see the scores and trends over time for that country*
+>**Result:** Pass
+- The application presents a list of the years available for the chosen country, as shown in the user story 3 screenprint. The user is instructed to enter A if they want to view the happiness score for all of these years, instead of just a single year. The scores are then displayed as shown below, "year : score" for each available year.
+- If the user originally chose to view the happiness score for a single year, they can still view the happiness score for all the years by selecting option 1 in the next menu as in user story 3. 
+![user story 4 - happiness score for all years](docs/user-stories/user-story-4-all-years.png)
+
+5. **Expectation:** *As a visiting user, I want to be able to see a graph of the happiness score over time for a particular country so that I can visualise the data more easily*
+>**Result:** Pass
+- After the scores for all years are presented to the user, they are given the option to decide if they want to view a graph (y/n question), as shown in user story 4 screenprint. 
+- If they select "y", then the graph is displayed in the terminal, with the years along the bottom and the happiness scores over time tracked on the line graph
+![user story 5 - graph](docs/user-stories/user-story-5-graph.png)
+- The graph remains on the screen until the user enters something in the next input box, they are then shown the next options as shown below
+![user story 5 - graph next options](docs/user-stories/user-story-5-graph-continue.png)
+6. **Expectation:** *As a visiting user, I want to be able to see the maximum, minimum, average and median happiness score for my selected country.*
+>**Result:** Pass
+- The user is given the option to choose to view more data (minimum, maximum, median and average scores) in the menu after they have viewed the graph as shown in user story 5, (or they are shown this straight away if they chose "n" for the graph question), and also in the menu choice after they view the score for a particular year, as shown in user story 3.
+- On selecting this option, the user is given a menu with 5 choices:
+![user story 6 - menu options for min, max, median, average scores](docs/user-stories/user-story-6-more-data-menu.png)
+- The user can select number 5 which will display the minimum, maximum, median and average scores for the chosen country:
+![user story 6 - display min, max, median and average scores](docs/user-stories/user-story-6-more-data-all.png)
+7. **Expectation:** *As a visting user, I want to be able to select one option at a time from: maximum, minimum, average and median happiness score for my selected country.*
+>**Result:** Pass
+- The user is given the option to choose to view more data (minimum, maximum, median and average scores), as explained above in user story 6. 
+- On selecting this option, the user is given a menu with 5 choices, as shown above in user story 6
+- The user can select number 1, 2, 3 or 4, corresponding to their choice, which will display the minimum, maximum, median or average scores for the chosen country (depending on which option they chose). In the below example, the minimum score is displayed:
+![user story 7 - min score choice](docs/user-stories/user-story-7-min.png)
+- After the relevant score is displayed, a new menu is shown from which the user can again select number 1, to "Get more data (max, min, median, average scores)", and they will then be shown the 5 options again, they can select again from these options. E.g. if they viewed Minimum score, they can now view Maximum score if they want.
+- Maximum score displayed:
+![user story 7 - max score choice](docs/user-stories/user-story-7-max.png)
+- Median score displayed:
+![user story 7 - median score choice](docs/user-stories/user-story-7-median.png)
+- Average score displayed:
+![user story 7 - average score choice](docs/user-stories/user-story-7-average.png)
+
 ### Fixed Bugs
 The following bugs were encountered during development and during testing.
 - **Issue: Creating countries dictionary: appending the year and score pair to existing country value creates a list within a list:**

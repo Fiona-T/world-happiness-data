@@ -587,9 +587,9 @@ def show_num_options(*options):
     """
     Shows numbered options for user to choose next - iterates through
     options tuple, displays number along with option text.
-    Calls validate_options function to check the input,
-    passing length of options tuple as the max number for validation
-    Continues looping until validate_options returns True
+    Calls validate_num_options function to check the input,
+    passing length of the options tuple as the max number for validation
+    Continues looping until validate_num_options returns True
 
     Args:
         *options: variable length tuple of options to show the user
@@ -603,16 +603,17 @@ def show_num_options(*options):
             print(f"{options.index(option)+1}: {option}")
         choice = input(
             "\nEnter the number corresponding to your choice here: \n")
-        if validate_options(choice, len(options)):
+        if validate_num_options(choice, len(options)):
             # convert the number chosen back to the option variable name
             opt_chosen = options[int(choice)-1]
             break
     return opt_chosen
 
 
-def validate_options(user_input, num_choices):
+def validate_num_options(user_input, num_choices):
     """
-    Validate the option entered by the user in show_options.
+    Validate the input entered by the user in show_num_options.
+    Input should be a number equal to one of the numbered options shown.
     First check if input can be converted to an integer, Print error if not.
     Next try block checks if more than one number entered, raises error.
     Then check if number entered is above num of options or = 0, raise error.
@@ -650,9 +651,9 @@ def validate_options(user_input, num_choices):
     return True
 
 
-def handle_options(option_chosen, c):
+def handle_num_options(option_chosen, c):
     """
-    Handle the option chosen from show_num_options.
+    Handle the numbered option chosen from show_num_options.
     Sends user to the relevant next path based on their choice
 
     Args:
@@ -677,8 +678,8 @@ def handle_options(option_chosen, c):
 def more_data_options(c):
     """
     Show the options to user for Min, Max, Median, Average or All.
-    Calls validate_options function to check the input.
-    Continues looping until validate_options returns True.
+    Calls validate_num_options function to check the input.
+    Continues looping until validate_num_options returns True.
 
     Args:
         c (obj): the instance of Country for chosen country
@@ -695,13 +696,13 @@ def more_data_options(c):
         print("5: All of these (min, max, median, average)")
         more_data_choice = input(
             "\nEnter 1/2/3/4/5 for the option you want from this list: \n")
-        if validate_options(more_data_choice, 5):
+        if validate_num_options(more_data_choice, 5):
             print("\n")
             break
     return more_data_choice
 
 
-def handle_data_options(choice, c):
+def handle_more_data_options(choice, c):
     """
     Handle the choice by user from more_data_options function, sends user to
     relevant next path based on their choice (Min, Max, Median, Average or All.
@@ -751,7 +752,7 @@ def one_score_path(c):
     """
     Path where country only has one year/score.
     Shows the score for that year and presents next options.
-    handle_options function decides the next path available to user
+    handle_num_options function decides the next path available to user
     based on their choice from show_num_options function.
 
     Args:
@@ -760,7 +761,7 @@ def one_score_path(c):
     year = c.scores[0]
     c.show_scores(year, True)
     option = show_num_options(DIFF_COUNTRY, EXIT_APP)
-    handle_options(option, c)
+    handle_num_options(option, c)
 
 
 def years_choice(c):
@@ -780,7 +781,7 @@ def single_yr_path(year, c):
     """
     Path if user chooses a single year to view score for.
     Shows the score for that year and presents next options.
-    handle_options function decides the next path available to user
+    handle_num_options function decides the next path available to user
     based on their choice from show_num_options function.
 
     Args:
@@ -789,7 +790,7 @@ def single_yr_path(year, c):
     c.show_scores(year, False)
     option = show_num_options(
         ALL_YEARS, DIFF_YR, MORE_DATA, DIFF_COUNTRY, EXIT_APP)
-    handle_options(option, c)
+    handle_num_options(option, c)
 
 
 def all_years_path(c):
@@ -797,7 +798,7 @@ def all_years_path(c):
     Path if user choose to view scores for all years
     Shows the scores for the years, shows option to view graph. Handles
     graph choice (show graph if choice is "y"), then present next options.
-    handle_options function decides the next path available to user
+    handle_num_options function decides the next path available to user
     based on their choice from show_num_options function.
 
     Args:
@@ -807,24 +808,24 @@ def all_years_path(c):
     graph = get_graph_choice()
     handle_graph_choice(graph, c)
     new_choice = show_num_options(MORE_DATA, DIFF_COUNTRY, DIFF_YR, EXIT_APP)
-    handle_options(new_choice, c)
+    handle_num_options(new_choice, c)
 
 
 def more_data_path(c):
     """
     Path that runs when user chooses MORE_DATA from show_num_options.
     Show the choices availables - min, max, median, average, all.
-    handle_data_options calls the relevant methods to show the requested data.
-    Then presents next options, then handle_options function decides the
+    handle_more_data_options calls relevant methods to show the requested data.
+    Then presents next options, then handle_num_options function decides the
     next path available to user based on choice from show_num_options function.
 
     Args:
         c (obj): the instance of Country for chosen country
     """
     more_data_choice = more_data_options(c)
-    handle_data_options(more_data_choice, c)
+    handle_more_data_options(more_data_choice, c)
     option = show_num_options(MORE_DATA, DIFF_COUNTRY, EXIT_APP)
-    handle_options(option, c)
+    handle_num_options(option, c)
 
 
 def exit_program():

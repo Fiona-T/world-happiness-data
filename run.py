@@ -118,6 +118,20 @@ def get_country():
     return country_cap
 
 
+class ApplicationError(Exception):
+    """
+    Base class for exceptions in this application.
+    """
+    pass
+
+
+class InvalidInputError(ApplicationError):
+    """
+    Raised for incorrect inputs.
+    """
+    pass
+
+
 def validate_country(user_input):
     """
     Validate the user input from get_country.
@@ -132,21 +146,22 @@ def validate_country(user_input):
         bool: True if no errors raised, False otherwise
 
     Raises:
-        Exceptions
+        InvalidInputError if a number is entered, or the input entered is not
+        in the list of countries.
     """
     countries = [k for k in list(country_dict.keys())]
     countries_lowercase = [c.lower() for c in countries]
     try:
         if user_input.isnumeric():
-            raise Exception("Numbers are not valid inputs")
+            raise InvalidInputError("Numbers are not valid inputs")
         else:
             country = convert_country_alias(user_input.lower())
             if country not in countries_lowercase:
-                raise Exception(
+                raise InvalidInputError(
                             f"{user_input} is not in the list of countries"
                             "\nHere are the countries you can choose from,"
                             f" please choose from this list: \n{countries}\n")
-    except Exception as e:
+    except InvalidInputError as e:
         print_error_msg(e, user_input)
         return False
     return True
@@ -460,12 +475,15 @@ def validate_years(user_input, available_years):
         bool: True if no errors raised, False otherwise.
 
     Raises:
-        Exceptions
+        InvalidInputError if length is 1.
+        ValueError if input cannot be converted to int.
+        InvalidInputError if input can be converted to int AND length is not
+        equal to 4 or 1, OR length is 4 but the year is not in the list.
     """
     try:
         if len(user_input) == 1:
-            raise Exception("Enter A for all years")
-    except Exception as e:
+            raise InvalidInputError("Enter A for all years")
+    except InvalidInputError as e:
         print_error_msg(e, user_input)
         return False
     try:
@@ -475,12 +493,12 @@ def validate_years(user_input, available_years):
         return False
     try:
         if len(user_input) != 4 and len(user_input) != 1:
-            raise Exception(
+            raise InvalidInputError(
                 f"Enter 4 numbers for a year, not {len(user_input)}. "
                 f"Or enter A for all years")
         elif len(user_input) == 4 and int(user_input) not in available_years:
-            raise Exception(f"{user_input} is not in the list")
-    except Exception as e:
+            raise InvalidInputError(f"{user_input} is not in the list")
+    except InvalidInputError as e:
         print_error_msg(e, user_input)
         return False
     return True
@@ -532,14 +550,15 @@ def validate_y_n(user_input):
         bool: True if no errors raised, False otherwise.
 
     Raises:
-        Exceptions
+        InvalidInputError if input contains numbers, or if (lowercase)input
+        does not equal y or n.
     """
     try:
         if user_input.isdigit():
-            raise Exception("Number is not a valid choice")
+            raise InvalidInputError("Number is not a valid choice")
         elif user_input != "y" and user_input != "n":
-            raise Exception("You didn't enter Y or N")
-    except Exception as e:
+            raise InvalidInputError("You didn't enter Y or N")
+    except InvalidInputError as e:
         print_error_msg(e, user_input)
         return False
     return True
@@ -606,7 +625,10 @@ def validate_options(user_input, num_choices):
         bool: True if no errors raised, False otherwise.
 
     Raises:
-        Exceptions
+        ValueError if input cannot be converted to int.
+        InvalidInputError if input can be converted to int AND length is longer
+        than 1, OR length is 1 but the number input is greater than the
+        number of available choices, or the number input is 0.
     """
     try:
         int(user_input)
@@ -615,14 +637,14 @@ def validate_options(user_input, num_choices):
         return False
     try:
         if len(user_input) > 1:
-            raise ValueError(
+            raise InvalidInputError(
                 "Please enter only one number and no space or "
                 f"characters. '{user_input}' is {len(user_input)} characters"
                 " long")
         elif int(user_input) > num_choices or int(user_input) == 0:
-            raise Exception(
+            raise InvalidInputError(
                 f"Number must be between 1 and {num_choices}")
-    except (ValueError, Exception) as e:
+    except InvalidInputError as e:
         print_error_msg(e, user_input)
         return False
     return True

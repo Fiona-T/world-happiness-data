@@ -125,10 +125,13 @@ If the country has more than one score recorded (this is the case for the majori
 An instance of `Country class` is created by the `make_country` function, each time the user selects a country that they want to view the scores/data for, in the `get_country function`(the instance is created after the country input has been validated). The `class` instance is created using the country name, and the `list` of year and scores `tuples` retrieved from the countries `dictionary`.
 
 The methods in the `Country class` are used throughout the application, to get the information for the relevant country, to present to the user in the terminal:
-- `show_scores`: prints the requested score(s) to the terminal for the requested year or years
+- `show_scores`: prints the requested score(s) to the terminal for the requested year or years, along with a relevant message if the country is a single score country
+- `yrs_span`: returns an `f-string` stating the span of years for the country, i.e.e. the first and last years in the available years. This is used by other methods when printing results to the terminal   
 - `show_graph`: uses plot function from uniplot to plot a graph in the terminal showing all available happiness scores over time
-- `show_min_score`, `show_max_score`: these methods print the min or max score for the country to the terminal, along with the corresponding year for that score
+`print_yr_for_min_max`: gets the year(s) corresponding to the relevant score (min score or max score) and returns an f-string stating the year(s). Used by other methods when printing the max or min score to the terminal
+- `show_min_or_max_score`: this method prints the min or max score for the country to the terminal, along with the corresponding year for that score
 - `show_median_score`, `show_average_score`: these methods print the median or average score for the country to the terminal
+- `show_min_max_ave_med`: prints the max, min, average and median scores for the country to the terminal, with associated text
 
 ## Testing
 ---

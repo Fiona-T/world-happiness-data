@@ -118,7 +118,7 @@ def get_country():
     country_std = convert_country_alias(country.lower())
     country_cap = convert_to_titlecase(country_std)
     print_output(
-        f"\nYou entered '{country}'. Showing results for '{country_cap}'.")
+        f"\nYou entered '{country}'. \nShowing results for '{country_cap}'.")
     return country_cap
 
 

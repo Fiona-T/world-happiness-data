@@ -52,11 +52,18 @@ def welcome_msg():
     print_banner_msg(" "*14 + "Welcome")
     print("This is the World Happiness Data Tool.")
     print(
-        "You can look up the Happiness Score per country, "
-        "for the years 2005 - 2020.\n")
+        "You can look up the Happiness Score(s) per country, for scores "
+        "between 2005 - 2020.")
+    print(
+        "You can view a graph of the score over time, if you choose to see "
+        "the score for all \nyears for a country. Or you can view the min, "
+        "max, average and median scores.")
+    # print(
+    #     "You can also get max, min average and median Happiness Scores for a "
+    #     "country.")
     print(colored(
-            "For all inputs, remember to press Enter after typing your input"
-            "\n", attrs=["bold"]))
+            "\nFor all inputs: type in your response and then press Enter",
+            attrs=["bold"]))
     print("-" * 78)
 
 

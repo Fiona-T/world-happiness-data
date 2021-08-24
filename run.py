@@ -197,20 +197,22 @@ def convert_to_titlecase(string):
     """
     Converts the lower case country name back to title case.
     Does not capitalise the words listed in exceptions.
+    Words in convert_to_caps list are converted to all CAPS
 
     Args:
         string (str): the string to be converted, i.e. country name
 
     Returns:
-        the country name in title case
+        the country name in title case, with abbreviations in all caps
     """
     # 'region' included below because it is not capitalised in csv file
     exceptions = ["and", "of", "region"]
+    convert_to_caps = ["sar"]
     words = string.split(" ")
     title_case_words = [words[0].capitalize()]
     title_case_words += [
-        word if word in exceptions else word.capitalize()
-        for word in words[1:]
+        word if word in exceptions else word.upper() if word in
+        convert_to_caps else word.capitalize() for word in words[1:]
         ]
     title_case_string = " ".join(title_case_words)
     return title_case_string

@@ -162,9 +162,10 @@ def validate_country(user_input):
             country = convert_country_alias(user_input.lower())
             if country not in countries_lowercase:
                 raise InvalidInputError(
-                            f"{user_input} is not in the list of countries"
+                            f"'{user_input}'' is not in the list of countries"
                             "\nHere are the countries you can choose from,"
-                            f" please choose from this list: \n{countries}\n")
+                            " please choose from this list: "
+                            f"\n{', '.join(countries)}\n")
     except InvalidInputError as e:
         print_error_msg(e, user_input)
         return False
@@ -227,7 +228,7 @@ def print_error_msg(e, user_input):
         user_input (str): the input from the user, that generated the error
     """
     print(colored(
-            f"Invalid choice: {e}. You entered '{user_input}'. Try again.\n",
+            f"Invalid choice: {e} \nYou entered '{user_input}'.\nTry again.\n",
             "red", attrs=["bold"]))
 
 

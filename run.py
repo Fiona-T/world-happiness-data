@@ -347,7 +347,7 @@ class Country:
             print("unknown minimum or maximum request, exiting.")
             exit_program()
         print_output(
-            f"The {min_or_max} happiness score for {self.name} over "
+            f"The {min_or_max} happiness score for {self.name} \nover "
             f"{self.yrs_span()} is: {score}.")
         print_output(f"{self.print_yr_for_min_max(score)}")
 
@@ -357,7 +357,7 @@ class Country:
         """
         median_score = statistics.median(self.scores_list)
         print_output(
-            f"The median happiness score for {self.name} over "
+            f"The median happiness score for {self.name} \nover "
             f"{self.yrs_span()} is: {median_score}.")
 
     def get_average_score(self):
@@ -377,7 +377,7 @@ class Country:
         Prints average score to terminal.
         """
         print_output(
-            f"The average happiness score for {self.name} over "
+            f"The average happiness score for {self.name} \nover "
             f"{self.yrs_span()} is: {self.get_average_score()}.")
 
     def show_min_max_ave_med(self):
@@ -451,7 +451,7 @@ def get_years(c):
         requested_years = input(
             "\nType in the year from this list for which you want to see the "
             f"\nhappiness score for {c.name}. \nOr type in A to see the "
-            f"happiness scores for all years for {c.name}: \n")
+            f"happiness scores for all years \nfor {c.name}: \n")
         if requested_years == "A" or requested_years == "a":
             choice = "all years"
             break

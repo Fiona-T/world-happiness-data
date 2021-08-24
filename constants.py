@@ -78,7 +78,7 @@ COUNTRIES_ALT_NAMES = {
         "haiti": ["republic of haiti", "hayti"],
         "honduras": ["republic of honduras"],
         "hong kong sar of china": [
-            "hong kong", "hsar", "hong kong china", "hksar"
+            "hong kong", "hsar", "hong kong china", "hksar",
             "hong kong special administrative region of china",
             "hong kong special administrative region of the people's "
             "republic of china",

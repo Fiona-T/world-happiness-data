@@ -53,14 +53,9 @@ def welcome_msg():
     print("This is the World Happiness Data Tool.")
     print(
         "You can look up the Happiness Score(s) per country, for scores "
-        "between 2005 - 2020.")
-    print(
-        "You can view a graph of the score over time, if you choose to see "
-        "the score for all \nyears for a country. Or you can view the min, "
-        "max, average and median scores.")
-    # print(
-    #     "You can also get max, min average and median Happiness Scores for a "
-    #     "country.")
+        "between \n2005 and 2020. You can view a graph of the score over "
+        "time, if you \nchoose to see the score for all years for a country. "
+        "Or you can view \nthe minimum, maximum, average and median scores.")
     print(colored(
             "\nFor all inputs: type in your response and then press Enter",
             attrs=["bold"]))
@@ -111,9 +106,11 @@ def get_country():
         capitalised country name, to be used to create country instance
     """
     while True:
-        print("\nChoose the country you want to look up.")
+        print(
+            "\nChoose the country you want to look up the Happiness Score(s) "
+            "for.")
         print("Use the common English name for the country, with no dots.")
-        print("You will then be shown the years from which you can choose")
+        print("You will then be shown the years from which you can choose.")
         country = input(
             "\nType in the name of the country you want to look up: \n")
         if validate_country(country):
@@ -448,10 +445,11 @@ def get_years(c):
     """
     available_years = c.years
     while True:
-        print_output(f"\nThe years available for {c.name} are:")
+        print_output(
+            f"\nThe years with happiness scores available for {c.name} are:")
         print_output(", ".join(map(str, c.years)))
         requested_years = input(
-            "\nEnter the year from this list for which you want to see the "
+            "\nType in the year from this list for which you want to see the "
             f"\nhappiness score for {c.name}. \nOr type in A to see the "
             f"happiness scores for all years for {c.name}: \n")
         if requested_years == "A" or requested_years == "a":
@@ -535,7 +533,8 @@ def get_graph_choice():
         graph (str): user choice y/n whether they want to view graph or not
     """
     while True:
-        graph_q = input("\nDo you want to view graph of this data? Y/N: \n")
+        print("\nDo you want to a view graph of this data?")
+        graph_q = input("Type in Y or N here: \n")
         graph = graph_q.lower()
         if validate_y_n(graph):
             break
@@ -573,7 +572,7 @@ def validate_y_n(user_input):
 
 def handle_graph_choice(choice, c):
     """
-    Run show_graph method if choice is Y. s
+    Run show_graph method if choice is Y.
     The while loop continues until user enters a key to proceed
 
     Args:
@@ -584,8 +583,8 @@ def handle_graph_choice(choice, c):
         while True:
             c.show_graph()
             proceed = input(
-                "\nEnter any key(s) to continue when you are finished with the"
-                " graph: \n")
+                "\nWhen finished with the graph, type in any key(s) & "
+                "press Enter to continue: \n")
             if proceed:
                 break
 
@@ -700,7 +699,7 @@ def more_data_options(c):
         print("2: Maximum happiness score")
         print("3: Median happiness score")
         print("4: Average happiness score")
-        print("5: All of these (min, max, median, average)")
+        print("5: All of these (min, max, median and average)")
         more_data_choice = input(
             "\nEnter 1/2/3/4/5 for the option you want from this list: \n")
         if validate_num_options(more_data_choice, 5):

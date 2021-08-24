@@ -97,6 +97,7 @@ def create_countries_dict(filepath):
 def get_country():
     """
     Get country name from user.
+    Option to view list of countries before inputting country choice.
     Calls validate_country to validate, loops until True returned.
     Calls convert_country_alias to convert the input name to the
     standardised name (the name as per the csv file).
@@ -112,14 +113,32 @@ def get_country():
         print("Use the common English name for the country, with no dots.")
         print("You will then be shown the years from which you can choose.")
         country = input(
-            "\nType in the name of the country you want to look up: \n")
-        if validate_country(country):
+            "\nType in the name of the country you want to look up below:"
+            "\nOr type in 1 to view a list of available countries: \n")
+        if country == "1":
+            display_country_names()
+        elif validate_country(country):
             break
     country_std = convert_country_alias(country.lower())
     country_cap = convert_to_titlecase(country_std)
     print_output(
         f"\nYou entered '{country}'. \nShowing results for '{country_cap}'.")
     return country_cap
+
+
+def display_country_names():
+    """
+    Prints a list of the country names, line by line, from the countries dict
+    """
+    countries = [k for k in list(country_dict.keys())]
+    new_line = "\n"
+    print_output(
+        "\nHere are the country names you can choose from:"
+        "\n(Remember to scroll back down to input your chosen country name)\n"
+        f"\n{new_line.join(countries)}\n")
+    print_output(
+        "You will need to scroll up in the window to view all the country "
+        "names. \nThen scroll back down to enter your chosen name below.")
 
 
 class ApplicationError(Exception):
@@ -138,8 +157,9 @@ class InvalidInputError(ApplicationError):
 
 def validate_country(user_input):
     """
-    Validate the user input from get_country.
-    1st check if numeric, if so raise error msg.
+    Validate the user input from get_country, if it is not 1.
+    1st check if numeric, user may be trying to input 1 for list of countries,
+    raise error msg to prompt user for 1.
     Then check if in the countries list, raise error msg if not.
     (Convert input name to standard name in order to check if country in list)
 
@@ -157,15 +177,13 @@ def validate_country(user_input):
     countries_lowercase = [c.lower() for c in countries]
     try:
         if user_input.isnumeric():
-            raise InvalidInputError("Numbers are not valid inputs")
+            raise InvalidInputError(
+                "Enter 1 to see the list of country names.")
         else:
             country = convert_country_alias(user_input.lower())
             if country not in countries_lowercase:
                 raise InvalidInputError(
-                            f"'{user_input}'' is not in the list of countries"
-                            "\nHere are the countries you can choose from,"
-                            " please choose from this list: "
-                            f"\n{', '.join(countries)}\n")
+                    f"'{user_input}' is not in the list of countries")
     except InvalidInputError as e:
         print_error_msg(e, user_input)
         return False

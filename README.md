@@ -157,17 +157,25 @@ This section covers testing the user stories from the [User Experience (UX)](#us
 
 1. **Expectation:** *As a visiting user, I want to understand what data I can access from the application so that I know what information I can get from it*
 >**Result:** Pass
-- When the application starts, there is a short intro text explaining that the tool allows you to look up the happiness score for a country, and the years covered. In the paragraph below this, the user is also told that they will see the years available for that country once they choose a country. 
+- When the application starts, there is a short intro text explaining that:
+    - the tool allows you to look up the happiness score for a country and the years covered, 
+    - they can view a graph of the score and 
+    - they can view the minimum, maximum, median and average happiness scores for a country
+
+In the paragraph below this, the user is also told that they will see the years available for that country once they choose a country. 
 ![user story 1 - intro text](docs/user-stories/user-story-1-intro-text.png)
+
 2. **Expectation:** *As a visiting user, I want to be able to choose a country so that I can view the data related to that country*
 >**Result:** Pass
 - The user can type in the name of the country that they want to view the score(s) for. After the country name has been validated as a country that exists in the dataset, the application prints back to the user the name they entered, along with the name of the country from the file, so that it is clear to the user which country results are being shown for. (In some cases, the user may type in an 'alternative' name for a country, e.g. 'us' for 'United States' so this message is to ensure clarity)
 ![user story 2 - choose country](docs/user-stories/user-story-2-choose-country.png)
+
 3. **Expectation:** *As a visiting user, I want to see the happiness score for a particular year (from those available) for my selected country*
 >**Result:** Pass
 - The application presents a list of the years available for the chosen country. The user then types in the specific year that they want to see the happiness score for.
 - They can then select number 2 from the next menu shown, to view the score from a different year (or 1 from that menu to see the score for all years)
 ![user story 3 - happiness score for particular year](docs/user-stories/user-story-3-specific-year.png)
+
 4. **Expectation:** *As a visiting user, I want to be able to see the happiness score over time for a particular country, so that I can see the scores and trends over time for that country*
 >**Result:** Pass
 - The application presents a list of the years available for the chosen country, as shown in the user story 3 screenprint. The user is instructed to enter A if they want to view the happiness score for all of these years, instead of just a single year. The scores are then displayed as shown below, "year : score" for each available year.
@@ -181,6 +189,7 @@ This section covers testing the user stories from the [User Experience (UX)](#us
 ![user story 5 - graph](docs/user-stories/user-story-5-graph.png)
 - The graph remains on the screen until the user enters something in the next input box, they are then shown the next options as shown below
 ![user story 5 - graph next options](docs/user-stories/user-story-5-graph-continue.png)
+
 6. **Expectation:** *As a visiting user, I want to be able to see the maximum, minimum, average and median happiness score for my selected country.*
 >**Result:** Pass
 - The user is given the option to choose to view more data (minimum, maximum, median and average scores) in the menu after they have viewed the graph as shown in user story 5, (or they are shown this straight away if they chose "n" for the graph question), and also in the menu choice after they view the score for a particular year, as shown in user story 3.
@@ -188,6 +197,7 @@ This section covers testing the user stories from the [User Experience (UX)](#us
 ![user story 6 - menu options for min, max, median, average scores](docs/user-stories/user-story-6-more-data-menu.png)
 - The user can select number 5 which will display the minimum, maximum, median and average scores for the chosen country:
 ![user story 6 - display min, max, median and average scores](docs/user-stories/user-story-6-more-data-all.png)
+
 7. **Expectation:** *As a visting user, I want to be able to select one option at a time from: maximum, minimum, average and median happiness score for my selected country.*
 >**Result:** Pass
 - The user is given the option to choose to view more data (minimum, maximum, median and average scores), as explained above in user story 6. 
@@ -201,6 +211,13 @@ This section covers testing the user stories from the [User Experience (UX)](#us
 ![user story 7 - median score choice](docs/user-stories/user-story-7-median.png)
 - Average score displayed:
 ![user story 7 - average score choice](docs/user-stories/user-story-7-average.png)
+
+8. **Expectation:** *As a visiting user, I want to see the list of available countries so that I can ensure to choose a country from the list.*
+>**Result:** Pass
+- As shown in user story 1, the user is given the option to view a list of the available countries by inputting '1' instead of inputting a country name. If they choose this option, then the list of countries is displayed in the terminal with a reminder to the user to scroll up/down as needed (due to the length of the list). 
+- The user can then enter the chosen country name in the input at the bottom of the terminal window as shown below:
+![user story 8 - country list from top](docs/user-stories/user-story-8-country-list-top.png)
+![user story 8 - country list bottom of window](docs/user-stories/user-story-8-country-list-bottom.png)
 
 ### Fixed Bugs
 The following bugs were encountered during development and during testing.

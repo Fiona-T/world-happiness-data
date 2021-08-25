@@ -262,7 +262,7 @@ As perviously mentioned, the user input country name is converted to lowercase f
 > Solution: Using the guidance shown [in this article from kite.com](https://www.kite.com/python/answers/how-to-titlecase-a-string-in-python), created a small function `convert_to_titlecase` to capitalise each word except those in a list of exception words such as 'and', 'of'. Note: I included ‘region’ in the list of exceptions also as this word is not capitalised in the csv file.
 
 - **Issue: Passing choice from numbered options to handle_options function:**
-![NUmbered options bug error message](docs/bugs/handle-numbered-options-bug.png)
+![Numbered options bug error message](docs/bugs/handle-numbered-options-bug.png)
 
 The number entered by the user has 1 deducted from it, to get the corresponding option by index number from the tuple of options: 
 
@@ -282,6 +282,32 @@ This is passed to the handle_options function to decide the next path. However i
 
 As there is an input underneath the graph, for the user to press a key to continue, this pushed the graph up in the terminal window and it could not be viewed without scrolling up.
 > Solution: There is an option within the uniplot plot function to set the height (defaults to 17 if not set). Added a slightly smaller height of 16 so that full graph fits in terminal window with space around.
+
+- **Issue: function `convert_to_titlecase` not working for country name "Hong Kong SAR of China":**
+![Hong Kong SAR of China bug with convert_to_titlecase function](docs/bugs/country-with-caps-bug.png)
+
+There are a couple of issues with this country name:
+1. There are dots in the name, this is the only country in the csv file that has dots in the name, and other abbreviated names do not have dots in them. The user instructions tell the user to enter the country name with no dots, to avoid any confusion e.g. entering U.K., or U.K, instead of UK. So this is just an inconsistency in the data in the csv file and can be amended.
+2. The `convert_to_titlecase` function capitalises only the first letter in the abbreviation instead of all three letters.
+> Solution: as follows:
+1. Remove the dots from the name in the csv file as they should not be there (the convert_to_titlecase function could be updated to deal with these dots, but it would cause confusion since no other abbreviated names have dots in them)
+2. Amended the `convert_to_titlecase` function, to have a `list` containing words that need to be all caps (there is currently only one word in the list but more could be added if the application was extended to work with other datasets). If the word is in this `list`, then use `.upper()` to change all letters to uppercase instead of just the first letter.
+
+- **Issue: function `convert_to_titlecase` not working for country names with parentheses in the name:**
+![Country name with parentheses bug example no.1](docs/bugs/country-with-brackets-bug-1.png)
+![Country name with parentheses bug example no.2](docs/bugs/country-with-brackets-bug-2.png)
+
+> Solution: As can be seen from the screenprints above, the issue is that the first letter of the word inside the parentheses is not getting capitalised by the `convert_to_titlecase` function (as the string is split into 'words' at the spaces, so the parentheses are seen as part of the 'word'). Added another `else` clause to the `list comprehension` that creates the `list` of converted words:
+    else
+        word[0] + word[1:].capitalize() if word.startswith("(")
+If the word starts with a "(", then get the first item from the word - which is the opening parenthesis, then capitalise the second item in the word, which is the first letter.
+
+- **Issue: Line wrapping on the list of countries when printed to the terminal:**
+![Bug in display of list of countries in the terminal](docs/bugs/countries-list-wrapping-bug.png)
+
+As can be seen above, when the list of counties is printed to the terminal, it is not wrapping correctly as the line breaks happen in the middle of words, which is confusing for the user. In addition, the text at the top of the list, informing the user of the error is not visible in the window. The countries list was originally printing to the terminal if the user enters an incorrect country name - to help them choose a correct country name.
+
+> Solution: Amended the printing of the list, to print each item in the list on its own line, this way it is easy for the user to see each country name. This generated a further error in that the `"\n"` for new line, that was needed as part of the `.join()`, i.e. `"\n".join(countries)` was not allowed inside the `f-string` curly brackets `{}`. This part was solved by creating a variable called new_line, holding the `"\n"`, as described in [this post on towardsdatascience.com](https://towardsdatascience.com/how-to-add-new-line-in-python-f-strings-7b4ccc605f4a) and using the variable name inside the `f-string` curly brackets `{}` like so: `f"{new_line.join(countries)}"`. Also added text at the bottom of the list instructing user to scroll up to view the full list (there is no other way around this since the terminal window is fixed size, and even printing several countries to a line does not fit in the window), and added text at the top reminding user to scroll back down to make their selection. Finally, instead of including this list within the error message if the user chooses a country that is not in the list, I decided it would be a better user experience to have the option to view the list of countries, *before* inputting their chosen country name. Updated the `get_country` function to allow user enter 1 in the input box, instead of a country name, if they want to view the list of countries, if 1 is entered then this calls the function `display_country_names`, which prints the list of country names in the terminal as described earlier. 
 
 ### Manual Testing
 ### Supported Screens and Browsers

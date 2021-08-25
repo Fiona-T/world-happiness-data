@@ -79,6 +79,57 @@ In the paragraph below this, the user is also told that they will see the years 
 ![user story 8 - country list from top](docs/user-stories/user-story-8-country-list-top.png)
 ![user story 8 - country list bottom of window](docs/user-stories/user-story-8-country-list-bottom.png)
 
+### Features Testing
+- **Welcome message: Expectations**
+  - short note on the purpose of the application
+  - first thing the user sees when starting the application
+>**Result:** Pass
+  - the welcome message is visible in the terminal window on starting the application, as shown below:
+  ![Features - welcome message](docs/features-testing/welcome-msg.png)
+
+- **User country choice, user view list of countries: Expectations**
+  - user can input the country name they want
+  - user can choose to view the list of available countries, before typing in their choice of country
+>**Result:** Pass
+  - the first input for the user is to either type in their choice of country, or press 1 to view a list of countries
+  - the user can do either option
+  - if they press 1 to view the list, then they can type in their choice of country after viewing the list
+  ![Features - country choice, view country list](docs/features-testing/country-choice-and-list.png)
+
+- **Exception handling for country choice: Expectations**
+  - a number, except 1 (for list of countries) entered will generate an error message
+  - a name that is not in the list of countries, or a string, or a mix of letters/numbers/symbols will generate an error message
+  - the terminal window will continue to display the request to choose the country (or input 1 to view the list) until a valid input is received
+
+>**Result:** Pass
+
+As shown below:
+  - a number input generates a specific error message
+  - a string/mix of letters/symbols/numbers not in the country list generates a specific error
+  - the choose country message and input box is shown again each time
+  ![Features - error messages for incorrect inputs to country choice](docs/features-testing/country-choice-error-handling.png)
+
+- **Show available years for chosen country: Expectations**
+  - after the country choice has been validated, display list of years that have scores recorded, for the user to choose from (since scores do not exist for every year for each country)
+  - unless country only has one score recorded (see separate feature for these countries later on below)
+
+>**Result:** Pass
+  - after the country is chosen, and is valid, the list of available years is shown for that country
+  - these match the years available in the source csv file
+  ![Features - show list of years for valid country choice](docs/features-testing/show-years.png)
+
+- **User can choose to view score for single year, or all years: Expectations**
+  - user can input a year from the list of available years for the country, to see happiness score for that year
+  - the relevant score will be printed to the terminal, along with corresponding year
+  - or user can choose to view happiness scores for all years for that country
+  - the scores and corresponding years will be printed to the terminal
+
+>**Result:** Pass
+  - both options (one year or all years) are available to the user, and both options print the correct results to the terminal
+  - selecting A brings up all years, or the specific year gets the score for that year
+  - the scores correctly match the scores and years in the source csv file
+  ![Features - choose year and show score](docs/features-testing/choose-year.png)
+
 ### Fixed Bugs
 The following bugs were encountered during development and during testing.
 - **Issue: Creating countries dictionary: appending the year and score pair to existing country value creates a list within a list:**

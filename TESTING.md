@@ -118,7 +118,7 @@ As shown below:
   - these match the years available in the source csv file
   ![Features - show list of years for valid country choice](docs/features-testing/show-years.png)
 
-- **User can choose to view score for single year, or all years: Expectations**
+- **Ability for user to choose to view score for single year, or all years: Expectations**
   - user can input a year from the list of available years for the country, to see happiness score for that year
   - the relevant score will be printed to the terminal, along with corresponding year
   - or user can choose to view happiness scores for all years for that country
@@ -129,6 +129,55 @@ As shown below:
   - selecting A brings up all years, or the specific year gets the score for that year
   - the scores correctly match the scores and years in the source csv file
   ![Features - choose year and show score](docs/features-testing/choose-year.png)
+
+- **Exception handling for year(s) choice: Expectations**
+  - if length of input is 1, but not A or a, generate an error message as user may be trying to input 'A' for all years
+  - if input can't be converted to integer, generate an error message as any further valid inputs (as a check has already been done if the input was A) must be possible to convert to an integer 
+  - if the input can be converted to integer, but the length is not 4, generate an error as the years are all 4 digits, or if the length is not 1, generate an error in case user is trying to input 'A' (even though A cannot be converted to int, but in case they are trying to input A and pressed a number instead)
+  - if the input can be converted to int, and the length is equal to 4, but the input is not in the list of years for that country, generate an error 
+  - the terminal window will continue to display the request to choose the year (or input A for all years) until a valid input is received
+
+>**Result:** Pass
+
+As shown below:
+  - the relevant incorrect inputs generate the relevant specific error messages
+  - the choose year message and input box is shown again each time
+  ![Features - error messages for incorrect inputs to year choice](docs/features-testing/year-choice-error-handling.png)
+
+- **Option to choose to view graph of happiness score over time: Expectations**
+  - if the user chose to view scores for all years, present this option to them (the option is not applicable if they viewed just a sinlge score as a graph would not be relevant then)
+  - user can enter Y to view the graph 
+  - the graph displays the scores for that country along a line graph tracking across the years
+  - user can enter N to skip this step and go straight to next step
+
+>**Result:** Pass
+- user can enter Y or N to the graph question
+- graph is displayed if Y entered
+- application skips graph and goes to next options if N entered
+- graph question is not displayed when user chose a single year to view score for
+ ![Features - graph option](docs/features-testing/graph-option.png)
+
+- **Exception handling for Y/N choice: Expectations**
+  - if the input is a number, generate an error message as the input should be a letter
+  - if the input is anything other than Y, y, N or n, generate an error message as these are the only acceptable inputs
+  - the terminal window will continue to display the request to enter Y or N to view the graph until a valid input is received
+
+  >**Result:** Pass
+
+As shown below:
+  - inputting a number generates an error message
+  - inputting anything else that is not Y/y/N/n generates an error message 
+  - the graph question and input box is shown again each time
+  ![Features - error messages for incorrect inputs to y/n question](docs/features-testing/y-n-question-error-handling.png)
+
+- **Option to view all years scores after viewing single year: Expectations**
+  - user previously selected to view score for a particular year, after this score is printed, user should have option to view score for all years for the same country
+  - if chosen, the score for all years should be printed to the terminal 
+
+  >**Result:** Pass
+  - user presented with list of options after viewing single score, option 1 is to get the scoe for all years for the same country
+  - if option 1 is chosen, then score for all years is printed to the terminal
+  ![Features - score for all years after single year option](docs/features-testing/all-years-after-single-yr.png)
 
 ### Fixed Bugs
 The following bugs were encountered during development and during testing.

@@ -105,13 +105,15 @@ Explanation of Happiness score:
 *Note: HTML, CSS and Javascript exist in the template provided by Code Institute for this project but these are to run the mock terminal. The programme itself is built purely using Python.*
 
 ### Frameworks, Libraries, Programmes and Tools
-- [Lucidchart](https://www.lucidchart.com/) to create the flowchart showing the user paths through the application
+- [diagrams.net](https://www.diagrams.net/) to create the flowchart showing the user paths through the application
 - Git for version control, using the [Gitpod](https://www.gitpod.io/) terminal to commit to Git and push to GitHub
 - [GitHub](https://github.com/) to store the project code
 - [Heroku](https://www.heroku.com/) to host the live application
 - [pyfiglet](https://pypi.org/project/pyfiglet/) for the fonts used in the banner messages on entering and exiting the application
 - [termcolor](https://pypi.org/project/termcolor/) to apply colours to the text printed to the terminal
 - [uniplot](https://github.com/olavolav/uniplot#readme) to create the graphs that can be displayed in the terminal (uniplot uses [numpy](https://numpy.org/))
+- [PEP8](http://pep8online.com/) checker to validate the Python code
+- [Code Institute template](https://github.com/Code-Institute-Org/python-essentials-template) for creating the GitHub repository, it includes the files required for creating the mock terminal in which the application runs.
 
 ## Data Model
 ---

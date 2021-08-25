@@ -51,6 +51,7 @@ The target market is relatively broad. In general, it would be people with a pas
 5. As a visiting user, I want to be able to see a graph of the happiness score over time for a particular country so that I can visualise the data more easily
 6. As a visiting user, I want to be able to see the maximum, minimum, average and median happiness score for my selected country. 
 7. As a visting user, I want to be able to select one option at a time from: maximum, minimum, average and median happiness score for my selected country
+8. As a visiting user, I want to see the list of available countries so that I can ensure to choose a country from the list.
 
 ### Design
 *Note:* Since the application runs in the terminal, there is no design of the user interface. 
@@ -71,6 +72,7 @@ The application is split into different 'paths' or sections. Each section is a p
 ### Existing Features
 - Welcome message with short note on the purpose of the application
 - Option for user to input the country name they want
+- Option for user to view a list of the available countries within the dataset, before inputting their choice of country
 - Exception handling for the country choice 
 - When a valid country is entered, show the years for which the happiness score is available for that country, since the dataset does not have a score recorded for every year for some countries. User can then choose from these years.
 - Option for user to choose the year they want to view for that country, or all years

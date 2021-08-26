@@ -175,9 +175,19 @@ As shown below:
   - if chosen, the score for all years should be printed to the terminal 
 
   >**Result:** Pass
-  - user presented with list of options after viewing single score, option 1 is to get the scoe for all years for the same country
+  - user presented with list of options after viewing single score, option 1 is to get the score for all years for the same country
   - if option 1 is chosen, then score for all years is printed to the terminal
   ![Features - score for all years after single year option](docs/features-testing/all-years-after-single-yr.png)
+
+- **Option to choose different year for score, after viewing all years or single year score: Expectations**
+  - user previously selected to view score for a particular year, or for all years, after the result is printed, user should have option to choose a different year to get the score for, for the same country
+  - if chosen, then they are presented with the 'choose years' message displaying list of years, and input box to input the selected year (or A for all years)
+>**Result:** Pass
+- user presented with list of options after viewing all years' scores, option 3 is to get the score for a different year for the same country
+- user is presented with list of options after viewing single year score, option 2 is to get the score for a different year for the same country
+- if option 3 (all years path) or 2 (single year path) is chosen, then the list of available years is displayed, along with input box
+- relevant score is displayed when chosen
+![Features - option to choose different year after previous choice shown](docs/features-testing/diff-yr-choice.png)
 
 ### Fixed Bugs
 The following bugs were encountered during development and during testing.

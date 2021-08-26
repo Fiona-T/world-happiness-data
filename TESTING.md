@@ -189,6 +189,64 @@ As shown below:
 - relevant score is displayed when chosen
 ![Features - option to choose different year after previous choice shown](docs/features-testing/diff-yr-choice.png)
 
+- **Option to view min, max, median, average scores or all of these together: Expectations**
+  - option can be chosen after single year score or all years scores were printed to terminal
+  - user can choose a single option e.g. maximum score
+  - user can choose to view all of them (min, max, average, median) together
+>**Result:** Pass
+- user presented with list of options after viewing all years' scores (and graph if selected), option 1 is to get 'more data' (min, max etc.) for the country
+- user is presented with list of options after viewing single year score, option 3 is to get 'more data' (min, max, etc.) for the country
+- if the user chooses option 1 (all years path), or option 3 (single year path), then the list of options is displayed 
+- user can individually select to view any of min, max, median, average or they can select to view all of them
+![Features - option to choose to get min, max, median, average after previous choice shown](docs/features-testing/min-max-median-average-all-option.png)
+
+- **Option to select another option from min, max, median, average scores after initial choice: Expectations**
+  - after selecting an option 1-5 from the min, max, median, average, all, the result is printed and the user is presented with a further menu option
+  - the new menu contains an option to get 'more data' (min, max etc.) again, so that they can choose another min/max etc. option
+  - the 5 options are presented again, regardless of which option (1-5) was chosen previously
+ >**Result:** Pass
+- user presented with list of options after viewing previous choice (min, max etc.)
+- option 1 is to get 'more data' (min, max etc.) for the same country
+- if the user chooses option 1 from this list, then the list of 5 options is displayed 
+- user can individually select to view any of min, max, median, average or they can select to view all of them
+- user can keep selecting option 1 from follow on menu, to get another option from min, max, median, average, all, until they have seen all they want and can then choose a different option from the follow on menu
+![Features - get each min, max, median, average after previous choice shown](docs/features-testing/min-max-med-ave-loop.png)
+
+- **Option to choose a different country, or exit the application: Expectations**
+  - after user has viewed their data, option to choose a different country, or to exit the application (among other options)
+
+ >**Result:** Pass
+- user presented with menu which includes the option to choose a different country or exit the application, in the following circumstances:
+  - after choosing to view happiness score for single year. Options are 4 and 5.
+  - after choosing to view happiness score for all years (and graph if chosen). Options are 2 and 4.
+  - after choosing to view min/max etc. Options are 2 and 3.
+  - after the score for country that only has one happiness score recorded. Options are 1 and 2 (the only options available in this case)
+![Features - option to choose different country or exit application](docs/features-testing/diff-country-or-exit.png)
+
+- **Showing score for country that only has one score recorded: Expectations**
+  - there are 5 countries in the dataset that only have a score recorded for 1 year. If the user chooses one of these countries, then:
+    - there is no option to choose a year (as this is irrelevant)
+    - the one score and year is shown, along with note stating that this is the only score available
+    - options are shown to choose a different country or exit the application
+>**Result:** Pass
+- all of these are present, as shown below:   
+![Features - single score country](docs/features-testing/single-score-country.png)
+
+- **Exception handling for inputs relating to numbered options: Expectations**
+  - if input can't be converted to integer, generate an error message as only numbers are valid inputs
+  - if length of input longer than 1, generate an error message because valid options are single digits only  
+  - if the input can be converted to integer, but the number input is greater than the number of options, or is equal to zero, generate an error
+  - the terminal window will continue to display the request to choose an option until a valid input is received
+
+>**Result:** Pass
+- a number entered above the number of options available generates a specific error message - this is true for the numbered options with 2, 3, 4 or 5 options
+- an input of more than one character e.g. a number plus a space, generates a specific error message 
+- an input of e.g. letters, symbols, or a mix generates a specific error message
+- the options list and input box is shown again each time
+
+![Features - error handling for numbered options, number greater than available entered](docs/features-testing/numbered-options-error-handling-num.png)
+![Features - error handling for numbered options, number greater than available entered](docs/features-testing/numbered-options-error-handling.png)
+
 ### Fixed Bugs
 The following bugs were encountered during development and during testing.
 - **Issue: Creating countries dictionary: appending the year and score pair to existing country value creates a list within a list:**

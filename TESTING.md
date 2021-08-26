@@ -247,6 +247,44 @@ As shown below:
 ![Features - error handling for numbered options, number greater than available entered](docs/features-testing/numbered-options-error-handling-num.png)
 ![Features - error handling for numbered options, number greater than available entered](docs/features-testing/numbered-options-error-handling.png)
 
+- **Exit message: Expectations**
+  - when exiting the application
+  - confirms to user they are exiting, and how to re-run the application
+
+>**Result:** Pass
+- when user chooses the Exit Application option, from one of the various stages at which this is available, the application ends 
+- the text on screen confirms they are exiting the application
+- the text on screen advises that they can click the RUN PROGRAM button if they want to run the application again
+- the word Goodbye prints to the screen as a banner message
+![Features - exit message](docs/features-testing/eixt-msg.png)
+
+- **Country choice input - alternative country names: Expectations**
+  - in the input box for country choice, the application should accept different alternative or abbreviated names for countries
+  - the alternative names are not exhaustive and not all countries have alternative names
+  - if the user enters this 'alternative' name for a country, the application will retrieve the 'standard' country name as per the csv file and will show results for that country
+  - for example if a user enters 'Britain', or 'UK', the application will retrieve 'United Kingdom'
+  - the application confirms the input from the user, along with the country name retrieved
+
+>**Result:** Pass
+- alternative names entered (from those in the `COUNTRIES_ALT_NAMES` dictionary in constants.py) will retrieve that country
+- the input name and the 'standard' name are printed to the terminal
+- see examples below 
+![Features - alternative country names](docs/features-testing/alt-country-names.png)
+
+- **Text inputs - accept different cases for inputs: Expectations**
+  - in the input boxs that require a text input from the user, accept inputs in any case - upper, lower, capitalised, or any combination
+  - inputs where the text entered matches the expected text should not generate an error just because the input case is different
+  - however, spaces must be present as normal, inputs must not include '.', and mispelled words are not valid
+
+>**Result:** Pass
+- inputs in upper, lower, capitalised, any combination are accepted, as long as the text itself is a valid input
+- for country names, either the standard country name or an alternative country name can be entered in uppercase, lowercase, capitalised or a combination
+- for all years, A or a are accepted
+- for Y/N, either y/Y/n/N are accepted
+- see examples below 
+![Features - inputs in different cases accepted](docs/features-testing/diff-case-inputs.png)
+
+
 ### Fixed Bugs
 The following bugs were encountered during development and during testing.
 - **Issue: Creating countries dictionary: appending the year and score pair to existing country value creates a list within a list:**

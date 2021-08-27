@@ -3,7 +3,12 @@
 *This file contains the Testing section of the [full README.md file for World Happiness Data application](README.md).*
 
 ## Table of Contents
-
+- [Testing](#testing)
+  * [Code Validation](#code-validation)
+  * [Test Cases - user stories](#test-cases---user-stories)
+  * [Features Testing](#features-testing)
+  * [Fixed Bugs](#fixed-bugs)
+  * [Manual Testing](#manual-testing)
 
 ## Testing
 ---

@@ -9,6 +9,30 @@ World Happiness Data is a tool to provide requested happiness scores from the Wo
 ![General screenprint of application showing opening screen](docs/general-app-screenprint.png)
 
 ## Table of Contents
+- [Purpose](#purpose)
+- [User Experience (UX)](#user-experience-ux)
+  * [User stories](#user-stories)
+  * [Design](#design)
+  * [Flow Chart](#flow-chart)
+- [Features](#features)
+  * [Existing Features](#existing-features)
+  * [Future Features](#future-features)
+- [Content Requirements](#content-requirements)
+- [Technology](#technology)
+  * [Languages](#languages)
+  * [Frameworks, Libraries, Programmes and Tools](#frameworks-libraries-programmes-and-tools)
+- [Data Model](#data-model)
+- [Testing](#testing)
+- [Deployment](#deployment)
+  * [Gitpod - during development](#gitpod---during-development)
+  * [Deployment to Heroku](#deployment-to-heroku)
+  * [Forking the GitHub Repository](#forking-the-github-repository)
+  * [Cloning the GitHub Repository](#cloning-the-github-repository)
+- [Credits](#credits)
+  * [Code](#code)
+  * [Content](#content)
+  * [Media](#media)
+- [Acknowledgements](#acknowledgements)
 
 ## Purpose
 ---

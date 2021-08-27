@@ -6,6 +6,8 @@ World Happiness Data is a tool to provide requested happiness scores from the Wo
 
 [View the live application here.](https://world-happiness-data.herokuapp.com/) 
 
+![General screenprint of application showing opening screen](docs/general-app-screenprint.png)
+
 ## Table of Contents
 
 ## Purpose

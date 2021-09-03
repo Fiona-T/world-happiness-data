@@ -117,6 +117,12 @@ The application is split into different 'paths' or sections. Each section is a p
 - For user inputs requiring text, accept lowercase, uppercase, capitalised and combinations of same, for example iReLanD will retrieve data for Ireland. 
 
 ### Future Features
+- option for user to choose to look up the happiness scores by year, as an alternative to by country. To view, for example, the maximum, minimum, average and median scores from that year and the countries that had these scores, or top 10 scores and countries from that year, etc. The application could be extended to do this, by following the same approach for the country choice: create a `dictionary` by year,  and create a Years `class` with `methods` to retrieve the maximum score etc. for the particular 'Year' instance.
+- option for user to view information on the other metrics included in the dataset, for example correlation between the metrics for a country/for all countries.
+- add new scores for 2020 (and 2021 and later years, when available)
+- option for a user to update the 'alternative country names' dictionary from the terminal. This option could be for specified users, when they become aware of a new valid alternative country name.
+- username/password functionality so that users can register
+- option for user to choose more than one country at a time, to view comparisons on the scores for these countries
 
 ## Content Requirements
 ---

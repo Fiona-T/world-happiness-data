@@ -60,10 +60,10 @@ The target market is relatively broad. In general, it would be people with a pas
 - the goal of this tool is to provide an easy way for users to get different information relating to the happiness scores from the World Happiness historical scores dataset, by requesting and viewing the results in the terminal.
 
 *Notes on the dataset:*
-- the originating dataset contains other measures such as "Social support", "Freedom to make life choices", etc. which are used by the World Happiness Reports to draw conclusions. However this application does not use this information as the focus is solely the happiness scores.
+- the originating dataset contains other measures such as "Social support", "Freedom to make life choices", etc. which are used by the World Happiness Reports to draw conclusions on a country's happiness score. However this application does not use this information as the focus is solely the happiness scores.
 - the dataset spans the years 2005 to 2020 inclusive, however it does not hold a happiness score for every year for every country - this is dependant on the data available at the time. Therefore the application shows the users the years available to choose from.
-- there are five countries for which a score is only recorded for a single year. The application handles these also by providing the score and year to the user once they select the country (they are not given a choice of years in this case). The user can then select to view a different country or simply exit the application.
-- the country names in the dataset are generally in the informal English name. The application holds alternative names so that if a user enters these names it will retrieve the correct country and not generate an error.
+- there are five countries for which a score is only recorded for a single year. The application handles these by providing the score and year to the user once they select one of these countries (they are not given a choice of years in this case, as no choice exists). The user can then select to view a different country or simply exit the application.
+- the country names in the dataset are generally in the informal English name. The application holds some alternative names for countries, where applicable, so that if a user enters these names it will retrieve the correct country and not generate an error.
 - further information on the dataset can be found it the [Content Requirements](#content-requirements) section.
 
 ## User Experience (UX)
@@ -80,7 +80,7 @@ The target market is relatively broad. In general, it would be people with a pas
 8. As a visiting user, I want to see the list of available countries so that I can ensure to choose a country from the list.
 
 ### Design
-*Note:* Since the application runs in the terminal, there is no design of the user interface. 
+*Note:* Since the application runs in the terminal, there is no design of the user interface as such. 
 
 The deployed application runs in a mock terminal on Heroku in order to demonstrate the project, the design of the mock terminal is built into the template provided by Code Institute.
 
@@ -99,31 +99,31 @@ The application is split into different 'paths' or sections. Each section is a p
 - Welcome message with short note on the purpose of the application
 - Option for user to input the country name they want
 - Option for user to view a list of the available countries within the dataset, before inputting their choice of country
-- Exception handling for the country choice 
-- When a valid country is entered, show the years for which the happiness score is available for that country, since the dataset does not have a score recorded for every year for some countries. User can then choose from these years.
+- Exception handling for the country choice, so that relevant error messages are shown if the user inputs an invalid input
+- When a valid country is entered (that is not a one score country), show the years for which the happiness score is available for that country, since the dataset does not have a score recorded for every year for some countries. User can then choose from these years.
 - Option for user to choose the year they want to view for that country, or all years
-- Exception handling for the user input to the years choice input
+- Exception handling for the years choice input, so that relevant error messages are shown if the user inputs an invalid input
 - Option for user, if they have chosen to view all years, to choose if they want to view a graph of the data. This will be the happiness score for that country over time
-- Exception handling for the user input to the Y/N choice input
+- Exception handling for the user input to the Y/N choice input, so that relevant error messages are shown if the input is invalid
 - Option for user, if they originally chose a single year, to then view all years for the selected country
 - Option for the user to choose a different year for the selected country, after viewing a single year's score or viewing all years' scores (this option is not applicable when a country only has one score for one year)
 - Option for user to view min, max, median, average, or all of these values, for the selected country - this option can be chosen after selecting a single year's score to view, or after selecting all years, but is not available when a country only has one score
 - Option for user to go back and select another option from min, max, median, average, or all options (e.g. they chose max first time, can go back and chose min or all, etc.)
 - Option for user to choose a different country, or to exit programme when they have viewed their data 
 - There are five countries in the dataset that only have a score recorded for one year. If the user chooses these countries, show the score and year along with a note confirming this is the only year available, and the option to choose a different country/exit
-- Exception handling for the user inputs when selecting an option from the list of numbered options
+- Exception handling for the user inputs when selecting an option from the list of numbered options, so that relevant error messages are shown if the input is invalid
 - Exit message confirming to user that they are exiting the application, and how to re-run the application 
-- For the country choice user input, accept different alternative/alias names for the countries as far as possible, for example 'britain' will retrieve data for United Kingdom. 
-- For user inputs requiring text, accept lowercase, uppercase, titlecase and combinations of same, for example iReLanD will retrieve data for Ireland. 
+- For the country choice user input, accept different alternative/alias names for the countries as far as practical, for example 'britain' will retrieve data for United Kingdom. Even though the application instructs the user to enter the common English name, this handling of alternative names is an extra help to the user to avoid frustration.
+- For user inputs requiring text, accept lowercase, uppercase, capitalised and combinations of same, for example iReLanD will retrieve data for Ireland. 
 
 ### Future Features
 
 ## Content Requirements
 ---
-Th content required to create the project was the dataset with which the user will interact. It contains the happiness score for each country over the years 2005 - 2020 inclusive. Not every country has a score in every year, due to the way the data is collected. The [dataset was sourced from Kaggle](https://www.kaggle.com/ajaypalsinghlo/world-happiness-report-2021?select=world-happiness-report.csv).
+Th content required to create the project was the dataset with which the user will interact. It contains the happiness score for each country over the years 2005 - 2020 inclusive. Not every country has a score in every year, due to the way the data is collected, and as noted previously there are five countries that only have one score recorded in the dataset. The [dataset was sourced from Kaggle](https://www.kaggle.com/ajaypalsinghlo/world-happiness-report-2021?select=world-happiness-report.csv).
 
 Explanation of Happiness score:
->It is referred to as "Life Ladder" in the dataset. This is the metric used to rate happiness and is based on a "Cantril life ladder" or subjective life evaluation. Survey respondents are asked to think of a ladder, with the best possible life for them being a 10, and the worst possible life being a 0. They are then asked to state which step of the ladder they feel they are at currently. The score for each country is the national average of each respondent's answer. The other metrics such as GDP, Social Support etc. are used by the Happiness Reports to explain the Life Ladder or Happiness score, these metrics are not used in this application.
+>It is referred to as "Life Ladder" in the dataset. This is the metric used to rate happiness and is based on a "Cantril life ladder" or subjective life evaluation. Survey respondents are asked to think of a ladder, with the best possible life for them being a 10, and the worst possible life being a 0. They are then asked to state which step of the ladder they feel they are at currently. The score for each country is the national average of each respondent's answer. The other metrics such as GDP, Social Support etc. are used by the Happiness Reports to explain the Life Ladder or Happiness score for the particular country. These metrics are not used in this application since the focus is purely on the happiness scores themselves.
 
 ## Technology
 ---
@@ -162,7 +162,7 @@ If the country has more than one score recorded (this is the case for the majori
 
 An instance of `Country class` is created by the `make_country` function, each time the user selects a country that they want to view the scores/data for, in the `get_country function`(the instance is created after the country input has been validated). The `class` instance is created using the country name, and the `list` of year and scores `tuples` retrieved from the countries `dictionary`.
 
-The methods in the `Country class` are used throughout the application, to get the information for the relevant country, to present to the user in the terminal:
+The methods in the `Country class` are used throughout the application, to get the information for the relevant country, which is presented to the user in the terminal:
 - `show_scores`: prints the requested score(s) to the terminal for the requested year or years, along with a relevant message if the country is a single score country
 - `yrs_span`: returns an `f-string` stating the span of years for the country, i.e.e. the first and last years in the available years. This is used by other methods when printing results to the terminal   
 - `show_graph`: uses plot function from uniplot to plot a graph in the terminal showing all available happiness scores over time
@@ -219,6 +219,8 @@ The following steps show how to deploy the application to [Heroku](https://www.h
 12.	Click the View button to view the app – it opens in a new window
 13.	The Python program automatically runs, you no longer need to type `python3 run.py` in the terminal once the application is deployed
 14.	To re-start the programme from the beginning, press the RUN PROGRAM orange button at top of page
+
+There is no difference between the deployed version and the development version of the application.
 
 ### Forking the GitHub Repository
 The repository can be forked on GitHub, this creates a copy of the repository that can be viewed or amended without affecting the original repository. This can be done using the following steps:

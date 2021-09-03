@@ -27,7 +27,7 @@ This section covers testing the user stories from the [User Experience (UX)](#us
     - they can view a graph of the score and 
     - they can view the minimum, maximum, median and average happiness scores for a country
 
-In the paragraph below this, the user is also told that they will see the years available for that country once they choose a country. 
+- In the paragraph below this, the user is also told that they will see the years available for that country once they choose a country. 
 ![user story 1 - intro text](docs/user-stories/user-story-1-intro-text.png)
 
 2. **Expectation:** *As a visiting user, I want to be able to choose a country so that I can view the data related to that country*
@@ -92,7 +92,7 @@ In the paragraph below this, the user is also told that they will see the years 
   - the welcome message is visible in the terminal window on starting the application, as shown below:
   ![Features - welcome message](docs/features-testing/welcome-msg.png)
 
-- **User country choice, user view list of countries: Expectations**
+- **User country choice, User option to view list of countries: Expectations**
   - user can input the country name they want
   - user can choose to view the list of available countries, before typing in their choice of country
 >**Result:** Pass
@@ -206,12 +206,12 @@ As shown below:
 ![Features - option to choose to get min, max, median, average after previous choice shown](docs/features-testing/min-max-median-average-all-option.png)
 
 - **Option to select another option from min, max, median, average scores after initial choice: Expectations**
-  - after selecting an option 1-5 from the min, max, median, average, all, the result is printed and the user is presented with a further menu option
-  - the new menu contains an option to get 'more data' (min, max etc.) again, so that they can choose another min/max etc. option
+  - after selecting an option 1-5 from min, max, median, average or all, the result is printed and the user is presented with a further menu option
+  - the new menu contains an option to get 'more data' (min, max, etc.) again, so that they can choose another min,max, etc. option
   - the 5 options are presented again, regardless of which option (1-5) was chosen previously
  >**Result:** Pass
 - user presented with list of options after viewing previous choice (min, max etc.)
-- option 1 is to get 'more data' (min, max etc.) for the same country
+- option 1 is to get 'more data' (min, max, etc.) for the same country
 - if the user chooses option 1 from this list, then the list of 5 options is displayed 
 - user can individually select to view any of min, max, median, average or they can select to view all of them
 - user can keep selecting option 1 from follow on menu, to get another option from min, max, median, average, all, until they have seen all they want and can then choose a different option from the follow on menu
@@ -223,8 +223,8 @@ As shown below:
  >**Result:** Pass
 - user presented with menu which includes the option to choose a different country or exit the application, in the following circumstances:
   - after choosing to view happiness score for single year. Options are 4 and 5.
-  - after choosing to view happiness score for all years (and graph if chosen). Options are 2 and 4.
-  - after choosing to view min/max etc. Options are 2 and 3.
+  - after choosing to view happiness score for all years (and graph, if chosen). Options are 2 and 4.
+  - after choosing to view "more data" (min,max, etc.). Options are 2 and 3.
   - after the score for country that only has one happiness score recorded. Options are 1 and 2 (the only options available in this case)
 ![Features - option to choose different country or exit application](docs/features-testing/diff-country-or-exit.png)
 
@@ -406,7 +406,7 @@ Manual testing, further to what is already shown in the [User Stories](#test-cas
 - selecting an option on the various options menus results in the relevant output for that option bring printed to the screen, i.e. each user path can be followed from start to finish through the application
 - outputs where country names are printed, print okay for longer country names - the application was amended during development to account for this 
 - the graph plots the scores correctly for each year for chosen country
-- manually checked random country names during development and testing, to ensure a) they are found by the application and b) the scores chosen are correct as per the source csv file
+- manually checked some random country names during development and testing, to ensure a) they are found by the application and b) the scores chosen are correct as per the source csv file
 - manually checked the max, min, median and average scores displayed are correct for some randomly chosen countries
-- manually checked that entering the 'alternative' country name brings up the correct country, checked this for some randomly chosen counties
+- manually checked that entering the 'alternative' country name brings up the correct country, checked this for some randomly chosen countries
 - manually checked that the correct output generates for the countries that have only one score - completed this for a small selection of these five countries

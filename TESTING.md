@@ -160,6 +160,7 @@ As shown below:
 - graph is displayed if Y entered
 - application skips graph and goes to next options if N entered
 - graph question is not displayed when user chose a single year to view score for
+- *Note: the graph displays the years along the bottom as e.g. "2,010" for "2010". There is no option within `uniplot` to amend this to show the years as text, i.e. without the comma. However the title on top of the graph confirms the years so it should be clear to the user that these are years and not numbers.*
  ![Features - graph option](docs/features-testing/graph-option.png)
 
 - **Exception handling for Y/N choice: Expectations**

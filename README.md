@@ -249,11 +249,17 @@ You can refer to the [GitHub documentation](https://docs.github.com/en/github/cr
 ## Credits
 ---
 ### Code
+- I used the guidance in [this article from kite.com](https://www.kite.com/python/answers/how-to-titlecase-a-string-in-python) to use a list of exception words in the `convert_to_titlecase function` so that words such as 'Of', 'And' are not capitalised when converting country names back to their capitalised name. I extended this to included further functionality.
+- Used the guidance in [this article from Programiz](https://www.programiz.com/python-programming/user-defined-exception) to create the custom Exception Classes
+- Used the method shown in this [article from thispointer.com](https://thispointer.com/python-how-to-add-append-key-value-pairs-in-dictionary-using-dict-update/#6) when creating the countries dictionary, to check the data-type of the existing key value and convert it to a list before adding the new value to the list.
+
+
 ### Content
 - The dataset containing the happiness scores was sourced from [Kaggle](https://www.kaggle.com/ajaypalsinghlo/world-happiness-report-2021?select=world-happiness-report.csv).
 - Most of the alternative country names for the `"countries_alt_names"` `dictionary` were sourced from [this page on Wikipedia](https://en.wikipedia.org/wiki/List_of_alternative_country_names).
 
 ### Media
+- the smiley face that prints when user exits the application was created by the developer, but based on examples shown at [Love ASCII Art](http://loveascii.com/smilies.html)
 
 ## Acknowledgements
 ---
